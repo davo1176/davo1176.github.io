@@ -18,6 +18,27 @@ header h1 {
     margin: 0;
 }
 
+#about {
+    padding: 20px;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+}
+
+.emblem img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.about-text {
+    max-width: 600px;
+}
+
 nav {
     margin-top: 10px;
 }
