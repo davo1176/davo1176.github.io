@@ -25,6 +25,7 @@ header h1 {
 .about-container {
     display: flex;
     align-items: center;
+    width: 100%; /* Make the container take the full width */
 }
 
 .emblem img {
@@ -36,8 +37,9 @@ header h1 {
 }
 
 .about-text {
-    max-width: 600px;
+    flex: 1; /* Allow the text to fill the remaining space */
 }
+
 
 nav {
     margin-top: 10px;
