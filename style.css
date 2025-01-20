@@ -40,6 +40,21 @@ header h1 {
     flex: 1; /* Allow the text to fill the remaining space */
 }
 
+/* Profile Image */
+.profile img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.intro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+}
 
 nav {
     margin-top: 10px;
@@ -73,6 +88,71 @@ section {
 h2 {
     margin-top: 0;
 }
+
+/* Logos Section */
+.logos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.logos span {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-color: #ddd;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+.logos span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Logos Section */
+.logos {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 20px 0;
+}
+
+.logos .logo-container {
+    display: inline-flex;
+    gap: 20px;
+    animation: slide 10s linear infinite;
+}
+
+.logos span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    background-color: #ddd;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Animation for sliding effect */
+@keyframes slide {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
 
 /* Main Portfolio Page - Project Section */
 .project {
