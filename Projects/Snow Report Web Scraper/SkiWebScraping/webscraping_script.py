@@ -2,14 +2,17 @@
 First Script -- Colorado Ski
 '''
 import os
+import re
+import logging
+from datetime import datetime
+import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
+from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
-import pandas as pd
-from datetime import datetime
 
 # Path to your ChromeDriver
 driver_path = "C:/Users/danie/chromedriver-win64/chromedriver.exe"
@@ -23,16 +26,48 @@ driver = webdriver.Chrome(service=service)
 url = "https://www.coloradoski.com/snow-report/"
 driver.get(url)
 
+# Parse depth for Dynamic Wait 
+def parse_depth(depth_text):
+    """
+    Extracts the numeric portion from depth strings (e.g., '10"', '0"', '10-12"').
+    Returns 0 if parsing fails.
+    """
+    import re
+    # Remove any non-numeric characters except "-" for ranges
+    cleaned = re.sub(r'[^0-9\-]', '', depth_text)
+
+    if not cleaned:
+        return 0  # Default to 0 if no number is found
+
+    # If there's a range like '10-12', split and take the higher end
+    if '-' in cleaned:
+        parts = cleaned.split('-')
+        try:
+            return float(parts[-1])  # Take the higher value
+        except:
+            return 0
+    else:
+        try:
+            return float(cleaned)  # Convert single number
+        except:
+            return 0
+
 # Dynamic wait: Wait until at least one Mid-Mt Depth value is not "0"
 try:
-    WebDriverWait(driver, 30).until(
+    # Wait until elements are present
+    WebDriverWait(driver, 40).until(
+        EC.presence_of_all_elements_located((By.CLASS_NAME, "answer.mid-mtn"))
+    )
+    
+    # Now wait until at least one of them has a depth > 0
+    WebDriverWait(driver, 40).until(
         lambda d: any(
-            mid_mt.text.strip() != '0"'
+            parse_depth(mid_mt.text) > 0  # Uses the function safely now
             for mid_mt in d.find_elements(By.CLASS_NAME, "answer.mid-mtn")
         )
     )
-except Exception as e:
-    print("Timeout waiting for Mid-Mt Depth to load:", e)
+except TimeoutException:
+    print("Timeout waiting for a non-zero Mid-Mt Depth.")
     driver.quit()
 
 # Get page source after JavaScript has loaded
@@ -105,7 +140,10 @@ else:
     # If CSV doesn't exist, the new data becomes the initial data
     combined_df = new_data_df
 
+# Drop duplicates based on "Date" and "Resort" to ensure no repeated rows
+combined_df.drop_duplicates(subset=["Date", "Resort"], keep="last", inplace=True)
 # Save the combined DataFrame back to CSV
+
 combined_df.to_csv(csv_file_path, index=False)
 
 # Display the newly added data
@@ -234,6 +272,9 @@ try:
     else:
         combined_df = new_data_df
 
+    # This ensures only one row per date per resort.
+    combined_df.drop_duplicates(subset=["Date", "Resort"], keep="last", inplace=True)
+
     # Save combined data
     combined_df.to_csv(csv_file_path, index=False)
     logging.info(f"Data successfully saved to {csv_file_path}")
@@ -244,3 +285,4 @@ try:
 except Exception as e:
     logging.error(f"An error occurred: {e}")
     print(f"An error occurred: {e}")
+

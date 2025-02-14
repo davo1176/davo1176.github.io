@@ -1,1 +1,5 @@
 Add a way to make tags on each project so that when I go in on the about me section I am able to filter out the projects based on the skills
+
+Add icons for the links
+
+Make it look less like a CV and more like a coherent web page
