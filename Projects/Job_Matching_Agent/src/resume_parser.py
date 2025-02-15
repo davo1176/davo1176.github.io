@@ -77,6 +77,6 @@ class ResumeParser:
 
 # Example Usage
 if __name__ == "__main__":
-    resume_path = "/mnt/data/Daniel Volin Resume Winter w Summary 2024.pdf"
+    resume_path = "Projects\Job_Matching_Agent\data\Daniel Volin Resume Winter w Summary 2024.pdf"
     parser = ResumeParser(resume_path)
     print(parser.to_json())
