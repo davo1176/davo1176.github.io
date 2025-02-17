@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 Insert requirements here.
+=======
+pdfminer.six
+python-docx
+spacy
+pandas
+requests
+>>>>>>> 62430dbf8142654d4095c9d56a185c6020adf6ee
