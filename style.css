@@ -1,4 +1,7 @@
+/* ============================== */
 /* General Styles */
+/* ============================== */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,6 +9,10 @@ body {
     background-color: #f0f0f0;
     line-height: 1.6;
 }
+
+/* ============================== */
+/* Header & Navigation */
+/* ============================== */
 
 header {
     background-color: #333;
@@ -16,45 +23,6 @@ header {
 
 header h1 {
     margin: 0;
-}
-
-#about {
-    padding: 20px;
-}
-
-.about-container {
-    display: flex;
-    align-items: center;
-    width: 100%; /* Make the container take the full width */
-}
-
-.emblem img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-right: 20px;
-}
-
-.about-text {
-    flex: 1; /* Allow the text to fill the remaining space */
-}
-
-/* Profile Image */
-.profile img {
-    width: 150px;  /* Reduced size from 200px to 150px */
-    height: 150px; /* Reduced size from 200px to 150px */
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.intro-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 40vh; /* Adjusted height for better spacing */
 }
 
 nav {
@@ -78,6 +46,72 @@ nav ul li a {
     text-decoration: none;
 }
 
+nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #e0e0e0;
+    padding: 8px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #ccc;
+}
+
+/* ============================== */
+/* About Section */
+/* ============================== */
+
+#about {
+    padding: 20px;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.emblem img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.about-text {
+    flex: 1;
+}
+
+/* ============================== */
+/* Profile Image & Intro Section */
+/* ============================== */
+
+.profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.intro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 40vh;
+}
+
+/* ============================== */
+/* Sections (General) */
+/* ============================== */
+
 section {
     padding: 20px;
     margin: 20px;
@@ -90,30 +124,16 @@ h2 {
     margin-top: 0;
 }
 
+/* ============================== */
 /* Logos Section */
+/* ============================== */
+
 .logos {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
-}
-
-.logos span {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-}
-
-  
-.logos span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Logos Section */
-.logos {
     overflow: hidden;
     white-space: nowrap;
     position: relative;
@@ -130,7 +150,7 @@ h2 {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px; 
+    padding: 10px 20px;
     width: 80px;
     height: 80px;
     background-color: #ddd;
@@ -141,30 +161,36 @@ h2 {
     color: #555;
 }
 
+/* ============================== */
+/* Skills Section */
+/* ============================== */
+
 .skills-container {
     display: flex;
-    justify-content: center; /* Centers the skill boxes in the container */
+    justify-content: center;
 }
 
 .skills-container span {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px 25px; /* Adds space inside the box */
-    margin: 10px; /* Adds space between each skill */
-    background-color: #f4f4f4; /* Light background for visibility */
-    border-radius: 5px; /* Rounded corners */
+    padding: 15px 25px;
+    margin: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
     font-weight: bold;
     text-align: center;
     white-space: nowrap;
-    min-width: 100px; /* Ensures consistent size */
-    height: 50px; /* Adjust as needed */
+    min-width: 100px;
+    height: 50px;
     position: relative;
-    top: 15px; /* Moves the boxes down by 15 pixels */
+    top: 15px;
 }
 
+/* ============================== */
+/* Animation for Logos */
+/* ============================== */
 
-/* Animation for sliding effect */
 @keyframes slide {
     from {
         transform: translateX(100%);
@@ -174,8 +200,10 @@ h2 {
     }
 }
 
+/* ============================== */
+/* Project Section */
+/* ============================== */
 
-/* Main Portfolio Page - Project Section */
 .project {
     margin-bottom: 20px;
     background-color: #f9f9f9;
@@ -207,7 +235,10 @@ h2 {
     padding: 10px;
 }
 
-/* Project Page (e.g., wildfire.html) */
+/* ============================== */
+/* Project Details Page */
+/* ============================== */
+
 #project-details {
     padding: 20px;
 }
@@ -225,23 +256,57 @@ h2 {
     line-height: 1.5;
 }
 
-nav a {
-    color: #333;
+/* ============================== */
+/* Contact Section */
+/* ============================== */
+
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
+    color: white;
+    font-size: 18px;
     font-weight: bold;
-    background-color: #e0e0e0;
-    padding: 8px 15px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
 }
 
-nav a:hover {
-    background-color: #ccc;
+/* Contact Buttons - Colors */
+.linkedin {
+    background-color: #0077b5;
 }
 
+.github {
+    background-color: #333;
+}
+
+.email {
+    background-color: #d14836;
+}
+
+/* Hover effect */
+.contact-btn:hover {
+    opacity: 0.8;
+}
+
+/* Icon styling */
+.contact-btn i {
+    font-size: 24px;
+}
+
+/* ============================== */
 /* Footer */
+/* ============================== */
+
 footer {
     background-color: #333;
     color: white;
