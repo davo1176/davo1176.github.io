@@ -1,48 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5966R6YDXX');
-</script>
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Human Resources Attrition Project">
-    <title>Human Resources Attrition Project</title>
+    <meta name="description" content="Human Resources Attrition Project - Daniel Volin">
+    <title>HR Attrition Project | Daniel Volin</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <header>
-        <h1>Human Resources Attrition Project</h1>
-        <nav>
-            <a href="../index.html">Back to Portfolio</a>
-          </nav>
-    </header>
 
-    <section id="project-details">
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="../index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero hero--project" style="background: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%);">
+        <div class="hero__content">
+            <h1 class="hero__title">Human Resources Attrition Project</h1>
+            <p class="hero__subtitle">Predicting employee tenure through regression analysis</p>
+            <div class="hero__buttons" style="margin-top: 1.5rem;">
+                <span class="tag tag--white">Python</span>
+                <span class="tag tag--white">Pandas</span>
+                <span class="tag tag--white">NumPy</span>
+                <span class="tag tag--white">Statsmodels</span>
+                <span class="tag tag--white">Jupyter</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
         <h2>Project Overview</h2>
-        <p>his project explores the relationship between career progression factors and employee retention using the "HR-Employee-Attrition" dataset. The main goal is to understand how factors such as job level, years in a current role, years since the last promotion, monthly income, and stock option levels influence the length of tenure at a company. The analysis employs both statistical tests (T-tests) and regression models to draw insights into these relationships.</p>
+        <p>This project explores the relationship between career progression factors and employee retention using the "HR-Employee-Attrition" dataset. The main goal is to understand how factors such as job level, years in a current role, years since the last promotion, monthly income, and stock option levels influence the length of tenure at a company. The analysis employs both statistical tests (T-tests) and regression models to draw insights into these relationships.</p>
 
         <h2>Objectives</h2>
-    <ul>
-        <li>Identify significant career progression factors that predict employee tenure.</li>
-        <li>Determine the impact of financial incentives on employee retention.</li>
-        <li>Provide actionable insights for improving retention strategies through career development.</li>
-    </ul>
+        <ul>
+            <li>Identify significant career progression factors that predict employee tenure.</li>
+            <li>Determine the impact of financial incentives on employee retention.</li>
+            <li>Provide actionable insights for improving retention strategies through career development.</li>
+        </ul>
 
         <h2>Key Results</h2>
         <ul>
             <li>The regression analysis indicates that job level, years in a current role, and years since the last promotion significantly predict the number of years employees stay at a company.</li>
             <li>The Durbin-Watson statistic suggests no autocorrelation in the residuals, confirming the independence of variables.</li>
-            <li>The R-squared value of 0.684 shows that the model explains 68.4% of the variance in employee tenure.</li>
+            <li>The R-squared value of <strong>0.684</strong> shows that the model explains 68.4% of the variance in employee tenure.</li>
             <li>Stock option levels were found to be statistically insignificant in predicting tenure.</li>
         </ul>
 
@@ -62,22 +93,39 @@
         </ul>
 
         <h2>Technologies Used</h2>
-        <ul>
-            <li>Python (pandas, numpy, matplotlib, seaborn, statsmodels)</li>
-            <li>Jupyter Notebook</li>
-        </ul> 
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+            <span class="tag tag--python">Python</span>
+            <span class="tag tag--pandas">Pandas</span>
+            <span class="tag tag--numpy">NumPy</span>
+            <span class="tag tag--dataviz">Matplotlib</span>
+            <span class="tag tag--dataviz">Seaborn</span>
+            <span class="tag tag--statsmodels">Statsmodels</span>
+            <span class="tag tag--jupyter">Jupyter</span>
+        </div>
+
         <h2>GitHub Repository</h2>
-        <p>Find the full code on <a href="https://github.com/davo1176/AttritionPython" target="_blank">GitHub</a>.</p>
+        <p>
+            <a href="https://github.com/davo1176/AttritionPython" target="_blank" class="btn btn--github">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        </p>
+    </div>
 
-        <h2>Visualizations</h2>
-        <img src="../images/visualization1.png" alt="Visualization 1">
-        <img src="../images/visualization2.png" alt="Visualization 2">
-
-        
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Daniel Volin</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
     </footer>
+
+    <script src="../script.js"></script>
 </body>
 </html>

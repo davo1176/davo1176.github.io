@@ -1,100 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5966R6YDXX');
-</script>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About Daniel Volin">
+    <meta name="description" content="About Daniel Volin - Data & Analytics Consultant">
     <title>About Me | Daniel Volin</title>
-   
-    <!-- Slick Carousel CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css" />
 
-    <!-- Custom CSS -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <header>
-        <h1>About Me</h1>
-        <nav>
-            <a href="index.html#about">About Me</a>
-            <a href="index.html#projects">Projects</a>
-            <a href="index.html#contact">Contact</a>
-        </nav>
-    </header>
 
-    <section id="intro">
-        <div class="intro-container">
-            <div class="profile">
-                <img src="images/DannyPhoto.jpg" alt="Daniel Volin">
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#contact">Contact</a>
             </div>
-            <div class="name-text">
-                <h2>Daniel Volin</h2>
-                <a href="index.html#projects" class="btn">View My Work</a>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Profile Hero -->
+    <section class="hero hero--about">
+        <div class="hero__content">
+            <img src="images/DannyPhoto.jpg" alt="Daniel Volin" class="hero__photo">
+            <h1 class="hero__title">Daniel Volin</h1>
+            <p class="hero__subtitle">Data & Analytics Consultant | Master's Student at Nova SBE</p>
+            <div class="hero__buttons">
+                <a href="index.html#projects" class="btn btn--primary">View My Work <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
 
-    <section id="biography">
-        <h2>Biography</h2>
-        <p>
-            I am a data and analytics consultant with a passion for transforming data into actionable insights. 
-            With experience in marketing analytics, financial modeling, and consulting, I bring a data-driven 
-            approach to business strategy. Currently pursuing my master's degree at Nova SBE, I am always eager 
-            to learn and apply new analytical methods to solve real-world business challenges.
-        </p>
-    </section>
-
-    <section id="skills">
-        <h2>Skills</h2>
-        <div class="skills-container logos">
-            <span>SQL</span>
-            <span>Python</span>
-            <span>Tableau</span>
-            <span>R</span>
-            <span>CSS</span>
-            <span>HTML</span>
-            <span>Matplotlib</span>
-            <span>Seaborn</span>
-            <span>Data Science</span>
-            <span>Web Development</span>
+    <!-- Biography -->
+    <section class="section">
+        <div class="container container--narrow">
+            <div class="bio-section fade-in">
+                <h2>About Me</h2>
+                <p>
+                    I am a data and analytics consultant with a passion for transforming data into actionable insights.
+                    With experience in marketing analytics, financial modeling, and consulting, I bring a data-driven
+                    approach to business strategy. Currently pursuing my master's degree at Nova SBE, I am always eager
+                    to learn and apply new analytical methods to solve real-world business challenges.
+                </p>
+            </div>
         </div>
     </section>
-    <footer>
-        <p>&copy; 2024 Daniel Volin</p>
+
+    <!-- Skills -->
+    <section class="section">
+        <div class="container container--narrow">
+            <div class="section-header fade-in">
+                <h2>Skills & Technologies</h2>
+            </div>
+
+            <div class="skills-category fade-in">
+                <h3>Languages</h3>
+                <div class="skills-grid">
+                    <div class="skill-card skill-card--teal">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-database"></i>
+                        <span>SQL</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-chart-line"></i>
+                        <span>R</span>
+                    </div>
+                    <div class="skill-card skill-card--coral">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category fade-in">
+                <h3>Tools & Platforms</h3>
+                <div class="skills-grid">
+                    <div class="skill-card skill-card--coral">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Tableau</span>
+                    </div>
+                    <div class="skill-card skill-card--coral">
+                        <i class="fas fa-book-open"></i>
+                        <span>Jupyter</span>
+                    </div>
+                    <div class="skill-card skill-card--green">
+                        <i class="fas fa-robot"></i>
+                        <span>Selenium</span>
+                    </div>
+                    <div class="skill-card skill-card--green">
+                        <i class="fas fa-code"></i>
+                        <span>BeautifulSoup</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category fade-in">
+                <h3>Libraries & Frameworks</h3>
+                <div class="skills-grid">
+                    <div class="skill-card skill-card--teal">
+                        <i class="fas fa-table"></i>
+                        <span>Pandas</span>
+                    </div>
+                    <div class="skill-card skill-card--pink">
+                        <i class="fas fa-chart-area"></i>
+                        <span>Matplotlib</span>
+                    </div>
+                    <div class="skill-card skill-card--pink">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Seaborn</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-calculator"></i>
+                        <span>NumPy</span>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-square-root-variable"></i>
+                        <span>Statsmodels</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#projects">Projects</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
     </footer>
 
-     <!-- jQuery -->
-     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    
-     <!-- Slick Carousel JS -->
-     <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
- 
-     <!-- Initialize Slick -->
-     <script>
-         $(document).ready(function(){
-             $('.skills-container').slick({
-                 slidesToShow: 5,
-                 slidesToScroll: 1,
-                 autoplay: true,
-                 autoplaySpeed: 0,
-                 speed: 2000,
-                 cssEase: 'linear',
-                 infinite: true,
-                 arrows: false
-             });
-         });
-     </script>
-
- </body>
+    <script src="script.js"></script>
 </body>
 </html>

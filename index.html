@@ -1,86 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5966R6YDXX');
-</script>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Daniel Volin">
+    <meta name="description" content="Portfolio of Daniel Volin - Data & Analytics Consultant">
     <title>Daniel Volin | Portfolio</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Daniel Volin</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="about">
-        <div class="about-container">
-            <div class="emblem">
-                <img src="images/DannyPhoto.jpg" alt="Emblem">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
             </div>
-            <div class="about-text">
-                <h2><a href="about_me.html">About Me</a></h2>
-                <p>I'm Daniel Volin, a data and analytics student with experience in marketing, financial analysis, and consulting. I am currently pursuing my master's degree at Nova SBE.</p>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__content">
+            <img src="images/DannyPhoto.jpg" alt="Daniel Volin" class="hero__photo">
+            <h1 class="hero__title">Hi, I'm Daniel</h1>
+            <p class="hero__subtitle">Data & Analytics | Nova SBE</p>
+            <div class="hero__buttons">
+                <a href="#projects" class="btn btn--primary">View My Work <i class="fas fa-arrow-down"></i></a>
+                <a href="#contact" class="btn btn--outline">Get In Touch</a>
+            </div>
+        </div>
+        <div class="hero__scroll">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-card fade-in">
+                <p>I'm Daniel Volin, a data and analytics consultant with a passion for transforming data into actionable insights. With experience in marketing analytics, financial modeling, and consulting, I bring a data-driven approach to business strategy. Currently pursuing my master's degree at Nova SBE, I am always eager to learn and apply new analytical methods to solve real-world business challenges.</p>
+                <a href="about_me.html" class="about-link">Learn more about me <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3><a href="Projects/python_hr_rmdb.html">Human Resources Attrition Project</a></h3>
-            <p>Utilizing python to conduct a simple regression to understand employee attrition and length of stay.</p>
-        </div>
-             
-        <div class="project">
-            <h3><a href="Projects/tableau_global_terrorism.html">Global Terrorism Dashboard Project</a></h3>
-            <p>Developed interactive dashboards to analyze global terrorism and kidnapping trends...</p>
-        </div>
-    
-        <div class="project">
-            <h3><a href="Projects/web_scraper.html">Web Scraper Application</a></h3>
-            <p>An automated Python solution using Selenium and BeautifulSoup to gather real-time ski reports...</p>
-        </div>
-    </section>
-    
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Featured Projects</h2>
+                <p>A selection of data analytics and engineering projects I've worked on.</p>
+            </div>
+            <div class="projects-grid">
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <div class="contact-buttons">
-            <a href="https://www.linkedin.com/in/daniel-volin/" target="_blank" class="contact-btn linkedin">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://github.com/davo1176" target="_blank" class="contact-btn github">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-            <a href="mailto:danielvolin1@gmail.com" class="contact-btn email">
-                <i class="fas fa-envelope"></i> Email
-            </a>
+                <!-- Project 1: HR Attrition -->
+                <div class="project-card project-card--teal fade-in">
+                    <div class="project-card__body">
+                        <div class="project-card__icon">📊</div>
+                        <h3 class="project-card__title">
+                            <a href="Projects/python_hr_rmdb.html">Human Resources Attrition Project</a>
+                        </h3>
+                        <p class="project-card__desc">Utilizing Python to conduct regression analysis to understand employee attrition and predict length of stay.</p>
+                        <div class="project-card__tags">
+                            <span class="tag tag--python">Python</span>
+                            <span class="tag tag--pandas">Pandas</span>
+                            <span class="tag tag--regression">Regression</span>
+                            <span class="tag tag--dataviz">Data Viz</span>
+                        </div>
+                        <a href="Projects/python_hr_rmdb.html" class="project-card__link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Terrorism Dashboard -->
+                <div class="project-card project-card--coral fade-in">
+                    <div class="project-card__body">
+                        <div class="project-card__icon">🌍</div>
+                        <h3 class="project-card__title">
+                            <a href="Projects/tableau_global_terrorism.html">Global Terrorism Dashboard</a>
+                        </h3>
+                        <p class="project-card__desc">Interactive dashboards analyzing global terrorism and kidnapping trends with key performance indicators.</p>
+                        <div class="project-card__tags">
+                            <span class="tag tag--tableau">Tableau</span>
+                            <span class="tag tag--dashboard">Dashboard</span>
+                            <span class="tag tag--dataviz">Data Viz</span>
+                            <span class="tag tag--kpi">KPIs</span>
+                        </div>
+                        <a href="Projects/tableau_global_terrorism.html" class="project-card__link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Web Scraper -->
+                <div class="project-card project-card--green fade-in">
+                    <div class="project-card__body">
+                        <div class="project-card__icon">🕷️</div>
+                        <h3 class="project-card__title">
+                            <a href="Projects/web_scraper.html">Web Scraper Application</a>
+                        </h3>
+                        <p class="project-card__desc">Automated Python solution using Selenium and BeautifulSoup to gather real-time ski resort snow reports.</p>
+                        <div class="project-card__tags">
+                            <span class="tag tag--python">Python</span>
+                            <span class="tag tag--selenium">Selenium</span>
+                            <span class="tag tag--beautifulsoup">BeautifulSoup</span>
+                            <span class="tag tag--webscraping">Scraping</span>
+                        </div>
+                        <a href="Projects/web_scraper.html" class="project-card__link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
-    
-    
-    <footer>
-        <p>&copy; 2024 Daniel Volin</p>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Let's Connect</h2>
+                <p>Feel free to reach out for collaboration or just a friendly chat.</p>
+            </div>
+            <div class="contact-buttons fade-in">
+                <a href="https://www.linkedin.com/in/daniel-volin/" target="_blank" class="contact-btn contact-btn--linkedin">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/davo1176" target="_blank" class="contact-btn contact-btn--github">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="mailto:danielvolin1@gmail.com" class="contact-btn contact-btn--email">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
-

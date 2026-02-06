@@ -1,61 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5966R6YDXX');
-</script>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Global Terrorism Dashboard Project">
-    <title>Global Terrorism Dashboard Project</title>
+    <meta name="description" content="Global Terrorism Dashboard Project - Daniel Volin">
+    <title>Global Terrorism Dashboard | Daniel Volin</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <header>
-        <h1>Global Terrorism Dashboard Project</h1>
-        <nav>
-            <a href="../index.html">Back to Portfolio</a>
-          </nav>
-    </header>
 
-    <section id="project-details">
-        <h2>Project Overview</h2>
-        <p>This project focused on developing an interactive dashboard to provide insights into global terrorism trends, specifically examining the impact and scale of various attacks. The dashboard offers users a clear understanding of the frequency, intensity, and geographical distribution of these events.
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="../index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
 
-            Additionally, a dedicated dashboard was created to analyze the global impact of kidnappings, with a detailed breakdown by region. 
-            
-            Key Performance Indicators (KPIs) used in the dashboards include:
-            <ul style="list-style-type: square;">
-                <li>Number of individuals wounded,</li>
-                <li>Number of individuals killed,</li>
-                <li>Total casualties,</li>
-                <li>Ransom amount demanded,</li>
-                <li>Ransom amount paid</li>
-                </ul>
-            These dashboards empower users to explore and interpret the data through a visually compelling and user-friendly interface, supporting data-driven decision-making and strategic planning.</p>
-
-        <h2>Tableau Dashboard</h2>
-        <p>Please reach out for a copy of the dashboard if you would like more information</p>
-
-        <h2>Visualizations</h2>
-        <img src="../images/TerrorismDashboard/Introduction to Terror.png" alt="Introduction to Terrorism">
-        <img src="../images/TerrorismDashboard/KidnappingDash.png" alt="Kidnapping Dashboard">
-
-
-
-        
+    <!-- Project Hero -->
+    <section class="hero hero--project" style="background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);">
+        <div class="hero__content">
+            <h1 class="hero__title">Global Terrorism Dashboard</h1>
+            <p class="hero__subtitle">Interactive data visualization for global security analysis</p>
+            <div class="hero__buttons" style="margin-top: 1.5rem;">
+                <span class="tag tag--white">Tableau</span>
+                <span class="tag tag--white">Dashboard Design</span>
+                <span class="tag tag--white">Data Visualization</span>
+                <span class="tag tag--white">KPIs</span>
+            </div>
+        </div>
     </section>
 
-    <footer>
-        <p>&copy; 2024 Daniel Volin</p>
+    <!-- Project Content -->
+    <div class="project-content">
+        <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <h2>Project Overview</h2>
+        <p>This project focused on developing an interactive dashboard to provide insights into global terrorism trends, specifically examining the impact and scale of various attacks. The dashboard offers users a clear understanding of the frequency, intensity, and geographical distribution of these events.</p>
+        <p>Additionally, a dedicated dashboard was created to analyze the global impact of kidnappings, with a detailed breakdown by region. Key Performance Indicators (KPIs) used in the dashboards include:</p>
+        <ul>
+            <li>Number of individuals wounded</li>
+            <li>Number of individuals killed</li>
+            <li>Total casualties</li>
+            <li>Ransom amount demanded</li>
+            <li>Ransom amount paid</li>
+        </ul>
+        <p>These dashboards empower users to explore and interpret the data through a visually compelling and user-friendly interface, supporting data-driven decision-making and strategic planning.</p>
+
+        <h2>Technologies Used</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+            <span class="tag tag--tableau">Tableau</span>
+            <span class="tag tag--dashboard">Dashboard Design</span>
+            <span class="tag tag--dataviz">Data Visualization</span>
+            <span class="tag tag--kpi">KPIs</span>
+        </div>
+
+        <h2>Tableau Dashboard</h2>
+        <div class="callout">
+            <p><i class="fas fa-info-circle" style="color: var(--color-primary); margin-right: 0.5rem;"></i> Interested in exploring the full interactive dashboard? Please <a href="mailto:danielvolin1@gmail.com">reach out via email</a> for a copy.</p>
+        </div>
+
+        <h2>Visualizations</h2>
+        <img src="../images/TerrorismDashboard/Introduction to Terror.png" alt="Introduction to Terrorism Dashboard">
+        <img src="../images/TerrorismDashboard/KidnappingDash.png" alt="Kidnapping Dashboard">
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
     </footer>
+
+    <script src="../script.js"></script>
 </body>
 </html>

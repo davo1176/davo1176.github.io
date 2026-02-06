@@ -1,36 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5966R6YDXX');
-</script>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Web Scraper Application">
-    <title>Web Scraper Application</title>
+    <meta name="description" content="Web Scraper Application - Daniel Volin">
+    <title>Web Scraper Application | Daniel Volin</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <header>
-        <h1>Web Scraper Application</h1>
-        <nav>
-            <a href="../index.html">Back to Portfolio</a>
-          </nav>
-    </header>
 
-    <section id="project-details">
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="../index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero hero--project" style="background: linear-gradient(135deg, #22C55E 0%, #059669 100%);">
+        <div class="hero__content">
+            <h1 class="hero__title">Web Scraper Application</h1>
+            <p class="hero__subtitle">Automated ski resort snow report data collection</p>
+            <div class="hero__buttons" style="margin-top: 1.5rem;">
+                <span class="tag tag--white">Python</span>
+                <span class="tag tag--white">Selenium</span>
+                <span class="tag tag--white">BeautifulSoup</span>
+                <span class="tag tag--white">Pandas</span>
+                <span class="tag tag--white">Automation</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
         <h2>Project Overview</h2>
         <p>
             This project provides automated scripts to collect real-time snow report data from two different websites:
-            <strong>Colorado Ski</strong> and <strong>OnTheSnow</strong>. By leveraging Python’s Selenium library and BeautifulSoup,
+            <strong>Colorado Ski</strong> and <strong>OnTheSnow</strong>. By leveraging Python's Selenium library and BeautifulSoup,
             the scraper captures details such as snowfall, base depth, open runs, and lifts open. The collected data are consolidated
             into CSV files for further analysis or integration into dashboards.
         </p>
@@ -46,24 +78,16 @@
         <ul>
             <li>Scripts successfully fetch snow stats and resort availability data from two separate sites.</li>
             <li>Data is appended daily into CSV files, building a historical dataset.</li>
-            <li>Resilient to dynamic page loads using Selenium’s <code>WebDriverWait</code> for accurate scraping.</li>
+            <li>Resilient to dynamic page loads using Selenium's <code>WebDriverWait</code> for accurate scraping.</li>
             <li>Includes custom logging to help track runs, errors, and data integrity.</li>
         </ul>
 
         <h2>Methodology</h2>
         <ul>
-            <li>
-                <strong>Selenium + ChromeDriver:</strong> Automates browser actions and waits for dynamic elements (e.g., 24-hour snowfall).
-            </li>
-            <li>
-                <strong>BeautifulSoup:</strong> Parses the HTML after page load to extract text and numerical values.
-            </li>
-            <li>
-                <strong>Data Aggregation:</strong> Each run appends new data to an existing CSV to build a time-series dataset.
-            </li>
-            <li>
-                <strong>Error Handling & Logging:</strong> Detailed logs for error detection and script debugging.
-            </li>
+            <li><strong>Selenium + ChromeDriver:</strong> Automates browser actions and waits for dynamic elements (e.g., 24-hour snowfall).</li>
+            <li><strong>BeautifulSoup:</strong> Parses the HTML after page load to extract text and numerical values.</li>
+            <li><strong>Data Aggregation:</strong> Each run appends new data to an existing CSV to build a time-series dataset.</li>
+            <li><strong>Error Handling & Logging:</strong> Detailed logs for error detection and script debugging.</li>
         </ul>
 
         <h2>Skills Demonstrated</h2>
@@ -75,22 +99,23 @@
         </ul>
 
         <h2>Technologies Used</h2>
-        <ul>
-            <li>Python (Selenium, BeautifulSoup, pandas, re, logging)</li>
-            <li>ChromeDriver</li>
-            <li>CSV for data storage</li>
-        </ul>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+            <span class="tag tag--python">Python</span>
+            <span class="tag tag--selenium">Selenium</span>
+            <span class="tag tag--beautifulsoup">BeautifulSoup</span>
+            <span class="tag tag--pandas">Pandas</span>
+            <span class="tag tag--webscraping">Web Scraping</span>
+            <span class="tag tag--automation">Automation</span>
+        </div>
 
         <h2>Scripts</h2>
         <p>
             Below is an abbreviated version of the two scripts used to scrape data from
-            <strong><em>coloradoski.com</em></strong> and <strong><em>onthesnow.com</em></strong>.  
-            (You can place them in separate Python files, e.g., <code>colorado_ski_scraper.py</code> and <code>onthesnow_scraper.py</code>.)
+            <strong>coloradoski.com</strong> and <strong>onthesnow.com</strong>.
         </p>
-        
+
         <h3>Colorado Ski Scraper</h3>
-<pre><code>
-import os
+<pre><code>import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -150,12 +175,10 @@ else:
     combined_df = new_data_df
 
 combined_df.to_csv(csv_file_path, index=False)
-print(new_data_df)
-</code></pre>
+print(new_data_df)</code></pre>
 
         <h3>OnTheSnow Scraper</h3>
-<pre><code>
-import os
+<pre><code>import os
 import re
 import logging
 from selenium import webdriver
@@ -198,25 +221,31 @@ new_data_df = pd.DataFrame(snow_data)
 # ...
 new_data_df.to_csv(csv_file_path, index=False)
 logging.info("Data saved.")
-print(new_data_df)
-</code></pre>
+print(new_data_df)</code></pre>
 
         <h2>GitHub Repository</h2>
         <p>
-            You can find the complete source code and instructions on how to run the web scraper in my 
-            <a href="https://github.com/davo1176/davo1176.github.io/tree/main/Projects/Snow%20Report%20Web%20Scraper/SkiWebScraping" target="_blank">GitHub profile</a>.
+            <a href="https://github.com/davo1176/davo1176.github.io/tree/main/Projects/Snow%20Report%20Web%20Scraper/SkiWebScraping" target="_blank" class="btn btn--github">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
         </p>
+    </div>
 
-        <h2>Sample Output</h2>
-        <p>
-            Below are examples of console outputs or CSV entries showing updated data for ski resorts:
-        </p>
-        <img src="images/webscraper_sample_output.png" alt="Web Scraper Sample Output">
-
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Daniel Volin</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
     </footer>
+
+    <script src="../script.js"></script>
 </body>
 </html>
