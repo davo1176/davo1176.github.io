@@ -11,6 +11,7 @@
   --color-teal: #14B8A6;
   --color-green: #22C55E;
   --color-pink: #EC4899;
+  --color-ski: #0EA5E9;
   --color-surface: #F8FAFC;
   --color-card: #FFFFFF;
   --color-text: #0F172A;
@@ -511,6 +512,10 @@ small, .text-small {
   border-top-color: var(--color-green);
 }
 
+.project-card--ski {
+  border-top-color: var(--color-ski);
+}
+
 .project-card__body {
   padding: var(--space-lg);
   display: flex;
@@ -831,6 +836,9 @@ small, .text-small {
 .tag--css { background: #1572B6; color: white; }
 .tag--datascience { background: var(--color-pink); color: white; }
 .tag--webdev { background: var(--color-primary-light); color: white; }
+.tag--chartjs { background: #FF6384; color: white; }
+.tag--api { background: var(--color-ski); color: white; }
+.tag--javascript { background: #F7DF1E; color: var(--color-text); }
 
 /* White variant for hero sections */
 .tag--white {
@@ -1009,7 +1017,73 @@ small, .text-small {
 }
 
 /* ============================================ */
-/* 16. RESPONSIVE - TABLET (max-width: 1024px)  */
+/* 16. SKI TRACKER CHARTS                       */
+/* ============================================ */
+.ski-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.ski-stat-card {
+  background: var(--color-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border-top: 3px solid var(--color-ski);
+}
+
+.ski-stat-card__icon {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.ski-stat-card__value {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.ski-stat-card__label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+.chart-container {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  margin: var(--space-lg) 0;
+}
+
+.chart-container h3 {
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.chart-container canvas {
+  max-height: 400px;
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+
+.chart-row .chart-container {
+  margin: 0;
+}
+
+/* ============================================ */
+/* 17. RESPONSIVE - TABLET (max-width: 1024px)  */
 /* ============================================ */
 @media (max-width: 1024px) {
   .projects-grid {
@@ -1105,6 +1179,14 @@ small, .text-small {
   .skills-grid {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
+
+  .chart-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ski-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ============================================ */
@@ -1133,6 +1215,14 @@ small, .text-small {
 
   .project-content {
     padding: var(--space-xl) var(--space-md);
+  }
+
+  .ski-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .ski-stat-card__value {
+    font-size: 1.5rem;
   }
 }
 

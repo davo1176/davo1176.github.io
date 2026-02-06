@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Epic Pass Ski Tracker - 15 seasons of skiing visualized from reverse-engineered API data">
+    <title>Epic Pass Ski Tracker | Daniel Volin</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="../index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero hero--project" style="background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);">
+        <div class="hero__content">
+            <h1 class="hero__title">Epic Pass Ski Tracker</h1>
+            <p class="hero__subtitle">15 seasons of skiing visualized from reverse-engineered API data</p>
+            <div class="hero__buttons" style="margin-top: 1.5rem;">
+                <span class="tag tag--white">Python</span>
+                <span class="tag tag--white">Chart.js</span>
+                <span class="tag tag--white">JavaScript</span>
+                <span class="tag tag--white">API</span>
+                <span class="tag tag--white">Data Viz</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <h2>Project Overview</h2>
+        <p>
+            Curious about my lifetime skiing stats, I reverse-engineered the Vail Resorts Epic Pass mobile app API
+            by intercepting HTTPS traffic with Proxyman. This uncovered an undocumented stats endpoint that returns
+            day-by-day ski history including vertical feet, lift rides, and GPS data. I extracted 256 day records
+            spanning December 2010 through January 2025 across four Colorado resorts: Vail, Breckenridge, Keystone,
+            and Beaver Creek. A Python script processes the raw JSON into a clean CSV, and the interactive charts
+            below are powered by Chart.js loading the data directly from the source.
+        </p>
+
+        <h2>Objectives</h2>
+        <ul>
+            <li>Extract and preserve personal ski history from the Epic Pass platform via API reverse engineering.</li>
+            <li>Build a reusable Python data pipeline to process and enrich the raw API data.</li>
+            <li>Create interactive visualizations revealing skiing patterns across 15 seasons.</li>
+            <li>Demonstrate API reverse-engineering and browser-based data visualization skills.</li>
+        </ul>
+
+        <h2>Key Results</h2>
+        <ul>
+            <li>Successfully reverse-engineered an undocumented API by intercepting mobile app traffic with Proxyman.</li>
+            <li>Extracted 256 day records spanning 15 ski seasons (Dec 2010 &ndash; Jan 2025) across 4 Colorado resorts.</li>
+            <li>Python script processes raw JSON into enriched CSV with season labels, resort names, and derived fields.</li>
+            <li>8 interactive Chart.js visualizations reveal patterns in resort preference, seasonal trends, and activity levels.</li>
+        </ul>
+
+        <!-- Lifetime Stats -->
+        <h2>Lifetime Stats</h2>
+        <div class="ski-stats" id="ski-stats">
+            <div class="ski-stat-card">
+                <div class="ski-stat-card__icon">Loading...</div>
+            </div>
+        </div>
+
+        <!-- Best Day -->
+        <h2>Best Skiing Day</h2>
+        <div class="callout" id="best-day-callout">
+            <p>Loading ski data...</p>
+        </div>
+
+        <!-- Charts: Resort Breakdown -->
+        <h2>Days by Resort</h2>
+        <div class="chart-row">
+            <div class="chart-container">
+                <h3>Days at Each Resort</h3>
+                <canvas id="chart-resort-days"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Resort Distribution</h3>
+                <canvas id="chart-resort-pie"></canvas>
+            </div>
+        </div>
+
+        <!-- Charts: Vertical Over Time -->
+        <h2>Vertical Feet Over Time</h2>
+        <div class="chart-container">
+            <h3>Total Vertical Feet by Season</h3>
+            <canvas id="chart-vertical-season"></canvas>
+        </div>
+
+        <div class="chart-row">
+            <div class="chart-container">
+                <h3>Days Skied by Season</h3>
+                <canvas id="chart-days-season"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Average Vertical per Day by Season</h3>
+                <canvas id="chart-avg-vert-season"></canvas>
+            </div>
+        </div>
+
+        <!-- Charts: Activity -->
+        <h2>Lift Rides & Activity</h2>
+        <div class="chart-row">
+            <div class="chart-container">
+                <h3>Total Lift Rides by Season</h3>
+                <canvas id="chart-lifts-season"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Day of Week Distribution</h3>
+                <canvas id="chart-day-of-week"></canvas>
+            </div>
+        </div>
+
+        <!-- Charts: Monthly -->
+        <h2>Monthly Patterns</h2>
+        <div class="chart-container">
+            <h3>Days Skied by Month (All Seasons)</h3>
+            <canvas id="chart-monthly"></canvas>
+        </div>
+
+        <!-- Methodology -->
+        <h2>Methodology</h2>
+        <ul>
+            <li><strong>API Discovery:</strong> Used Proxyman to intercept HTTPS traffic from the Epic Pass mobile app, identifying the Vail Resorts stats API endpoint and authentication pattern (Bearer token + client credentials).</li>
+            <li><strong>Data Extraction:</strong> Single authenticated GET request with date range parameters to retrieve all historical day records as JSON (256 records, ~93KB).</li>
+            <li><strong>Data Processing:</strong> Python script (standard library only &mdash; no pip dependencies) parses JSON, maps resort IDs to names, derives ski season labels, and exports an enriched CSV.</li>
+            <li><strong>Visualization:</strong> Chart.js renders 8 interactive charts directly from the JSON data in the browser with no build tools or frameworks required.</li>
+        </ul>
+
+        <!-- Skills Demonstrated -->
+        <h2>Skills Demonstrated</h2>
+        <ul>
+            <li><strong>API Reverse Engineering:</strong> Intercepting and analyzing mobile app network traffic to discover undocumented endpoints and authentication schemes.</li>
+            <li><strong>Data Pipeline:</strong> Building a Python ETL script to transform raw API responses into analysis-ready datasets with derived fields.</li>
+            <li><strong>Data Visualization:</strong> Creating interactive browser-based charts with Chart.js and vanilla JavaScript for pattern discovery.</li>
+            <li><strong>Web Development:</strong> Building a responsive, data-driven project page following modern HTML/CSS patterns.</li>
+        </ul>
+
+        <!-- Technologies Used -->
+        <h2>Technologies Used</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+            <span class="tag tag--python">Python</span>
+            <span class="tag tag--javascript">JavaScript</span>
+            <span class="tag tag--chartjs">Chart.js</span>
+            <span class="tag tag--api">API</span>
+            <span class="tag tag--dataviz">Data Viz</span>
+        </div>
+
+        <!-- Updating the Data -->
+        <h2>Updating the Data</h2>
+        <p>The Epic Pass API uses short-lived Bearer tokens (~1.5 hours), so automated refresh isn't practical. To update the dataset:</p>
+        <ol>
+            <li>Open the Epic Pass mobile app while <strong>Proxyman</strong> (or a similar HTTPS proxy) is intercepting traffic.</li>
+            <li>Navigate to your stats/history in the app to trigger the API call.</li>
+            <li>Copy the <code>Authorization: Bearer &lt;token&gt;</code> header from the intercepted request.</li>
+            <li>Make a GET request to the stats endpoint with the fresh token:
+<pre><code>curl -H "Authorization: Bearer YOUR_TOKEN" \
+  "https://api.vailresorts.com/digital/stats/statsapi/v3/Stats/ResortDayStat/YOUR_USER_ID?Limit=1000&MinDate=2010-01-01T00:00:00Z" \
+  -o ski_day_data.json</code></pre>
+            </li>
+            <li>Replace <code>Projects/Ski_Tracker/ski_day_data.json</code> with the new response.</li>
+            <li>Re-run <code>python process_ski_data.py</code> to regenerate the CSV.</li>
+        </ol>
+
+        <!-- GitHub -->
+        <h2>GitHub Repository</h2>
+        <p>
+            <a href="https://github.com/davo1176/davo1176.github.io/tree/main/Projects/Ski_Tracker" target="_blank" class="btn btn--github">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+
+    <!-- Ski Tracker Charts -->
+    <script>
+    (function() {
+        // Chart.js defaults
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748B';
+        Chart.defaults.responsive = true;
+        Chart.defaults.maintainAspectRatio = true;
+
+        // Resort mapping
+        const RESORT_MAP = {
+            '1_15': 'Vail',
+            '2_3':  'Breckenridge',
+            '3_4':  'Keystone',
+            '4_8':  'Beaver Creek',
+        };
+
+        // Resort colors (from site design system)
+        const RESORT_COLORS = {
+            'Vail':        '#4F46E5',
+            'Breckenridge':'#F97316',
+            'Keystone':    '#14B8A6',
+            'Beaver Creek':'#22C55E',
+        };
+
+        const SKI_BLUE = '#0EA5E9';
+        const MONTHS = ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'];
+        const MONTH_NUMS = [11, 12, 1, 2, 3, 4];
+        const DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const DAYS_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+        function getResortName(r) {
+            return RESORT_MAP[r.resortId + '_' + r.myEpicResortId] || 'Unknown';
+        }
+
+        function getSeason(dateStr) {
+            var dt = new Date(dateStr);
+            var month = dt.getUTCMonth() + 1;
+            var year = dt.getUTCFullYear();
+            if (month >= 11) {
+                return year + '-' + String(year + 1).slice(-2);
+            } else {
+                return (year - 1) + '-' + String(year).slice(-2);
+            }
+        }
+
+        function getDayOfWeek(dateStr) {
+            var dt = new Date(dateStr);
+            return DAYS_OF_WEEK[((dt.getUTCDay() + 6) % 7)]; // Monday=0
+        }
+
+        function formatNumber(n) {
+            return n.toLocaleString('en-US');
+        }
+
+        // Fetch data and render
+        fetch('Ski_Tracker/ski_day_data.json')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                // Enrich records
+                var days = data.map(function(r) {
+                    return {
+                        resort: getResortName(r),
+                        date: r.createdTimestampUtc,
+                        season: getSeason(r.createdTimestampUtc),
+                        dayOfWeek: getDayOfWeek(r.createdTimestampUtc),
+                        month: new Date(r.createdTimestampUtc).getUTCMonth() + 1,
+                        verticalFeet: r.verticalInFeet,
+                        liftRides: r.liftRides,
+                        hasGps: !!r.gpsStats,
+                    };
+                }).sort(function(a, b) { return a.date.localeCompare(b.date); });
+
+                renderStats(days);
+                renderBestDay(days);
+                renderResortDaysChart(days);
+                renderResortPieChart(days);
+                renderVerticalSeasonChart(days);
+                renderDaysSeasonChart(days);
+                renderAvgVertSeasonChart(days);
+                renderLiftsSeasonChart(days);
+                renderDayOfWeekChart(days);
+                renderMonthlyChart(days);
+            })
+            .catch(function(err) {
+                console.error('Failed to load ski data:', err);
+                document.getElementById('ski-stats').innerHTML =
+                    '<p style="color: red;">Failed to load ski data. Please serve this page from a web server.</p>';
+            });
+
+        // === RENDER FUNCTIONS ===
+
+        function renderStats(days) {
+            var totalDays = days.length;
+            var totalVert = days.reduce(function(s, d) { return s + d.verticalFeet; }, 0);
+            var totalLifts = days.reduce(function(s, d) { return s + d.liftRides; }, 0);
+            var seasons = {};
+            days.forEach(function(d) { seasons[d.season] = true; });
+            var numSeasons = Object.keys(seasons).length;
+
+            var vertDisplay = totalVert >= 1000000
+                ? (totalVert / 1000000).toFixed(1) + 'M'
+                : formatNumber(totalVert);
+
+            document.getElementById('ski-stats').innerHTML =
+                '<div class="ski-stat-card">' +
+                    '<div class="ski-stat-card__icon"><i class="fas fa-skiing" style="color: ' + SKI_BLUE + ';"></i></div>' +
+                    '<div class="ski-stat-card__value">' + totalDays + '</div>' +
+                    '<div class="ski-stat-card__label">Total Ski Days</div>' +
+                '</div>' +
+                '<div class="ski-stat-card">' +
+                    '<div class="ski-stat-card__icon"><i class="fas fa-mountain" style="color: ' + SKI_BLUE + ';"></i></div>' +
+                    '<div class="ski-stat-card__value">' + vertDisplay + '</div>' +
+                    '<div class="ski-stat-card__label">Vertical Feet</div>' +
+                '</div>' +
+                '<div class="ski-stat-card">' +
+                    '<div class="ski-stat-card__icon"><i class="fas fa-cable-car" style="color: ' + SKI_BLUE + ';"></i></div>' +
+                    '<div class="ski-stat-card__value">' + formatNumber(totalLifts) + '</div>' +
+                    '<div class="ski-stat-card__label">Lift Rides</div>' +
+                '</div>' +
+                '<div class="ski-stat-card">' +
+                    '<div class="ski-stat-card__icon"><i class="fas fa-calendar-alt" style="color: ' + SKI_BLUE + ';"></i></div>' +
+                    '<div class="ski-stat-card__value">' + numSeasons + '</div>' +
+                    '<div class="ski-stat-card__label">Seasons Tracked</div>' +
+                '</div>';
+        }
+
+        function renderBestDay(days) {
+            var best = days.reduce(function(a, b) {
+                return a.verticalFeet > b.verticalFeet ? a : b;
+            });
+            var dt = new Date(best.date);
+            var dateStr = dt.toLocaleDateString('en-US', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'
+            });
+            document.getElementById('best-day-callout').innerHTML =
+                '<p><i class="fas fa-trophy" style="color: #FBBF24; margin-right: 0.5rem;"></i>' +
+                '<strong>' + dateStr + '</strong> at <strong>' + best.resort + '</strong>' +
+                ' &mdash; ' + formatNumber(best.verticalFeet) + ' vertical feet' +
+                ' across ' + best.liftRides + ' lift rides.</p>';
+        }
+
+        // --- Resort Charts ---
+
+        function getResortCounts(days) {
+            var counts = {};
+            days.forEach(function(d) {
+                counts[d.resort] = (counts[d.resort] || 0) + 1;
+            });
+            // Sort descending
+            var sorted = Object.keys(counts).sort(function(a, b) {
+                return counts[b] - counts[a];
+            });
+            return {
+                labels: sorted,
+                values: sorted.map(function(r) { return counts[r]; }),
+                colors: sorted.map(function(r) { return RESORT_COLORS[r] || '#999'; }),
+            };
+        }
+
+        function renderResortDaysChart(days) {
+            var data = getResortCounts(days);
+            new Chart(document.getElementById('chart-resort-days'), {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.values,
+                        backgroundColor: data.colors,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderResortPieChart(days) {
+            var data = getResortCounts(days);
+            new Chart(document.getElementById('chart-resort-pie'), {
+                type: 'doughnut',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.values,
+                        backgroundColor: data.colors,
+                        borderWidth: 2,
+                        borderColor: '#fff',
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: { padding: 16, usePointStyle: true }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Season Charts ---
+
+        function getSeasonData(days) {
+            var seasonMap = {};
+            days.forEach(function(d) {
+                if (!seasonMap[d.season]) {
+                    seasonMap[d.season] = { days: 0, vert: 0, lifts: 0 };
+                }
+                seasonMap[d.season].days++;
+                seasonMap[d.season].vert += d.verticalFeet;
+                seasonMap[d.season].lifts += d.liftRides;
+            });
+            var seasons = Object.keys(seasonMap).sort();
+            return {
+                labels: seasons,
+                days: seasons.map(function(s) { return seasonMap[s].days; }),
+                vert: seasons.map(function(s) { return seasonMap[s].vert; }),
+                avgVert: seasons.map(function(s) {
+                    return Math.round(seasonMap[s].vert / seasonMap[s].days);
+                }),
+                lifts: seasons.map(function(s) { return seasonMap[s].lifts; }),
+            };
+        }
+
+        function renderVerticalSeasonChart(days) {
+            var data = getSeasonData(days);
+            new Chart(document.getElementById('chart-vertical-season'), {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Vertical Feet',
+                        data: data.vert,
+                        backgroundColor: SKI_BLUE,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(v) {
+                                    return v >= 1000 ? (v / 1000) + 'k' : v;
+                                }
+                            }
+                        },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderDaysSeasonChart(days) {
+            var data = getSeasonData(days);
+            new Chart(document.getElementById('chart-days-season'), {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Days Skied',
+                        data: data.days,
+                        backgroundColor: '#4F46E5',
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderAvgVertSeasonChart(days) {
+            var data = getSeasonData(days);
+            new Chart(document.getElementById('chart-avg-vert-season'), {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Avg Vertical/Day',
+                        data: data.avgVert,
+                        borderColor: '#F97316',
+                        backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: '#F97316',
+                        pointRadius: 5,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(v) {
+                                    return v >= 1000 ? (v / 1000) + 'k' : v;
+                                }
+                            }
+                        },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderLiftsSeasonChart(days) {
+            var data = getSeasonData(days);
+            new Chart(document.getElementById('chart-lifts-season'), {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Lift Rides',
+                        data: data.lifts,
+                        backgroundColor: '#14B8A6',
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // --- Day of Week Chart ---
+
+        function renderDayOfWeekChart(days) {
+            var counts = {};
+            DAYS_OF_WEEK.forEach(function(d) { counts[d] = 0; });
+            days.forEach(function(d) { counts[d.dayOfWeek]++; });
+
+            var values = DAYS_OF_WEEK.map(function(d) { return counts[d]; });
+            var colors = DAYS_OF_WEEK.map(function(d, i) {
+                // Weekend days get a brighter color
+                return (i >= 5) ? '#0284C7' : SKI_BLUE;
+            });
+
+            new Chart(document.getElementById('chart-day-of-week'), {
+                type: 'bar',
+                data: {
+                    labels: DAYS_SHORT,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // --- Monthly Chart ---
+
+        function renderMonthlyChart(days) {
+            var counts = {};
+            MONTH_NUMS.forEach(function(m) { counts[m] = 0; });
+            days.forEach(function(d) {
+                if (counts.hasOwnProperty(d.month)) {
+                    counts[d.month]++;
+                }
+            });
+
+            var values = MONTH_NUMS.map(function(m) { return counts[m]; });
+            var colors = ['#BAE6FD', '#7DD3FC', '#38BDF8', '#0EA5E9', '#0284C7', '#0369A1'];
+
+            new Chart(document.getElementById('chart-monthly'), {
+                type: 'bar',
+                data: {
+                    labels: MONTHS,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+    })();
+    </script>
+</body>
+</html>
