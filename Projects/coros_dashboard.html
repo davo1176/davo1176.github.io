@@ -309,13 +309,17 @@
         <!-- Sleep -->
         <div class="dashboard-section">
             <h2>Sleep Analysis</h2>
+            <div class="chart-container">
+                <h3>Nightly Sleep Stages</h3>
+                <canvas id="chart-sleep-stages-daily"></canvas>
+            </div>
             <div class="chart-row">
                 <div class="chart-container">
                     <h3>Nightly Sleep Duration</h3>
                     <canvas id="chart-sleep-duration"></canvas>
                 </div>
                 <div class="chart-container">
-                    <h3>Sleep Stage Breakdown</h3>
+                    <h3>Average Sleep Stage Breakdown</h3>
                     <canvas id="chart-sleep-stages"></canvas>
                 </div>
             </div>
@@ -476,12 +480,13 @@
 
             if (healthData) {
                 renderRestingHrApple(healthData.resting_heart_rate);
+                renderSleepStagesDaily(healthData.sleep);
                 renderSleepDuration(healthData.sleep);
                 renderSleepStages(healthData.sleep);
                 renderHrv(healthData.heart_rate_variability);
                 renderSpo2(healthData.blood_oxygen);
             } else {
-                ['chart-resting-hr-apple', 'chart-sleep-duration', 'chart-sleep-stages', 'chart-hrv', 'chart-spo2'].forEach(function(id) {
+                ['chart-resting-hr-apple', 'chart-sleep-stages-daily', 'chart-sleep-duration', 'chart-sleep-stages', 'chart-hrv', 'chart-spo2'].forEach(function(id) {
                     var el = document.getElementById(id);
                     if (el) el.parentElement.innerHTML = '<p class="no-data-message">Apple Health data not available yet. Set up the iOS Shortcut to populate.</p>';
                 });
@@ -684,6 +689,50 @@
                 type: 'line',
                 data: { labels: data.map(function(r) { return shortDate(r.date); }), datasets: [{ label: 'Resting HR (bpm)', data: data.map(function(r) { return r.resting_hr; }), borderColor: HEALTH_PINK, backgroundColor: 'rgba(236, 72, 153, 0.1)', fill: true, tension: 0.3, pointRadius: 2 }] },
                 options: { plugins: { legend: { display: false } }, scales: { y: { min: 30 }, x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } } } }
+            });
+        }
+
+        // --- Sleep Stages Per Day (stacked bar) ---
+
+        function renderSleepStagesDaily(records) {
+            if (!records || records.length === 0) {
+                document.getElementById('chart-sleep-stages-daily').parentElement.innerHTML =
+                    '<h3>Nightly Sleep Stages</h3><p class="no-data-message">No sleep data yet. Set up the iOS Shortcut to sync.</p>';
+                return;
+            }
+            var data = lastN(records.filter(function(r) {
+                return r.deep_minutes !== null && r.core_minutes !== null && r.rem_minutes !== null;
+            }), 60);
+
+            if (data.length === 0) {
+                document.getElementById('chart-sleep-stages-daily').parentElement.innerHTML =
+                    '<h3>Nightly Sleep Stages</h3><p class="no-data-message">No sleep stage data yet.</p>';
+                return;
+            }
+
+            var labels = data.map(function(r) { return shortDate(r.date); });
+
+            new Chart(document.getElementById('chart-sleep-stages-daily'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Deep', data: data.map(function(r) { return Math.round((r.deep_minutes || 0) / 60 * 10) / 10; }), backgroundColor: INDIGO, borderRadius: 0 },
+                        { label: 'Core', data: data.map(function(r) { return Math.round((r.core_minutes || 0) / 60 * 10) / 10; }), backgroundColor: SKY, borderRadius: 0 },
+                        { label: 'REM', data: data.map(function(r) { return Math.round((r.rem_minutes || 0) / 60 * 10) / 10; }), backgroundColor: PURPLE, borderRadius: 0 },
+                        { label: 'Awake', data: data.map(function(r) { return Math.round((r.awake_minutes || 0) / 60 * 10) / 10; }), backgroundColor: '#E2E8F0', borderRadius: 0 }
+                    ]
+                },
+                options: {
+                    plugins: {
+                        legend: { display: true, position: 'bottom', labels: { padding: 16, usePointStyle: true } },
+                        tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y + 'h'; } } }
+                    },
+                    scales: {
+                        x: { stacked: true, grid: { display: false }, ticks: { maxTicksLimit: 10 } },
+                        y: { stacked: true, beginAtZero: true, ticks: { callback: function(v) { return v + 'h'; } } }
+                    }
+                }
             });
         }
 
