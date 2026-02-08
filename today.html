@@ -229,6 +229,51 @@
             top: 0.5rem;
         }
 
+        /* Date navigation */
+        .date-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        .date-nav__btn {
+            background: none;
+            border: 1px solid #E2E8F0;
+            border-radius: var(--radius);
+            padding: 0.5rem 0.85rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .date-nav__btn:hover { background: #F8FAFC; border-color: #CBD5E1; }
+        .date-nav__btn--today {
+            background: #4F46E5;
+            color: #fff;
+            border-color: #4F46E5;
+        }
+        .date-nav__btn--today:hover { background: #4338CA; }
+        .date-nav__btn--today[disabled] {
+            opacity: 0.4;
+            cursor: default;
+        }
+        .date-nav__center {
+            text-align: center;
+        }
+        .date-nav__label {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        .date-nav__sub {
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+        }
+
         .loading-state {
             text-align: center;
             padding: 4rem 2rem;
@@ -324,9 +369,26 @@
 
         var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        var TODAY = new Date();
-        var TODAY_STR = TODAY.getFullYear() + '-' + String(TODAY.getMonth() + 1).padStart(2, '0') + '-' + String(TODAY.getDate()).padStart(2, '0');
-        var TODAY_DAY = DAYS[TODAY.getDay()];
+        var REAL_TODAY = new Date();
+        var REAL_TODAY_STR = toDateStr(REAL_TODAY);
+
+        // Selected date (navigable)
+        var selectedDate = new Date(REAL_TODAY);
+        var TODAY, TODAY_STR, TODAY_DAY;
+
+        function toDateStr(d) {
+            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        }
+
+        function setSelectedDate(d) {
+            selectedDate = new Date(d);
+            TODAY = selectedDate;
+            TODAY_STR = toDateStr(selectedDate);
+            TODAY_DAY = DAYS[selectedDate.getDay()];
+        }
+
+        // Initialize to today
+        setSelectedDate(REAL_TODAY);
 
         function daysAgo(dateStr) {
             if (!dateStr) return 999;
@@ -337,7 +399,34 @@
         function dateNDaysAgo(n) {
             var d = new Date(TODAY);
             d.setDate(d.getDate() - n);
-            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+            return toDateStr(d);
+        }
+
+        // Expose navigation globally for onclick handlers
+        window.navigateDay = function(offset) {
+            var d = new Date(selectedDate);
+            d.setDate(d.getDate() + offset);
+            // Don't go into the future
+            if (d > REAL_TODAY) return;
+            setSelectedDate(d);
+            runEngine();
+        };
+
+        window.goToToday = function() {
+            setSelectedDate(REAL_TODAY);
+            runEngine();
+        };
+
+        function daysAgoLabel() {
+            var diff = Math.floor((REAL_TODAY - TODAY) / 86400000);
+            if (diff === 1) return 'Yesterday';
+            return diff + ' days ago';
+        }
+
+        function runEngine() {
+            var analysis = analyzeTrainingState();
+            var prescription = generatePrescription(analysis);
+            render(analysis, prescription);
         }
 
         // ============================================================
@@ -353,9 +442,7 @@
             fetch('data/hevy_data.json').then(function(r) { return r.json(); }).then(function(d) { hevyData = d; }).catch(function() {}),
             fetch('data/strava_activities.json').then(function(r) { return r.json(); }).then(function(d) { stravaData = d; }).catch(function() {}),
         ]).then(function() {
-            var analysis = analyzeTrainingState();
-            var prescription = generatePrescription(analysis);
-            render(analysis, prescription);
+            runEngine();
         });
 
         // ============================================================
@@ -376,9 +463,14 @@
             // --- COROS Training Load & Readiness ---
             if (corosData && corosData.training_days) {
                 var days = corosData.training_days;
+                // Find closest training day data at or before selected date
                 var todayData = days.find(function(d) { return d.date === TODAY_STR; });
                 var yesterdayData = days.find(function(d) { return d.date === dateNDaysAgo(1); });
-                var latest = todayData || yesterdayData || days[days.length - 1];
+                var closestBefore = null;
+                for (var ci = days.length - 1; ci >= 0; ci--) {
+                    if (days[ci].date <= TODAY_STR) { closestBefore = days[ci]; break; }
+                }
+                var latest = todayData || yesterdayData || closestBefore;
 
                 if (latest) {
                     state.restingHr = latest.resting_hr;
@@ -387,8 +479,9 @@
                     state.chronicLoad = latest.chronic_load;
                     state.fatigue = latest.fatigue_rate;
 
-                    // Resting HR baseline (median of last 14 days)
-                    var recentHrs = days.slice(-14).map(function(d) { return d.resting_hr; }).filter(function(v) { return v && v > 0; }).sort(function(a, b) { return a - b; });
+                    // Resting HR baseline (median of 14 days before selected date)
+                    var fourteenAgo = dateNDaysAgo(14);
+                    var recentHrs = days.filter(function(d) { return d.date >= fourteenAgo && d.date <= TODAY_STR; }).map(function(d) { return d.resting_hr; }).filter(function(v) { return v && v > 0; }).sort(function(a, b) { return a - b; });
                     state.baselineHr = recentHrs.length > 0 ? recentHrs[Math.floor(recentHrs.length / 2)] : null;
 
                     // Readiness signals from HR
@@ -435,16 +528,18 @@
                     }
                 }
 
-                // Recent cardio activities
+                // Recent cardio activities (within 7 days before selected date)
                 state.recentRuns = corosData.activities.filter(function(a) {
-                    return a.date >= weekStart && ['Run', 'Indoor Run', 'Trail Run', 'Track Run'].indexOf(a.type) !== -1;
+                    return a.date >= weekStart && a.date <= TODAY_STR && ['Run', 'Indoor Run', 'Trail Run', 'Track Run'].indexOf(a.type) !== -1;
                 });
                 state.lastRunDate = null;
                 for (var i = corosData.activities.length - 1; i >= 0; i--) {
-                    if (['Run', 'Indoor Run', 'Trail Run', 'Track Run'].indexOf(corosData.activities[i].type) !== -1) {
-                        state.lastRunDate = corosData.activities[i].date;
-                        state.lastRunPace = corosData.activities[i].average_pace_min_mile;
-                        state.lastRunDistance = corosData.activities[i].distance_miles;
+                    var ca = corosData.activities[i];
+                    if (ca.date > TODAY_STR) continue; // Skip future activities relative to selected date
+                    if (['Run', 'Indoor Run', 'Trail Run', 'Track Run'].indexOf(ca.type) !== -1) {
+                        state.lastRunDate = ca.date;
+                        state.lastRunPace = ca.average_pace_min_mile;
+                        state.lastRunDistance = ca.distance_miles;
                         break;
                     }
                 }
@@ -455,14 +550,15 @@
 
             // --- HEVY Lifting Data ---
             if (hevyData && hevyData.workouts) {
-                var recentLifts = hevyData.workouts.filter(function(w) { return w.date >= weekStart; });
+                var recentLifts = hevyData.workouts.filter(function(w) { return w.date >= weekStart && w.date <= TODAY_STR; });
                 state.liftsThisWeek = recentLifts.length;
 
-                // Last push/pull dates
+                // Last push/pull dates (on or before selected date)
                 state.lastPushDate = null;
                 state.lastPullDate = null;
                 for (var j = hevyData.workouts.length - 1; j >= 0; j--) {
                     var w = hevyData.workouts[j];
+                    if (w.date > TODAY_STR) continue;
                     var name = w.name.toLowerCase();
                     if (!state.lastPushDate && name.indexOf('push') !== -1) state.lastPushDate = w.date;
                     if (!state.lastPullDate && name.indexOf('pull') !== -1) state.lastPullDate = w.date;
@@ -471,9 +567,10 @@
                 state.daysSincePush = daysAgo(state.lastPushDate);
                 state.daysSincePull = daysAgo(state.lastPullDate);
 
-                // Muscle group freshness (days since last hit)
+                // Muscle group freshness (days since last hit, up to selected date)
                 var muscleLastHit = {};
                 hevyData.workouts.forEach(function(w) {
+                    if (w.date > TODAY_STR) return;
                     Object.keys(w.muscle_groups_hit).forEach(function(mg) {
                         if (!muscleLastHit[mg] || w.date > muscleLastHit[mg]) {
                             muscleLastHit[mg] = w.date;
@@ -487,7 +584,7 @@
 
                 // Consecutive lift days
                 state.liftedYesterday = recentLifts.some(function(w) { return w.date === dateNDaysAgo(1); });
-                state.liftedToday = recentLifts.some(function(w) { return w.date === TODAY_STR; });
+                state.liftedToday = hevyData.workouts.some(function(w) { return w.date === TODAY_STR; });
 
                 // Push/pull balance this week
                 state.pushCountWeek = recentLifts.filter(function(w) { return w.name.toLowerCase().indexOf('push') !== -1; }).length;
@@ -498,12 +595,12 @@
             var allDatesThisWeek = {};
             if (corosData) {
                 corosData.activities.forEach(function(a) {
-                    if (a.date >= weekStart) allDatesThisWeek[a.date] = true;
+                    if (a.date >= weekStart && a.date <= TODAY_STR) allDatesThisWeek[a.date] = true;
                 });
             }
             if (hevyData) {
                 hevyData.workouts.forEach(function(w) {
-                    if (w.date >= weekStart) allDatesThisWeek[w.date] = true;
+                    if (w.date >= weekStart && w.date <= TODAY_STR) allDatesThisWeek[w.date] = true;
                 });
             }
             state.activeDaysThisWeek = Object.keys(allDatesThisWeek).length;
@@ -536,7 +633,7 @@
 
                 if (corosData) {
                     entry.ran = corosData.activities.some(function(a) {
-                        return a.date === dateStr && ['Run', 'Indoor Run', 'Trail Run', 'Track Run'].indexOf(a.type) !== -1;
+                        return a.date === dateStr && a.date <= TODAY_STR && ['Run', 'Indoor Run', 'Trail Run', 'Track Run'].indexOf(a.type) !== -1;
                     });
                 }
                 if (hevyData) {
@@ -827,9 +924,32 @@
             var root = document.getElementById('rx-root');
             var html = '';
 
-            // Date header
+            // Date navigation
             var dateDisplay = TODAY.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-            html += '<p class="rx-date">' + dateDisplay + '</p>';
+            var isRealToday = TODAY_STR === REAL_TODAY_STR;
+            var isPast = TODAY_STR < REAL_TODAY_STR;
+
+            html += '<div class="date-nav">';
+            html += '<button class="date-nav__btn" onclick="navigateDay(-1)"><i class="fas fa-chevron-left"></i> Previous</button>';
+            html += '<div class="date-nav__center">';
+            html += '<div class="date-nav__label">' + dateDisplay + '</div>';
+            if (!isRealToday) {
+                html += '<div class="date-nav__sub">' + daysAgoLabel() + '</div>';
+            }
+            html += '</div>';
+            if (isRealToday) {
+                html += '<button class="date-nav__btn date-nav__btn--today" disabled><i class="fas fa-calendar-day"></i> Today</button>';
+            } else {
+                html += '<button class="date-nav__btn" onclick="navigateDay(1)">Next <i class="fas fa-chevron-right"></i></button>';
+            }
+            html += '</div>';
+
+            // "Back to today" link when viewing past
+            if (!isRealToday) {
+                html += '<div style="text-align: center; margin-bottom: 1rem;">';
+                html += '<button class="date-nav__btn date-nav__btn--today" onclick="goToToday()" style="margin: 0 auto;"><i class="fas fa-calendar-day"></i> Jump to Today</button>';
+                html += '</div>';
+            }
 
             // Headline
             var headline = 'Rest Up';
@@ -837,7 +957,8 @@
                 if (rx.primary.type === 'run' && rx.secondary) headline = rx.primary.title + ' + ' + rx.secondary.title;
                 else headline = rx.primary.title;
             }
-            html += '<h1 class="rx-headline">' + headline + '</h1>';
+            var pastPrefix = isPast ? '<span style="font-size: 0.7em; color: var(--color-text-secondary); font-weight: 500;">WOULD HAVE PRESCRIBED</span><br>' : '';
+            html += '<h1 class="rx-headline">' + pastPrefix + headline + '</h1>';
 
             // Week at a glance
             html += '<h3 style="font-family: var(--font-heading); font-size: 0.85rem; margin-bottom: 0.25rem; color: var(--color-text-secondary);">YOUR WEEK</h3>';
