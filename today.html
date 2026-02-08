@@ -464,6 +464,9 @@
         var DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         var REAL_TODAY = new Date();
         var REAL_TODAY_STR = toDateStr(REAL_TODAY);
+        var MAX_DATE = new Date(REAL_TODAY);
+        MAX_DATE.setDate(MAX_DATE.getDate() + 1);
+        var MAX_DATE_STR = toDateStr(MAX_DATE);
 
         // Selected date (navigable)
         var selectedDate = new Date(REAL_TODAY);
@@ -499,8 +502,8 @@
         window.navigateDay = function(offset) {
             var d = new Date(selectedDate);
             d.setDate(d.getDate() + offset);
-            // Don't go into the future
-            if (d > REAL_TODAY) return;
+            // Allow up to tomorrow
+            if (d > MAX_DATE) return;
             setSelectedDate(d);
             runEngine();
         };
@@ -512,13 +515,14 @@
 
         window.goToDate = function(dateStr) {
             var d = new Date(dateStr + 'T12:00:00');
-            if (d > REAL_TODAY) return;
+            if (d > MAX_DATE) return;
             setSelectedDate(d);
             runEngine();
         };
 
         function daysAgoLabel() {
             var diff = Math.floor((REAL_TODAY - TODAY) / 86400000);
+            if (diff === -1) return 'Tomorrow';
             if (diff === 1) return 'Yesterday';
             return diff + ' days ago';
         }
@@ -1028,6 +1032,8 @@
             var dateDisplay = TODAY.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
             var isRealToday = TODAY_STR === REAL_TODAY_STR;
             var isPast = TODAY_STR < REAL_TODAY_STR;
+            var isFuture = TODAY_STR > REAL_TODAY_STR;
+            var isMaxDate = TODAY_STR === MAX_DATE_STR;
 
             html += '<div class="date-nav">';
             html += '<button class="date-nav__btn" onclick="navigateDay(-1)"><i class="fas fa-chevron-left"></i> Previous</button>';
@@ -1037,14 +1043,16 @@
                 html += '<div class="date-nav__sub">' + daysAgoLabel() + '</div>';
             }
             html += '</div>';
-            if (isRealToday) {
-                html += '<button class="date-nav__btn date-nav__btn--today" disabled><i class="fas fa-calendar-day"></i> Today</button>';
+            if (isMaxDate) {
+                html += '<button class="date-nav__btn" disabled style="opacity: 0.3;"><span>Next</span> <i class="fas fa-chevron-right"></i></button>';
+            } else if (isRealToday) {
+                html += '<button class="date-nav__btn" onclick="navigateDay(1)">Tomorrow <i class="fas fa-chevron-right"></i></button>';
             } else {
                 html += '<button class="date-nav__btn" onclick="navigateDay(1)">Next <i class="fas fa-chevron-right"></i></button>';
             }
             html += '</div>';
 
-            // "Back to today" link when viewing past
+            // "Back to today" link when not viewing today
             if (!isRealToday) {
                 html += '<div style="text-align: center; margin-bottom: 1rem;">';
                 html += '<button class="date-nav__btn date-nav__btn--today" onclick="goToToday()" style="margin: 0 auto;"><i class="fas fa-calendar-day"></i> Jump to Today</button>';
@@ -1057,8 +1065,10 @@
                 if (rx.primary.type === 'run' && rx.secondary) headline = rx.primary.title + ' + ' + rx.secondary.title;
                 else headline = rx.primary.title;
             }
-            var pastPrefix = isPast ? '<span style="font-size: 0.7em; color: var(--color-text-secondary); font-weight: 500;">WOULD HAVE PRESCRIBED</span><br>' : '';
-            html += '<h1 class="rx-headline">' + pastPrefix + headline + '</h1>';
+            var headlinePrefix = '';
+            if (isPast) headlinePrefix = '<span style="font-size: 0.7em; color: var(--color-text-secondary); font-weight: 500;">WOULD HAVE PRESCRIBED</span><br>';
+            else if (isFuture) headlinePrefix = '<span style="font-size: 0.7em; color: #4F46E5; font-weight: 500;">UP NEXT</span><br>';
+            html += '<h1 class="rx-headline">' + headlinePrefix + headline + '</h1>';
 
             // Week at a glance
             html += '<h3 style="font-family: var(--font-heading); font-size: 0.85rem; margin-bottom: 0.25rem; color: var(--color-text-secondary);">YOUR WEEK</h3>';
@@ -1270,7 +1280,10 @@
             }
 
             if (!hasActivities) {
-                html += '<div class="activity-log__empty">No activities recorded on this day.</div>';
+                var emptyMsg = TODAY_STR > REAL_TODAY_STR
+                    ? 'Tomorrow\u2019s activities will show up here after you train.'
+                    : 'No activities recorded on this day.';
+                html += '<div class="activity-log__empty">' + emptyMsg + '</div>';
             }
 
             html += '</div>';
