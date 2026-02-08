@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hevy Gym Dashboard - Automated workout tracking with interactive visualizations">
+    <title>Gym Dashboard | Daniel Volin</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+    <style>
+        .dashboard-section { margin-top: 2.5rem; }
+        .dashboard-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .dashboard-section h2 i { font-size: 0.9em; }
+        .data-source-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.5rem;
+            border-radius: var(--radius-full);
+            vertical-align: middle;
+            margin-left: 0.5rem;
+        }
+        .data-source-badge--hevy {
+            background: rgba(249, 115, 22, 0.15);
+            color: #EA580C;
+        }
+        .no-data-message {
+            text-align: center;
+            color: var(--color-text-secondary);
+            padding: 2rem;
+            font-style: italic;
+        }
+        .recent-workouts-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+        .recent-workouts-table th {
+            text-align: left;
+            padding: 0.6rem 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            border-bottom: 2px solid #E2E8F0;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .recent-workouts-table td {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .recent-workouts-table tr:hover td {
+            background: #F8FAFC;
+        }
+        .pr-badge {
+            display: inline-block;
+            background: #FEF3C7;
+            color: #B45309;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.1rem 0.4rem;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="../index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero hero--project" style="background: linear-gradient(135deg, #F97316 0%, #EA580C 50%, #4F46E5 100%);">
+        <div class="hero__content">
+            <h1 class="hero__title">Gym Dashboard</h1>
+            <p class="hero__subtitle">Hevy workout data &mdash; reverse-engineered API, automated daily via GitHub Actions</p>
+            <div class="hero__buttons" style="margin-top: 1.5rem;">
+                <span class="tag tag--white">Python</span>
+                <span class="tag tag--white">Chart.js</span>
+                <span class="tag tag--white">Hevy API</span>
+                <span class="tag tag--white">GitHub Actions</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <h2>Project Overview</h2>
+        <p>
+            This dashboard pulls workout data from the Hevy gym tracking app via its private API.
+            Since Hevy doesn't offer a public API (without a Pro subscription), I reverse-engineered
+            the endpoints using Postman, built a Python fetcher, and set up automated daily syncs
+            through GitHub Actions.
+        </p>
+        <p>
+            The data includes every set, rep, and weight for all exercises across every workout &mdash;
+            giving rich insight into training volume, muscle group distribution, personal records, and
+            consistency over time.
+        </p>
+
+        <!-- The Journey -->
+        <div class="dashboard-section">
+            <h2><i class="fas fa-route" style="color: #4F46E5;"></i> The Journey</h2>
+
+            <h3>Step 1: Looking for an API</h3>
+            <p>
+                Hevy does have an official API, but it requires a <strong>Hevy Pro</strong> subscription.
+                Without paying for Pro, the API documentation is inaccessible and the endpoints return
+                authentication errors. Time for the same playbook that worked for COROS: reverse-engineer it.
+            </p>
+
+            <h3>Step 2: Capturing the Private API</h3>
+            <p>
+                Using Postman as a proxy, I captured the HTTP requests the Hevy app makes when loading
+                workouts. The key discovery was the <code>user_workouts_paged</code> endpoint on
+                <code>api.hevyapp.com</code>, which returns full workout data including every exercise,
+                set, rep count, weight, RPE, muscle groups, and personal records.
+            </p>
+            <p>
+                Authentication uses a session token (<code>auth-token</code> header) plus a hardcoded
+                API key. The endpoint supports pagination via <code>limit</code> and <code>offset</code>
+                parameters, though with a max page size of 5 workouts per request.
+            </p>
+
+            <h3>Step 3: Building the Pipeline</h3>
+            <p>
+                Following the same pattern as the COROS integration, I built <strong>fetch_hevy.py</strong>
+                &mdash; a zero-dependency Python script that authenticates, paginates through all workouts,
+                computes per-exercise and per-workout aggregates (volume, max weight, PR counts), and writes
+                everything to a clean JSON file. A GitHub Actions cron job runs this daily.
+            </p>
+        </div>
+
+        <!-- ======================== -->
+        <!-- STATS CARDS              -->
+        <!-- ======================== -->
+
+        <div class="dashboard-section">
+            <h2><i class="fas fa-dumbbell" style="color: #F97316;"></i> Workout Stats
+                <span class="data-source-badge data-source-badge--hevy">Hevy</span>
+            </h2>
+            <div class="strava-stats" id="hevy-stats">
+                <div class="strava-stat-card">
+                    <div class="strava-stat-card__icon">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Volume Over Time -->
+        <div class="dashboard-section">
+            <h2>Volume Over Time</h2>
+            <div class="chart-container">
+                <h3>Weekly Total Volume (lbs)</h3>
+                <canvas id="chart-weekly-volume"></canvas>
+            </div>
+        </div>
+
+        <!-- Muscle Group Breakdown -->
+        <div class="dashboard-section">
+            <h2>Muscle Group Breakdown</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Sets by Muscle Group</h3>
+                    <canvas id="chart-muscle-bar"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Muscle Group Distribution</h3>
+                    <canvas id="chart-muscle-doughnut"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workout Patterns -->
+        <div class="dashboard-section">
+            <h2>Workout Patterns</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Day of Week Distribution</h3>
+                    <canvas id="chart-day-of-week"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Workout Duration Trend</h3>
+                    <canvas id="chart-duration-trend"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRs & Volume per Workout -->
+        <div class="dashboard-section">
+            <h2>Progress Tracking</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Personal Records Over Time</h3>
+                    <canvas id="chart-pr-timeline"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Volume per Workout</h3>
+                    <canvas id="chart-volume-per-workout"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Push/Pull Split -->
+        <div class="dashboard-section">
+            <h2>Workout Split</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Push vs Pull Distribution</h3>
+                    <canvas id="chart-split-doughnut"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Sets per Workout Trend</h3>
+                    <canvas id="chart-sets-trend"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Workouts Table -->
+        <div class="dashboard-section">
+            <h2><i class="fas fa-clock-rotate-left" style="color: #F97316;"></i> Recent Workouts</h2>
+            <div id="recent-workouts-container">
+                <p class="no-data-message">Loading...</p>
+            </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="dashboard-section">
+            <h2><i class="fas fa-diagram-project" style="color: #F97316;"></i> Architecture</h2>
+            <ul>
+                <li><strong>Data Source:</strong> Hevy app's private API at <code>api.hevyapp.com</code>, discovered via Postman. Uses session-based authentication with an <code>auth-token</code> header.</li>
+                <li><strong>Fetcher:</strong> <code>fetch_hevy.py</code> paginates through all workouts (5 per page), processes exercises and sets, computes volume/PR aggregates, and writes JSON.</li>
+                <li><strong>Automation:</strong> GitHub Actions cron runs daily at 7:00 AM UTC, committing updated data.</li>
+                <li><strong>Zero Dependencies:</strong> Python standard library only &mdash; <code>urllib</code>, <code>json</code>, <code>ssl</code>.</li>
+                <li><strong>Visualization:</strong> Chart.js renders 8 interactive charts from pre-processed JSON.</li>
+            </ul>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Technologies Used</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+                <span class="tag tag--python">Python</span>
+                <span class="tag tag--javascript">JavaScript</span>
+                <span class="tag tag--chartjs">Chart.js</span>
+                <span class="tag" style="background: #F97316; color: #fff;">Hevy API</span>
+                <span class="tag tag--actions">GitHub Actions</span>
+                <span class="tag tag--dataviz">Data Viz</span>
+            </div>
+        </div>
+
+        <!-- GitHub -->
+        <div class="dashboard-section">
+            <h2>GitHub Repository</h2>
+            <p>
+                <a href="https://github.com/davo1176/davo1176.github.io" target="_blank" class="btn btn--github">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+
+    <!-- Dashboard Charts -->
+    <script>
+    (function() {
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748B';
+        Chart.defaults.responsive = true;
+        Chart.defaults.maintainAspectRatio = true;
+
+        var ORANGE = '#F97316';
+        var ORANGE_DARK = '#EA580C';
+        var INDIGO = '#4F46E5';
+        var TEAL = '#14B8A6';
+        var GREEN = '#22C55E';
+        var SKY = '#0EA5E9';
+        var PURPLE = '#8B5CF6';
+        var AMBER = '#FBBF24';
+        var PINK = '#EC4899';
+        var RED = '#EF4444';
+
+        var MUSCLE_COLORS = {
+            'chest': '#EF4444',
+            'triceps': '#F97316',
+            'shoulders': '#FBBF24',
+            'biceps': '#22C55E',
+            'upper_back': '#14B8A6',
+            'lats': '#0EA5E9',
+            'forearms': '#4F46E5',
+            'traps': '#8B5CF6',
+            'abdominals': '#EC4899',
+            'neck': '#64748B',
+            'full_body': '#94A3B8',
+            'glutes': '#A855F7',
+            'hamstrings': '#06B6D4',
+            'quadriceps': '#10B981',
+            'lower_back': '#78716C',
+        };
+
+        var DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        var DAYS_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+        function formatNumber(n) { return n.toLocaleString('en-US'); }
+        function shortDate(dateStr) {
+            var dt = new Date(dateStr + 'T00:00:00');
+            return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+        function lastN(arr, n) { return arr.length > n ? arr.slice(-n) : arr; }
+
+        // Capitalize and format muscle group names
+        function formatMuscle(name) {
+            return name.replace(/_/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+        }
+
+        // Get ISO week string for grouping
+        function getWeekKey(dateStr) {
+            var dt = new Date(dateStr + 'T00:00:00');
+            var day = dt.getDay() || 7; // Monday = 1
+            dt.setDate(dt.getDate() + 4 - day); // Thursday of the week
+            var yearStart = new Date(dt.getFullYear(), 0, 1);
+            var weekNum = Math.ceil(((dt - yearStart) / 86400000 + 1) / 7);
+            return dt.getFullYear() + '-W' + String(weekNum).padStart(2, '0');
+        }
+
+        // Get the Monday of a week for display
+        function weekStartDate(dateStr) {
+            var dt = new Date(dateStr + 'T00:00:00');
+            var day = dt.getDay() || 7;
+            dt.setDate(dt.getDate() - day + 1);
+            return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        // Load Hevy data
+        fetch('../data/hevy_data.json')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                renderStats(data);
+                renderWeeklyVolume(data.workouts);
+                renderMuscleBar(data.athlete_stats.muscle_group_sets);
+                renderMuscleDoughnut(data.athlete_stats.muscle_group_sets);
+                renderDayOfWeek(data.workouts);
+                renderDurationTrend(data.workouts);
+                renderPrTimeline(data.workouts);
+                renderVolumePerWorkout(data.workouts);
+                renderSplitDoughnut(data.workouts);
+                renderSetsTrend(data.workouts);
+                renderRecentWorkouts(data.workouts);
+            })
+            .catch(function() {
+                document.getElementById('hevy-stats').innerHTML =
+                    '<p class="no-data-message">Hevy data not available yet. Run the sync workflow to populate.</p>';
+            });
+
+        // ============================
+        // STAT CARDS
+        // ============================
+
+        function renderStats(data) {
+            var s = data.athlete_stats;
+            var volumeDisplay = s.total_volume_lbs >= 1000000
+                ? (s.total_volume_lbs / 1000000).toFixed(1) + 'M'
+                : s.total_volume_lbs >= 1000
+                ? Math.round(s.total_volume_lbs / 1000) + 'K'
+                : Math.round(s.total_volume_lbs);
+
+            document.getElementById('hevy-stats').innerHTML =
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-dumbbell" style="color: ' + ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + s.total_workouts + '</div>' +
+                    '<div class="strava-stat-card__label">Workouts</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-weight-hanging" style="color: ' + ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + volumeDisplay + '</div>' +
+                    '<div class="strava-stat-card__label">Total Volume (lbs)</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-layer-group" style="color: ' + ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + formatNumber(s.total_sets) + '</div>' +
+                    '<div class="strava-stat-card__label">Total Sets</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-trophy" style="color: ' + AMBER + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + s.total_prs + '</div>' +
+                    '<div class="strava-stat-card__label">Personal Records</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-clock" style="color: ' + ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + s.total_duration_display + '</div>' +
+                    '<div class="strava-stat-card__label">Gym Time</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-repeat" style="color: ' + ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + formatNumber(s.total_reps) + '</div>' +
+                    '<div class="strava-stat-card__label">Total Reps</div>' +
+                '</div>';
+        }
+
+        // ============================
+        // CHARTS
+        // ============================
+
+        function renderWeeklyVolume(workouts) {
+            var weekMap = {};
+            var weekDates = {};
+            workouts.forEach(function(w) {
+                if (!w.date) return;
+                var key = getWeekKey(w.date);
+                weekMap[key] = (weekMap[key] || 0) + w.total_volume_lbs;
+                if (!weekDates[key]) weekDates[key] = w.date;
+            });
+            var weeks = Object.keys(weekMap).sort();
+            var labels = weeks.map(function(k) { return weekStartDate(weekDates[k]); });
+            var values = weeks.map(function(k) { return Math.round(weekMap[k]); });
+
+            new Chart(document.getElementById('chart-weekly-volume'), {
+                type: 'bar',
+                data: { labels: labels, datasets: [{ label: 'Volume (lbs)', data: values, backgroundColor: ORANGE, borderRadius: 6 }] },
+                options: {
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx) { return formatNumber(ctx.parsed.y) + ' lbs'; } } } },
+                    scales: { y: { beginAtZero: true, ticks: { callback: function(v) { return v >= 1000 ? (v / 1000) + 'K' : v; } } }, x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } } }
+                }
+            });
+        }
+
+        function renderMuscleBar(muscleGroups) {
+            var sorted = Object.keys(muscleGroups).sort(function(a, b) { return muscleGroups[b] - muscleGroups[a]; });
+            var labels = sorted.map(formatMuscle);
+            var values = sorted.map(function(k) { return muscleGroups[k]; });
+            var colors = sorted.map(function(k) { return MUSCLE_COLORS[k] || '#64748B'; });
+
+            new Chart(document.getElementById('chart-muscle-bar'), {
+                type: 'bar',
+                data: { labels: labels, datasets: [{ data: values, backgroundColor: colors, borderRadius: 6 }] },
+                options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { display: false } } } }
+            });
+        }
+
+        function renderMuscleDoughnut(muscleGroups) {
+            var sorted = Object.keys(muscleGroups).sort(function(a, b) { return muscleGroups[b] - muscleGroups[a]; });
+            var labels = sorted.map(formatMuscle);
+            var values = sorted.map(function(k) { return muscleGroups[k]; });
+            var colors = sorted.map(function(k) { return MUSCLE_COLORS[k] || '#64748B'; });
+
+            new Chart(document.getElementById('chart-muscle-doughnut'), {
+                type: 'doughnut',
+                data: { labels: labels, datasets: [{ data: values, backgroundColor: colors, borderWidth: 2, borderColor: '#fff' }] },
+                options: { plugins: { legend: { display: true, position: 'bottom', labels: { padding: 12, usePointStyle: true, font: { size: 11 } } } } }
+            });
+        }
+
+        function renderDayOfWeek(workouts) {
+            var counts = {};
+            DAYS_OF_WEEK.forEach(function(d) { counts[d] = 0; });
+            workouts.forEach(function(w) { if (w.day_of_week) counts[w.day_of_week]++; });
+            var values = DAYS_OF_WEEK.map(function(d) { return counts[d]; });
+            var colors = DAYS_OF_WEEK.map(function(d, i) { return i >= 5 ? ORANGE_DARK : ORANGE; });
+
+            new Chart(document.getElementById('chart-day-of-week'), {
+                type: 'bar',
+                data: { labels: DAYS_SHORT, datasets: [{ data: values, backgroundColor: colors, borderRadius: 6 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } }, x: { grid: { display: false } } } }
+            });
+        }
+
+        function renderDurationTrend(workouts) {
+            var data = lastN(workouts.filter(function(w) { return w.duration_seconds > 0; }), 30);
+            var labels = data.map(function(w) { return shortDate(w.date); });
+            var values = data.map(function(w) { return Math.round(w.duration_seconds / 60); });
+
+            new Chart(document.getElementById('chart-duration-trend'), {
+                type: 'line',
+                data: { labels: labels, datasets: [{ label: 'Duration (min)', data: values, borderColor: ORANGE, backgroundColor: 'rgba(249, 115, 22, 0.1)', fill: true, tension: 0.3, pointBackgroundColor: ORANGE, pointRadius: 4 }] },
+                options: {
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx) { return ctx.parsed.y + ' min'; } } } },
+                    scales: { y: { beginAtZero: true, ticks: { callback: function(v) { return v + 'm'; } } }, x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } } }
+                }
+            });
+        }
+
+        function renderPrTimeline(workouts) {
+            var prWorkouts = workouts.filter(function(w) { return w.pr_count > 0; });
+            prWorkouts = lastN(prWorkouts, 30);
+            var labels = prWorkouts.map(function(w) { return shortDate(w.date); });
+            var values = prWorkouts.map(function(w) { return w.pr_count; });
+
+            // Cumulative PR count
+            var cumulative = [];
+            var total = 0;
+            workouts.forEach(function(w) { total += w.pr_count; cumulative.push(total); });
+
+            new Chart(document.getElementById('chart-pr-timeline'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'PRs', data: values, backgroundColor: AMBER, borderRadius: 4 }
+                    ]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } }, x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } } }
+                }
+            });
+        }
+
+        function renderVolumePerWorkout(workouts) {
+            var data = lastN(workouts, 30);
+            var labels = data.map(function(w) { return shortDate(w.date); });
+            var values = data.map(function(w) { return Math.round(w.total_volume_lbs); });
+
+            new Chart(document.getElementById('chart-volume-per-workout'), {
+                type: 'bar',
+                data: { labels: labels, datasets: [{ label: 'Volume (lbs)', data: values, backgroundColor: INDIGO, borderRadius: 4 }] },
+                options: {
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx) { return formatNumber(ctx.parsed.y) + ' lbs'; } } } },
+                    scales: { y: { beginAtZero: true, ticks: { callback: function(v) { return v >= 1000 ? (v / 1000) + 'K' : v; } } }, x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } } }
+                }
+            });
+        }
+
+        function renderSplitDoughnut(workouts) {
+            // Categorize workouts by name into Push/Pull/Other
+            var counts = { 'Push': 0, 'Pull': 0, 'Other': 0 };
+            workouts.forEach(function(w) {
+                var name = w.name.toLowerCase();
+                if (name.indexOf('push') !== -1) counts['Push']++;
+                else if (name.indexOf('pull') !== -1) counts['Pull']++;
+                else counts['Other']++;
+            });
+
+            var labels = [];
+            var values = [];
+            var colors = [];
+            if (counts['Push'] > 0) { labels.push('Push'); values.push(counts['Push']); colors.push(RED); }
+            if (counts['Pull'] > 0) { labels.push('Pull'); values.push(counts['Pull']); colors.push(SKY); }
+            if (counts['Other'] > 0) { labels.push('Other'); values.push(counts['Other']); colors.push('#94A3B8'); }
+
+            new Chart(document.getElementById('chart-split-doughnut'), {
+                type: 'doughnut',
+                data: { labels: labels, datasets: [{ data: values, backgroundColor: colors, borderWidth: 2, borderColor: '#fff' }] },
+                options: { plugins: { legend: { display: true, position: 'bottom', labels: { padding: 16, usePointStyle: true } } } }
+            });
+        }
+
+        function renderSetsTrend(workouts) {
+            var data = lastN(workouts, 30);
+            var labels = data.map(function(w) { return shortDate(w.date); });
+            var values = data.map(function(w) { return w.total_sets; });
+
+            new Chart(document.getElementById('chart-sets-trend'), {
+                type: 'line',
+                data: { labels: labels, datasets: [{ label: 'Sets', data: values, borderColor: TEAL, backgroundColor: 'rgba(20, 184, 166, 0.1)', fill: true, tension: 0.3, pointBackgroundColor: TEAL, pointRadius: 4 }] },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { stepSize: 5 } }, x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } } }
+                }
+            });
+        }
+
+        // ============================
+        // RECENT WORKOUTS TABLE
+        // ============================
+
+        function renderRecentWorkouts(workouts) {
+            var recent = workouts.slice().reverse().slice(0, 15);
+            var html = '<table class="recent-workouts-table">' +
+                '<thead><tr>' +
+                '<th>Date</th>' +
+                '<th>Workout</th>' +
+                '<th>Duration</th>' +
+                '<th>Exercises</th>' +
+                '<th>Sets</th>' +
+                '<th>Volume</th>' +
+                '<th>PRs</th>' +
+                '</tr></thead><tbody>';
+
+            recent.forEach(function(w) {
+                var prHtml = w.pr_count > 0
+                    ? '<span class="pr-badge"><i class="fas fa-trophy" style="font-size: 0.6rem;"></i> ' + w.pr_count + '</span>'
+                    : '';
+                html += '<tr>' +
+                    '<td>' + shortDate(w.date) + '</td>' +
+                    '<td><strong>' + w.name + '</strong></td>' +
+                    '<td>' + w.duration_display + '</td>' +
+                    '<td>' + w.exercise_count + '</td>' +
+                    '<td>' + w.total_sets + '</td>' +
+                    '<td>' + formatNumber(Math.round(w.total_volume_lbs)) + ' lbs</td>' +
+                    '<td>' + prHtml + '</td>' +
+                    '</tr>';
+            });
+
+            html += '</tbody></table>';
+            document.getElementById('recent-workouts-container').innerHTML = html;
+        }
+
+    })();
+    </script>
+</body>
+</html>

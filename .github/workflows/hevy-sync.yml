@@ -1,0 +1,30 @@
+name: Sync Hevy Data
+
+on:
+  schedule:
+    - cron: '0 7 * * *'      # Daily at 7:00 AM UTC (offset from COROS/Strava)
+  workflow_dispatch:           # Manual trigger for testing
+
+permissions:
+  contents: write              # Needed to commit and push
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Hevy data
+        env:
+          HEVY_AUTH_TOKEN: ${{ secrets.HEVY_AUTH_TOKEN }}
+          CI: true
+        run: python scripts/fetch_hevy.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/hevy_data.json
+          git diff --cached --quiet || git commit -m "chore: update Hevy workout data"
+          git push
