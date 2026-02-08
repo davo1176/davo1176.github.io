@@ -176,7 +176,10 @@
             border-radius: var(--radius);
             background: #F8FAFC;
             font-size: 0.7rem;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
         }
+        .week-day:hover { background: #E2E8F0; transform: scale(1.05); }
         .week-day__label {
             font-weight: 600;
             color: var(--color-text-secondary);
@@ -502,6 +505,13 @@
 
         window.goToToday = function() {
             setSelectedDate(REAL_TODAY);
+            runEngine();
+        };
+
+        window.goToDate = function(dateStr) {
+            var d = new Date(dateStr + 'T12:00:00');
+            if (d > REAL_TODAY) return;
+            setSelectedDate(d);
             runEngine();
         };
 
@@ -1061,7 +1071,7 @@
                 else if (day.type === 'lift') { icon = '<i class="fas fa-dumbbell"></i>'; typeLabel = day.liftName || 'Lift'; }
                 else if (day.type === 'both') { icon = '<i class="fas fa-bolt"></i>'; typeLabel = 'Run + Lift'; }
 
-                html += '<div class="' + cls + '">' +
+                html += '<div class="' + cls + '" onclick="goToDate(\'' + day.date + '\')">' +
                     '<div class="week-day__label">' + day.day + '</div>' +
                     '<div class="week-day__icon">' + icon + '</div>' +
                     '<div class="week-day__type">' + typeLabel + '</div>' +
