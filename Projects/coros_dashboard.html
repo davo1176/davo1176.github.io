@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="COROS Health & Training Dashboard - Automated daily sync with interactive visualizations">
+    <title>Health & Training Dashboard | Daniel Volin</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+    <style>
+        .dashboard-section { margin-top: 2.5rem; }
+        .dashboard-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .dashboard-section h2 i { font-size: 0.9em; }
+        .data-source-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.5rem;
+            border-radius: var(--radius-full);
+            vertical-align: middle;
+            margin-left: 0.5rem;
+        }
+        .data-source-badge--coros {
+            background: rgba(20, 184, 166, 0.15);
+            color: #0D9488;
+        }
+        .data-source-badge--health {
+            background: rgba(236, 72, 153, 0.15);
+            color: #DB2777;
+        }
+        .no-data-message {
+            text-align: center;
+            color: var(--color-text-secondary);
+            padding: 2rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="../index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero hero--project" style="background: linear-gradient(135deg, #14B8A6 0%, #0D9488 50%, #EC4899 100%);">
+        <div class="hero__content">
+            <h1 class="hero__title">Health &amp; Training Dashboard</h1>
+            <p class="hero__subtitle">COROS activities &amp; Apple Health metrics &mdash; automated daily via GitHub Actions</p>
+            <div class="hero__buttons" style="margin-top: 1.5rem;">
+                <span class="tag tag--white">Python</span>
+                <span class="tag tag--white">Chart.js</span>
+                <span class="tag tag--white">COROS API</span>
+                <span class="tag tag--white">Apple Health</span>
+                <span class="tag tag--white">iOS Shortcuts</span>
+                <span class="tag tag--white">GitHub Actions</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <h2>Project Overview</h2>
+        <p>
+            This dashboard combines two automated data pipelines: a Python script that fetches training
+            data from the COROS Training Hub API, and an iOS Shortcut that exports health metrics from
+            Apple Health. Both feed into GitHub Actions workflows that commit updated JSON to this
+            repository, keeping the dashboard fresh with zero manual effort.
+        </p>
+
+        <!-- ======================== -->
+        <!-- TRAINING: COROS DATA     -->
+        <!-- ======================== -->
+
+        <div class="dashboard-section">
+            <h2><i class="fas fa-person-running" style="color: #14B8A6;"></i> Training Stats
+                <span class="data-source-badge data-source-badge--coros">COROS</span>
+            </h2>
+            <div class="strava-stats" id="coros-stats">
+                <div class="strava-stat-card">
+                    <div class="strava-stat-card__icon">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Type Breakdown -->
+        <div class="dashboard-section">
+            <h2>Activity Type Breakdown</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Activities by Type</h3>
+                    <canvas id="chart-type-bar"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Type Distribution</h3>
+                    <canvas id="chart-type-doughnut"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Distance Over Time -->
+        <div class="dashboard-section">
+            <h2>Distance Over Time</h2>
+            <div class="chart-container">
+                <h3>Monthly Distance (Miles)</h3>
+                <canvas id="chart-monthly-distance"></canvas>
+            </div>
+        </div>
+
+        <!-- Training Load & Fitness -->
+        <div class="dashboard-section">
+            <h2>Training Load &amp; Fitness</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Daily Training Load</h3>
+                    <canvas id="chart-training-load"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Acute vs Chronic Load</h3>
+                    <canvas id="chart-load-balance"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Running Pace & Day of Week -->
+        <div class="dashboard-section">
+            <h2>Activity Patterns</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Day of Week Distribution</h3>
+                    <canvas id="chart-day-of-week"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Running Pace Trend</h3>
+                    <canvas id="chart-pace-trend"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== -->
+        <!-- HEALTH: APPLE HEALTH     -->
+        <!-- ======================== -->
+
+        <div class="dashboard-section">
+            <h2><i class="fas fa-heart-pulse" style="color: #EC4899;"></i> Health Metrics
+                <span class="data-source-badge data-source-badge--health">Apple Health</span>
+            </h2>
+        </div>
+
+        <!-- Resting HR -->
+        <div class="dashboard-section">
+            <h2>Resting Heart Rate</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Daily Resting HR (COROS)</h3>
+                    <canvas id="chart-resting-hr-coros"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Daily Resting HR (Apple Health)</h3>
+                    <canvas id="chart-resting-hr-apple"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sleep -->
+        <div class="dashboard-section">
+            <h2>Sleep Analysis</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Nightly Sleep Duration</h3>
+                    <canvas id="chart-sleep-duration"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Sleep Stage Breakdown</h3>
+                    <canvas id="chart-sleep-stages"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- HRV & SpO2 -->
+        <div class="dashboard-section">
+            <h2>HRV &amp; Blood Oxygen</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <h3>Heart Rate Variability Trend</h3>
+                    <canvas id="chart-hrv"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Blood Oxygen (SpO2)</h3>
+                    <canvas id="chart-spo2"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology -->
+        <div class="dashboard-section">
+            <h2>Methodology</h2>
+            <ul>
+                <li><strong>COROS Data:</strong> A Python script authenticates with the COROS Training Hub API, fetches all activities and daily training analytics (resting HR, training load, fatigue, fitness), and writes pre-processed JSON.</li>
+                <li><strong>Apple Health Data:</strong> An iOS Shortcut queries Apple Health for sleep, HRV, resting HR, and SpO2, then POSTs the data to GitHub via repository_dispatch.</li>
+                <li><strong>Automation:</strong> Two GitHub Actions workflows handle updates &mdash; a daily cron for COROS data and a webhook receiver for Apple Health pushes.</li>
+                <li><strong>Deduplication:</strong> Incoming health records are merged by date, ensuring no duplicate data accumulates over time.</li>
+                <li><strong>Visualization:</strong> Chart.js renders interactive charts from the pre-processed JSON with no build tools or frameworks.</li>
+            </ul>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Technologies Used</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+                <span class="tag tag--python">Python</span>
+                <span class="tag tag--javascript">JavaScript</span>
+                <span class="tag tag--chartjs">Chart.js</span>
+                <span class="tag" style="background: #14B8A6; color: #fff;">COROS API</span>
+                <span class="tag" style="background: #EC4899; color: #fff;">Apple Health</span>
+                <span class="tag tag--actions">GitHub Actions</span>
+                <span class="tag tag--dataviz">Data Viz</span>
+            </div>
+        </div>
+
+        <!-- GitHub -->
+        <div class="dashboard-section">
+            <h2>GitHub Repository</h2>
+            <p>
+                <a href="https://github.com/davo1176/davo1176.github.io" target="_blank" class="btn btn--github">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+
+    <!-- Dashboard Charts -->
+    <script>
+    (function() {
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748B';
+        Chart.defaults.responsive = true;
+        Chart.defaults.maintainAspectRatio = true;
+
+        var COROS_TEAL = '#14B8A6';
+        var COROS_TEAL_DARK = '#0D9488';
+        var HEALTH_PINK = '#EC4899';
+        var HEALTH_PINK_DARK = '#DB2777';
+        var INDIGO = '#4F46E5';
+        var ORANGE = '#F97316';
+        var GREEN = '#22C55E';
+        var SKY = '#0EA5E9';
+        var PURPLE = '#8B5CF6';
+        var AMBER = '#FBBF24';
+
+        var ACTIVITY_COLORS = {
+            'Run': '#14B8A6',
+            'Indoor Run': '#0D9488',
+            'Trail Run': '#065F46',
+            'Track Run': '#2DD4BF',
+            'Bike': '#4F46E5',
+            'Indoor Bike': '#6366F1',
+            'Pool Swim': '#0EA5E9',
+            'Open Water Swim': '#0284C7',
+            'Hike': '#22C55E',
+            'Walk': '#84CC16',
+            'Strength': '#F97316',
+            'Gym Cardio': '#FB923C',
+            'Ski': '#7DD3FC',
+            'Snowboard': '#38BDF8',
+            'Multisport': '#8B5CF6',
+            'GPS Cardio': '#EC4899',
+            'Jump Rope': '#FBBF24',
+        };
+        var DEFAULT_COLOR = '#64748B';
+
+        var DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        var DAYS_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+        function getColor(type) { return ACTIVITY_COLORS[type] || DEFAULT_COLOR; }
+        function formatNumber(n) { return n.toLocaleString('en-US'); }
+
+        // Format date labels
+        function shortDate(dateStr) {
+            var dt = new Date(dateStr + 'T00:00:00');
+            return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        // Limit arrays to last N items for readability
+        function lastN(arr, n) { return arr.length > n ? arr.slice(-n) : arr; }
+
+        // Load both data sources
+        var corosData = null;
+        var healthData = null;
+
+        var corosPromise = fetch('../data/coros_data.json')
+            .then(function(r) { return r.json(); })
+            .then(function(d) { corosData = d; })
+            .catch(function() { console.warn('No COROS data available yet.'); });
+
+        var healthPromise = fetch('../data/apple_health.json')
+            .then(function(r) { return r.json(); })
+            .then(function(d) { healthData = d; })
+            .catch(function() { console.warn('No Apple Health data available yet.'); });
+
+        Promise.all([corosPromise, healthPromise]).then(function() {
+            if (corosData) {
+                renderCorosStats(corosData);
+                renderTypeBarChart(corosData.activities);
+                renderTypeDoughnutChart(corosData.activities);
+                renderMonthlyDistanceChart(corosData.activities);
+                renderTrainingLoadChart(corosData.training_days);
+                renderLoadBalanceChart(corosData.training_days);
+                renderDayOfWeekChart(corosData.activities);
+                renderPaceTrendChart(corosData.activities);
+                renderRestingHrCoros(corosData.training_days);
+            } else {
+                document.getElementById('coros-stats').innerHTML =
+                    '<p class="no-data-message">COROS data not available yet. Run the sync workflow to populate.</p>';
+            }
+
+            if (healthData) {
+                renderRestingHrApple(healthData.resting_heart_rate);
+                renderSleepDuration(healthData.sleep);
+                renderSleepStages(healthData.sleep);
+                renderHrv(healthData.heart_rate_variability);
+                renderSpo2(healthData.blood_oxygen);
+            } else {
+                ['chart-resting-hr-apple', 'chart-sleep-duration', 'chart-sleep-stages', 'chart-hrv', 'chart-spo2'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.parentElement.innerHTML = '<p class="no-data-message">Apple Health data not available yet. Set up the iOS Shortcut to populate.</p>';
+                });
+            }
+        });
+
+        // ============================
+        // COROS CHARTS
+        // ============================
+
+        function renderCorosStats(data) {
+            var s = data.athlete_stats;
+            var distDisplay = s.total_distance_miles >= 1000
+                ? (s.total_distance_miles / 1000).toFixed(1) + 'K'
+                : Math.round(s.total_distance_miles);
+            var elevDisplay = s.total_elevation_feet >= 100000
+                ? (s.total_elevation_feet / 1000).toFixed(0) + 'K'
+                : formatNumber(Math.round(s.total_elevation_feet));
+
+            document.getElementById('coros-stats').innerHTML =
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-person-running" style="color: ' + COROS_TEAL + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + s.total_activities + '</div>' +
+                    '<div class="strava-stat-card__label">Total Activities</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-route" style="color: ' + COROS_TEAL + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + distDisplay + '</div>' +
+                    '<div class="strava-stat-card__label">Total Miles</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-mountain" style="color: ' + COROS_TEAL + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + elevDisplay + '</div>' +
+                    '<div class="strava-stat-card__label">Elevation (ft)</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-fire" style="color: ' + ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + formatNumber(s.total_calories) + '</div>' +
+                    '<div class="strava-stat-card__label">Calories</div>' +
+                '</div>';
+        }
+
+        // --- Activity Type Charts ---
+
+        function getTypeCounts(activities) {
+            var counts = {};
+            activities.forEach(function(a) { counts[a.type] = (counts[a.type] || 0) + 1; });
+            var sorted = Object.keys(counts).sort(function(a, b) { return counts[b] - counts[a]; });
+            return {
+                labels: sorted,
+                values: sorted.map(function(t) { return counts[t]; }),
+                colors: sorted.map(function(t) { return getColor(t); }),
+            };
+        }
+
+        function renderTypeBarChart(activities) {
+            var data = getTypeCounts(activities);
+            new Chart(document.getElementById('chart-type-bar'), {
+                type: 'bar',
+                data: { labels: data.labels, datasets: [{ data: data.values, backgroundColor: data.colors, borderRadius: 6 }] },
+                options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { display: false } } } }
+            });
+        }
+
+        function renderTypeDoughnutChart(activities) {
+            var data = getTypeCounts(activities);
+            new Chart(document.getElementById('chart-type-doughnut'), {
+                type: 'doughnut',
+                data: { labels: data.labels, datasets: [{ data: data.values, backgroundColor: data.colors, borderWidth: 2, borderColor: '#fff' }] },
+                options: { plugins: { legend: { display: true, position: 'bottom', labels: { padding: 16, usePointStyle: true } } } }
+            });
+        }
+
+        // --- Monthly Distance ---
+
+        function renderMonthlyDistanceChart(activities) {
+            var monthMap = {};
+            activities.forEach(function(a) {
+                var key = a.year + '-' + String(a.month).padStart(2, '0');
+                monthMap[key] = (monthMap[key] || 0) + a.distance_miles;
+            });
+            var months = Object.keys(monthMap).sort();
+            var MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var labels = months.map(function(m) { var p = m.split('-'); return MONTH_NAMES[parseInt(p[1], 10) - 1] + ' ' + p[0]; });
+            var values = months.map(function(m) { return Math.round(monthMap[m] * 10) / 10; });
+
+            new Chart(document.getElementById('chart-monthly-distance'), {
+                type: 'bar',
+                data: { labels: labels, datasets: [{ label: 'Distance (mi)', data: values, backgroundColor: COROS_TEAL, borderRadius: 6 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true }, x: { grid: { display: false } } } }
+            });
+        }
+
+        // --- Training Load ---
+
+        function renderTrainingLoadChart(days) {
+            var filtered = days.filter(function(d) { return d.training_load > 0; });
+            filtered = lastN(filtered, 90);
+            var labels = filtered.map(function(d) { return shortDate(d.date); });
+            var values = filtered.map(function(d) { return d.training_load; });
+
+            new Chart(document.getElementById('chart-training-load'), {
+                type: 'bar',
+                data: { labels: labels, datasets: [{ label: 'Training Load', data: values, backgroundColor: COROS_TEAL, borderRadius: 4 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true }, x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } } } }
+            });
+        }
+
+        // --- Acute vs Chronic Load ---
+
+        function renderLoadBalanceChart(days) {
+            var filtered = days.filter(function(d) { return d.acute_load !== null && d.chronic_load !== null; });
+            filtered = lastN(filtered, 90);
+            var labels = filtered.map(function(d) { return shortDate(d.date); });
+
+            new Chart(document.getElementById('chart-load-balance'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Acute Load (7d)', data: filtered.map(function(d) { return d.acute_load; }), borderColor: ORANGE, backgroundColor: 'rgba(249, 115, 22, 0.1)', fill: false, tension: 0.3, pointRadius: 0 },
+                        { label: 'Chronic Load (28d)', data: filtered.map(function(d) { return d.chronic_load; }), borderColor: INDIGO, backgroundColor: 'rgba(79, 70, 229, 0.1)', fill: false, tension: 0.3, pointRadius: 0 }
+                    ]
+                },
+                options: { plugins: { legend: { display: true, position: 'bottom', labels: { padding: 12, usePointStyle: true } } }, scales: { y: { beginAtZero: true }, x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } } } }
+            });
+        }
+
+        // --- Day of Week ---
+
+        function renderDayOfWeekChart(activities) {
+            var counts = {};
+            DAYS_OF_WEEK.forEach(function(d) { counts[d] = 0; });
+            activities.forEach(function(a) { if (a.day_of_week) counts[a.day_of_week]++; });
+            var values = DAYS_OF_WEEK.map(function(d) { return counts[d]; });
+            var colors = DAYS_OF_WEEK.map(function(d, i) { return i >= 5 ? COROS_TEAL_DARK : COROS_TEAL; });
+
+            new Chart(document.getElementById('chart-day-of-week'), {
+                type: 'bar',
+                data: { labels: DAYS_SHORT, datasets: [{ data: values, backgroundColor: colors, borderRadius: 6 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true }, x: { grid: { display: false } } } }
+            });
+        }
+
+        // --- Running Pace Trend ---
+
+        function renderPaceTrendChart(activities) {
+            var runs = activities.filter(function(a) { return a.type === 'Run' && a.average_pace_min_mile; });
+            if (runs.length === 0) {
+                document.getElementById('chart-pace-trend').parentElement.innerHTML =
+                    '<h3>Running Pace Trend</h3><p class="no-data-message">No running data available yet.</p>';
+                return;
+            }
+            runs.sort(function(a, b) { return a.date.localeCompare(b.date); });
+            runs = lastN(runs, 60);
+
+            function paceToMinutes(pace) { var p = pace.split(':'); return parseInt(p[0], 10) + parseInt(p[1], 10) / 60; }
+            var labels = runs.map(function(r) { return shortDate(r.date); });
+            var values = runs.map(function(r) { return Math.round(paceToMinutes(r.average_pace_min_mile) * 100) / 100; });
+
+            new Chart(document.getElementById('chart-pace-trend'), {
+                type: 'line',
+                data: { labels: labels, datasets: [{ label: 'Pace (min/mi)', data: values, borderColor: COROS_TEAL, backgroundColor: 'rgba(20, 184, 166, 0.1)', fill: true, tension: 0.3, pointBackgroundColor: COROS_TEAL, pointRadius: 4 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { reverse: true, ticks: { callback: function(v) { var m = Math.floor(v); var s = Math.round((v - m) * 60); return m + ':' + String(s).padStart(2, '0'); } } }, x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } } } }
+            });
+        }
+
+        // --- Resting HR from COROS ---
+
+        function renderRestingHrCoros(days) {
+            var filtered = days.filter(function(d) { return d.resting_hr && d.resting_hr > 0; });
+            filtered = lastN(filtered, 90);
+            if (filtered.length === 0) {
+                document.getElementById('chart-resting-hr-coros').parentElement.innerHTML =
+                    '<h3>Daily Resting HR (COROS)</h3><p class="no-data-message">No resting HR data available yet.</p>';
+                return;
+            }
+            var labels = filtered.map(function(d) { return shortDate(d.date); });
+            var values = filtered.map(function(d) { return d.resting_hr; });
+
+            new Chart(document.getElementById('chart-resting-hr-coros'), {
+                type: 'line',
+                data: { labels: labels, datasets: [{ label: 'Resting HR (bpm)', data: values, borderColor: COROS_TEAL, backgroundColor: 'rgba(20, 184, 166, 0.1)', fill: true, tension: 0.3, pointRadius: 2 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { min: 30 }, x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } } } }
+            });
+        }
+
+        // ============================
+        // APPLE HEALTH CHARTS
+        // ============================
+
+        function renderRestingHrApple(records) {
+            if (!records || records.length === 0) {
+                document.getElementById('chart-resting-hr-apple').parentElement.innerHTML =
+                    '<h3>Daily Resting HR (Apple Health)</h3><p class="no-data-message">No data yet. Set up the iOS Shortcut to sync.</p>';
+                return;
+            }
+            var data = lastN(records, 90);
+            new Chart(document.getElementById('chart-resting-hr-apple'), {
+                type: 'line',
+                data: { labels: data.map(function(r) { return shortDate(r.date); }), datasets: [{ label: 'Resting HR (bpm)', data: data.map(function(r) { return r.resting_hr; }), borderColor: HEALTH_PINK, backgroundColor: 'rgba(236, 72, 153, 0.1)', fill: true, tension: 0.3, pointRadius: 2 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { min: 30 }, x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } } } }
+            });
+        }
+
+        // --- Sleep Duration ---
+
+        function renderSleepDuration(records) {
+            if (!records || records.length === 0) {
+                document.getElementById('chart-sleep-duration').parentElement.innerHTML =
+                    '<h3>Nightly Sleep Duration</h3><p class="no-data-message">No sleep data yet. Set up the iOS Shortcut to sync.</p>';
+                return;
+            }
+            var data = lastN(records, 60);
+            var labels = data.map(function(r) { return shortDate(r.date); });
+            var hours = data.map(function(r) {
+                var mins = r.asleep_minutes || r.in_bed_minutes || 0;
+                return Math.round(mins / 60 * 10) / 10;
+            });
+
+            new Chart(document.getElementById('chart-sleep-duration'), {
+                type: 'bar',
+                data: { labels: labels, datasets: [{ label: 'Sleep (hours)', data: hours, backgroundColor: INDIGO, borderRadius: 4 }] },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { callback: function(v) { return v + 'h'; } } },
+                        x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } }
+                    }
+                }
+            });
+        }
+
+        // --- Sleep Stages (averaged) ---
+
+        function renderSleepStages(records) {
+            if (!records || records.length === 0) {
+                document.getElementById('chart-sleep-stages').parentElement.innerHTML =
+                    '<h3>Sleep Stage Breakdown</h3><p class="no-data-message">No sleep stage data yet.</p>';
+                return;
+            }
+
+            // Calculate averages
+            var totals = { deep: 0, core: 0, rem: 0, awake: 0 };
+            var count = 0;
+            records.forEach(function(r) {
+                if (r.deep_minutes !== null && r.core_minutes !== null && r.rem_minutes !== null) {
+                    totals.deep += r.deep_minutes || 0;
+                    totals.core += r.core_minutes || 0;
+                    totals.rem += r.rem_minutes || 0;
+                    totals.awake += r.awake_minutes || 0;
+                    count++;
+                }
+            });
+
+            if (count === 0) {
+                document.getElementById('chart-sleep-stages').parentElement.innerHTML =
+                    '<h3>Sleep Stage Breakdown</h3><p class="no-data-message">No sleep stage data yet.</p>';
+                return;
+            }
+
+            var avg = {
+                deep: Math.round(totals.deep / count),
+                core: Math.round(totals.core / count),
+                rem: Math.round(totals.rem / count),
+                awake: Math.round(totals.awake / count),
+            };
+
+            new Chart(document.getElementById('chart-sleep-stages'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Deep', 'Core', 'REM', 'Awake'],
+                    datasets: [{
+                        data: [avg.deep, avg.core, avg.rem, avg.awake],
+                        backgroundColor: [INDIGO, SKY, PURPLE, '#E2E8F0'],
+                        borderWidth: 2,
+                        borderColor: '#fff',
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { display: true, position: 'bottom', labels: { padding: 16, usePointStyle: true } },
+                        tooltip: { callbacks: { label: function(ctx) { return ctx.label + ': ' + ctx.parsed + ' min'; } } }
+                    }
+                }
+            });
+        }
+
+        // --- HRV ---
+
+        function renderHrv(records) {
+            if (!records || records.length === 0) {
+                document.getElementById('chart-hrv').parentElement.innerHTML =
+                    '<h3>Heart Rate Variability Trend</h3><p class="no-data-message">No HRV data yet. Set up the iOS Shortcut to sync.</p>';
+                return;
+            }
+            var data = lastN(records, 90);
+            new Chart(document.getElementById('chart-hrv'), {
+                type: 'line',
+                data: { labels: data.map(function(r) { return shortDate(r.date); }), datasets: [{ label: 'HRV (ms)', data: data.map(function(r) { return r.hrv_ms; }), borderColor: PURPLE, backgroundColor: 'rgba(139, 92, 246, 0.1)', fill: true, tension: 0.3, pointRadius: 2 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true }, x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } } } }
+            });
+        }
+
+        // --- SpO2 ---
+
+        function renderSpo2(records) {
+            if (!records || records.length === 0) {
+                document.getElementById('chart-spo2').parentElement.innerHTML =
+                    '<h3>Blood Oxygen (SpO2)</h3><p class="no-data-message">No SpO2 data yet. Set up the iOS Shortcut to sync.</p>';
+                return;
+            }
+            var data = lastN(records, 90);
+            new Chart(document.getElementById('chart-spo2'), {
+                type: 'line',
+                data: { labels: data.map(function(r) { return shortDate(r.date); }), datasets: [{ label: 'SpO2 (%)', data: data.map(function(r) { return r.spo2_pct; }), borderColor: GREEN, backgroundColor: 'rgba(34, 197, 94, 0.1)', fill: true, tension: 0.3, pointRadius: 2 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { min: 90, max: 100 }, x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } } } }
+            });
+        }
+
+    })();
+    </script>
+</body>
+</html>
