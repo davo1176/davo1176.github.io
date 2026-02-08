@@ -529,6 +529,10 @@ small, .text-small {
   border-top-color: var(--color-accent);
 }
 
+.project-card--rx {
+  border-top-color: #7C3AED;
+}
+
 .project-card__body {
   padding: var(--space-lg);
   display: flex;

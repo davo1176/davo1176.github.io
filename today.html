@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered daily training prescription based on real fitness data">
+    <title>Today's Training | Daniel Volin</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .rx-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        .rx-date {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .rx-headline {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        /* Readiness gauge */
+        .readiness-card {
+            background: #F8FAFC;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .readiness-ring {
+            width: 90px;
+            height: 90px;
+            flex-shrink: 0;
+        }
+        .readiness-ring svg { transform: rotate(-90deg); }
+        .readiness-ring__bg { fill: none; stroke: #E2E8F0; stroke-width: 8; }
+        .readiness-ring__fill { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.8s ease; }
+        .readiness-ring__text {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            fill: var(--color-text-primary);
+            dominant-baseline: central;
+            text-anchor: middle;
+        }
+        .readiness-details { flex: 1; }
+        .readiness-details h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        .readiness-details p {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        /* Signal pills */
+        .signals {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        .signal {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            background: #F1F5F9;
+            color: #475569;
+        }
+        .signal--good { background: #DCFCE7; color: #166534; }
+        .signal--caution { background: #FEF3C7; color: #92400E; }
+        .signal--warning { background: #FEE2E2; color: #991B1B; }
+        .signal i { font-size: 0.65rem; }
+
+        /* Prescription card */
+        .rx-card {
+            background: #fff;
+            border: 1px solid #E2E8F0;
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+            border-left: 4px solid #4F46E5;
+        }
+        .rx-card--lift { border-left-color: #F97316; }
+        .rx-card--run { border-left-color: #14B8A6; }
+        .rx-card--rest { border-left-color: #8B5CF6; }
+        .rx-card--active-recovery { border-left-color: #22C55E; }
+
+        .rx-card__type {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.25rem;
+        }
+        .rx-card__title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .rx-card__desc {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .rx-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .rx-detail {
+            background: #F8FAFC;
+            padding: 0.65rem 0.85rem;
+            border-radius: var(--radius);
+        }
+        .rx-detail__label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+        .rx-detail__value {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* Week summary */
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.4rem;
+            margin: 1rem 0 2rem;
+        }
+        .week-day {
+            text-align: center;
+            padding: 0.6rem 0.25rem;
+            border-radius: var(--radius);
+            background: #F8FAFC;
+            font-size: 0.7rem;
+        }
+        .week-day__label {
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.3rem;
+        }
+        .week-day__icon { font-size: 1.1rem; margin-bottom: 0.15rem; }
+        .week-day__type { font-size: 0.65rem; color: var(--color-text-secondary); }
+        .week-day--today { background: #EEF2FF; border: 2px solid #4F46E5; }
+        .week-day--rest .week-day__icon { color: #94A3B8; }
+        .week-day--run .week-day__icon { color: #14B8A6; }
+        .week-day--lift .week-day__icon { color: #F97316; }
+        .week-day--both .week-day__icon { color: #8B5CF6; }
+
+        /* Reasoning */
+        .rx-reasoning {
+            background: #F8FAFC;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .rx-reasoning h3 {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .rx-reasoning ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .rx-reasoning li {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            padding: 0.35rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .rx-reasoning li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            font-size: 0.7rem;
+            color: #4F46E5;
+            top: 0.5rem;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--color-text-secondary);
+        }
+        .loading-state i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero hero--project" style="background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #EC4899 100%);">
+        <div class="hero__content">
+            <h1 class="hero__title">Today's Training</h1>
+            <p class="hero__subtitle">Data-driven daily workout prescription &mdash; powered by real training data from COROS, Hevy &amp; Strava</p>
+            <div class="hero__buttons" style="margin-top: 1.5rem;">
+                <span class="tag tag--white">Recommendation Engine</span>
+                <span class="tag tag--white">Multi-Source Data</span>
+                <span class="tag tag--white">Hybrid Athlete</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="rx-container" id="rx-root">
+        <div class="loading-state">
+            <div><i class="fas fa-brain"></i></div>
+            <p>Analyzing your training data...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#projects">Projects</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============================================================
+        // ATHLETE PROFILE & GOALS
+        // Update these to change the prescription behavior.
+        // ============================================================
+        var GOALS = {
+            type: 'hybrid',              // 'hybrid', 'running', 'strength'
+            trainingDaysPerWeek: 5,
+            runDaysPerWeek: 2,            // Target run sessions per week
+            liftDaysPerWeek: 3,           // Target lift sessions per week
+            pushPullSplit: true,          // Alternating push/pull
+            easyRunPace: '9:30',          // Easy run pace target (min/mi)
+            longRunDay: 'Saturday',
+            restDays: ['Sunday'],         // Preferred rest days (flexible)
+            maxTrainingLoadRatio: 1.5,    // Acute:chronic ratio ceiling
+            minRestDaysBetweenHard: 1,
+        };
+
+        var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        var TODAY = new Date();
+        var TODAY_STR = TODAY.getFullYear() + '-' + String(TODAY.getMonth() + 1).padStart(2, '0') + '-' + String(TODAY.getDate()).padStart(2, '0');
+        var TODAY_DAY = DAYS[TODAY.getDay()];
+
+        function daysAgo(dateStr) {
+            if (!dateStr) return 999;
+            var d = new Date(dateStr + 'T12:00:00');
+            return Math.floor((TODAY - d) / 86400000);
+        }
+
+        function dateNDaysAgo(n) {
+            var d = new Date(TODAY);
+            d.setDate(d.getDate() - n);
+            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        }
+
+        // ============================================================
+        // DATA LOADING
+        // ============================================================
+
+        var corosData = null;
+        var hevyData = null;
+        var stravaData = null;
+
+        Promise.all([
+            fetch('data/coros_data.json').then(function(r) { return r.json(); }).then(function(d) { corosData = d; }).catch(function() {}),
+            fetch('data/hevy_data.json').then(function(r) { return r.json(); }).then(function(d) { hevyData = d; }).catch(function() {}),
+            fetch('data/strava_activities.json').then(function(r) { return r.json(); }).then(function(d) { stravaData = d; }).catch(function() {}),
+        ]).then(function() {
+            var analysis = analyzeTrainingState();
+            var prescription = generatePrescription(analysis);
+            render(analysis, prescription);
+        });
+
+        // ============================================================
+        // ANALYSIS ENGINE
+        // Reads all data sources and produces a training state snapshot
+        // ============================================================
+
+        function analyzeTrainingState() {
+            var weekStart = dateNDaysAgo(7);
+            var state = {
+                today: TODAY_STR,
+                dayOfWeek: TODAY_DAY,
+                signals: [],
+                readiness: 100,
+                readinessLabel: 'Ready',
+            };
+
+            // --- COROS Training Load & Readiness ---
+            if (corosData && corosData.training_days) {
+                var days = corosData.training_days;
+                var todayData = days.find(function(d) { return d.date === TODAY_STR; });
+                var yesterdayData = days.find(function(d) { return d.date === dateNDaysAgo(1); });
+                var latest = todayData || yesterdayData || days[days.length - 1];
+
+                if (latest) {
+                    state.restingHr = latest.resting_hr;
+                    state.trainingLoadRatio = latest.training_load_ratio;
+                    state.acuteLoad = latest.acute_load;
+                    state.chronicLoad = latest.chronic_load;
+                    state.fatigue = latest.fatigue_rate;
+
+                    // Resting HR baseline (median of last 14 days)
+                    var recentHrs = days.slice(-14).map(function(d) { return d.resting_hr; }).filter(function(v) { return v && v > 0; }).sort(function(a, b) { return a - b; });
+                    state.baselineHr = recentHrs.length > 0 ? recentHrs[Math.floor(recentHrs.length / 2)] : null;
+
+                    // Readiness signals from HR
+                    if (state.restingHr && state.baselineHr) {
+                        var hrDelta = state.restingHr - state.baselineHr;
+                        if (hrDelta >= 8) {
+                            state.signals.push({ text: 'Resting HR elevated +' + hrDelta + ' bpm', type: 'warning', icon: 'fa-heart-pulse' });
+                            state.readiness -= 25;
+                        } else if (hrDelta >= 4) {
+                            state.signals.push({ text: 'Resting HR slightly elevated +' + hrDelta + ' bpm', type: 'caution', icon: 'fa-heart-pulse' });
+                            state.readiness -= 10;
+                        } else {
+                            state.signals.push({ text: 'Resting HR normal (' + state.restingHr + ' bpm)', type: 'good', icon: 'fa-heart-pulse' });
+                        }
+                    }
+
+                    // Training load ratio signals
+                    if (state.trainingLoadRatio !== null) {
+                        if (state.trainingLoadRatio > 1.5) {
+                            state.signals.push({ text: 'Training load ratio high (' + state.trainingLoadRatio.toFixed(2) + ')', type: 'warning', icon: 'fa-gauge-high' });
+                            state.readiness -= 20;
+                        } else if (state.trainingLoadRatio > 1.2) {
+                            state.signals.push({ text: 'Training load building (' + state.trainingLoadRatio.toFixed(2) + ')', type: 'caution', icon: 'fa-gauge-high' });
+                            state.readiness -= 5;
+                        } else if (state.trainingLoadRatio < 0.5) {
+                            state.signals.push({ text: 'Training load low \u2014 room to push (' + state.trainingLoadRatio.toFixed(2) + ')', type: 'good', icon: 'fa-gauge-high' });
+                            state.readiness += 5;
+                        } else {
+                            state.signals.push({ text: 'Training load balanced (' + state.trainingLoadRatio.toFixed(2) + ')', type: 'good', icon: 'fa-gauge-high' });
+                        }
+                    }
+
+                    // Fatigue
+                    if (state.fatigue !== null) {
+                        if (state.fatigue > 30) {
+                            state.signals.push({ text: 'Fatigue high (' + state.fatigue + ')', type: 'warning', icon: 'fa-battery-quarter' });
+                            state.readiness -= 15;
+                        } else if (state.fatigue > 15) {
+                            state.signals.push({ text: 'Moderate fatigue (' + state.fatigue + ')', type: 'caution', icon: 'fa-battery-half' });
+                            state.readiness -= 5;
+                        } else {
+                            state.signals.push({ text: 'Low fatigue (' + state.fatigue + ')', type: 'good', icon: 'fa-battery-full' });
+                        }
+                    }
+                }
+
+                // Recent cardio activities
+                state.recentRuns = corosData.activities.filter(function(a) {
+                    return a.date >= weekStart && ['Run', 'Indoor Run', 'Trail Run', 'Track Run'].indexOf(a.type) !== -1;
+                });
+                state.lastRunDate = null;
+                for (var i = corosData.activities.length - 1; i >= 0; i--) {
+                    if (['Run', 'Indoor Run', 'Trail Run', 'Track Run'].indexOf(corosData.activities[i].type) !== -1) {
+                        state.lastRunDate = corosData.activities[i].date;
+                        state.lastRunPace = corosData.activities[i].average_pace_min_mile;
+                        state.lastRunDistance = corosData.activities[i].distance_miles;
+                        break;
+                    }
+                }
+                state.daysSinceRun = daysAgo(state.lastRunDate);
+                state.runsThisWeek = state.recentRuns.length;
+                state.weeklyMileage = state.recentRuns.reduce(function(s, a) { return s + a.distance_miles; }, 0);
+            }
+
+            // --- HEVY Lifting Data ---
+            if (hevyData && hevyData.workouts) {
+                var recentLifts = hevyData.workouts.filter(function(w) { return w.date >= weekStart; });
+                state.liftsThisWeek = recentLifts.length;
+
+                // Last push/pull dates
+                state.lastPushDate = null;
+                state.lastPullDate = null;
+                for (var j = hevyData.workouts.length - 1; j >= 0; j--) {
+                    var w = hevyData.workouts[j];
+                    var name = w.name.toLowerCase();
+                    if (!state.lastPushDate && name.indexOf('push') !== -1) state.lastPushDate = w.date;
+                    if (!state.lastPullDate && name.indexOf('pull') !== -1) state.lastPullDate = w.date;
+                    if (state.lastPushDate && state.lastPullDate) break;
+                }
+                state.daysSincePush = daysAgo(state.lastPushDate);
+                state.daysSincePull = daysAgo(state.lastPullDate);
+
+                // Muscle group freshness (days since last hit)
+                var muscleLastHit = {};
+                hevyData.workouts.forEach(function(w) {
+                    Object.keys(w.muscle_groups_hit).forEach(function(mg) {
+                        if (!muscleLastHit[mg] || w.date > muscleLastHit[mg]) {
+                            muscleLastHit[mg] = w.date;
+                        }
+                    });
+                });
+                state.muscleLastHit = muscleLastHit;
+
+                // Weekly volume
+                state.weeklyVolumeLbs = recentLifts.reduce(function(s, w) { return s + w.total_volume_lbs; }, 0);
+
+                // Consecutive lift days
+                state.liftedYesterday = recentLifts.some(function(w) { return w.date === dateNDaysAgo(1); });
+                state.liftedToday = recentLifts.some(function(w) { return w.date === TODAY_STR; });
+
+                // Push/pull balance this week
+                state.pushCountWeek = recentLifts.filter(function(w) { return w.name.toLowerCase().indexOf('push') !== -1; }).length;
+                state.pullCountWeek = recentLifts.filter(function(w) { return w.name.toLowerCase().indexOf('pull') !== -1; }).length;
+            }
+
+            // --- Rest days count ---
+            var allDatesThisWeek = {};
+            if (corosData) {
+                corosData.activities.forEach(function(a) {
+                    if (a.date >= weekStart) allDatesThisWeek[a.date] = true;
+                });
+            }
+            if (hevyData) {
+                hevyData.workouts.forEach(function(w) {
+                    if (w.date >= weekStart) allDatesThisWeek[w.date] = true;
+                });
+            }
+            state.activeDaysThisWeek = Object.keys(allDatesThisWeek).length;
+            state.restDaysThisWeek = 7 - state.activeDaysThisWeek;
+            state.trainedToday = !!allDatesThisWeek[TODAY_STR];
+
+            if (state.restDaysThisWeek <= 1) {
+                state.signals.push({ text: 'Only ' + state.restDaysThisWeek + ' rest day this week', type: 'caution', icon: 'fa-bed' });
+                state.readiness -= 10;
+            }
+            if (state.daysSinceRun >= 4) {
+                state.signals.push({ text: state.daysSinceRun + ' days since last run', type: 'caution', icon: 'fa-person-running' });
+            }
+
+            // Clamp readiness
+            state.readiness = Math.max(10, Math.min(100, state.readiness));
+
+            // Label
+            if (state.readiness >= 80) state.readinessLabel = 'Ready to Push';
+            else if (state.readiness >= 60) state.readinessLabel = 'Moderate';
+            else if (state.readiness >= 40) state.readinessLabel = 'Recover';
+            else state.readinessLabel = 'Rest Day';
+
+            // Build week history
+            state.weekHistory = [];
+            for (var d = 6; d >= 0; d--) {
+                var dateStr = dateNDaysAgo(d);
+                var dayIdx = new Date(dateStr + 'T12:00:00').getDay();
+                var entry = { date: dateStr, day: DAYS_SHORT[dayIdx], isToday: dateStr === TODAY_STR, ran: false, lifted: false, type: 'rest' };
+
+                if (corosData) {
+                    entry.ran = corosData.activities.some(function(a) {
+                        return a.date === dateStr && ['Run', 'Indoor Run', 'Trail Run', 'Track Run'].indexOf(a.type) !== -1;
+                    });
+                }
+                if (hevyData) {
+                    entry.lifted = hevyData.workouts.some(function(w) { return w.date === dateStr; });
+                }
+                if (entry.ran && entry.lifted) entry.type = 'both';
+                else if (entry.ran) entry.type = 'run';
+                else if (entry.lifted) entry.type = 'lift';
+                else entry.type = 'rest';
+
+                // Get lift name if applicable
+                if (entry.lifted && hevyData) {
+                    var liftW = hevyData.workouts.find(function(w) { return w.date === dateStr; });
+                    if (liftW) entry.liftName = liftW.name;
+                }
+
+                state.weekHistory.push(entry);
+            }
+
+            return state;
+        }
+
+        // ============================================================
+        // PRESCRIPTION GENERATOR
+        // Uses the analysis state to decide what to do today
+        // ============================================================
+
+        function generatePrescription(state) {
+            var rx = {
+                primary: null,      // Main workout recommendation
+                secondary: null,    // Optional secondary recommendation
+                reasoning: [],      // Why we chose this
+            };
+
+            // Already trained today?
+            if (state.trainedToday) {
+                rx.primary = {
+                    type: 'rest',
+                    cardType: 'rx-card--active-recovery',
+                    label: 'Already Trained',
+                    title: 'Recovery & Mobility',
+                    desc: 'You already got a session in today. Focus on recovery \u2014 foam rolling, stretching, or a light walk. Hydrate and fuel up.',
+                    details: [
+                        { label: 'Focus', value: 'Recovery' },
+                        { label: 'Duration', value: '15-20 min' },
+                        { label: 'Intensity', value: 'Easy' },
+                    ],
+                };
+                rx.reasoning.push('You already trained today \u2014 no need to double up.');
+                return rx;
+            }
+
+            // Very low readiness = rest day
+            if (state.readiness < 40) {
+                rx.primary = {
+                    type: 'rest',
+                    cardType: 'rx-card--rest',
+                    label: 'Rest Day',
+                    title: 'Full Rest or Light Walk',
+                    desc: 'Your body is signaling it needs recovery. Your readiness score is low \u2014 take the day off or do a very easy 20-minute walk.',
+                    details: [
+                        { label: 'Readiness', value: state.readiness + '/100' },
+                        { label: 'Activity', value: 'Walk or Off' },
+                        { label: 'Duration', value: '0-20 min' },
+                    ],
+                };
+                rx.reasoning.push('Readiness score is ' + state.readiness + '/100 \u2014 recovery is the priority today.');
+                if (state.fatigue > 30) rx.reasoning.push('Fatigue level is high (' + state.fatigue + ').');
+                if (state.restingHr && state.baselineHr) rx.reasoning.push('Resting HR is ' + state.restingHr + ' bpm (baseline: ' + state.baselineHr + ').');
+                return rx;
+            }
+
+            // Decide between lift, run, or both
+            var shouldRun = false;
+            var shouldLift = false;
+            var liftType = 'push'; // or 'pull'
+            var runType = 'easy';  // or 'tempo', 'long', 'intervals'
+
+            // -- Lift decision --
+            var liftsNeeded = GOALS.liftDaysPerWeek - (state.liftsThisWeek || 0);
+            var daysLeftInWeek = 7 - state.activeDaysThisWeek;
+
+            if (liftsNeeded > 0) {
+                shouldLift = true;
+                // Push or pull? Pick whichever is more overdue
+                if (state.daysSincePush > state.daysSincePull) {
+                    liftType = 'push';
+                } else if (state.daysSincePull > state.daysSincePush) {
+                    liftType = 'pull';
+                } else {
+                    // Equal or both fresh \u2014 alternate based on last
+                    liftType = (state.pushCountWeek || 0) <= (state.pullCountWeek || 0) ? 'push' : 'pull';
+                }
+            }
+
+            // -- Run decision --
+            var runsNeeded = GOALS.runDaysPerWeek - (state.runsThisWeek || 0);
+            if (runsNeeded > 0 && state.daysSinceRun >= 2) {
+                shouldRun = true;
+            }
+
+            // If both needed and readiness allows, do both (run first)
+            if (shouldRun && shouldLift && state.readiness >= 70) {
+                // Both
+            } else if (shouldRun && shouldLift) {
+                // Pick the more urgent one
+                if (state.daysSinceRun > Math.max(state.daysSincePush, state.daysSincePull)) {
+                    shouldLift = false;
+                } else {
+                    shouldRun = false;
+                }
+            }
+
+            // If neither needed and it's a preferred rest day
+            if (!shouldRun && !shouldLift) {
+                if (GOALS.restDays.indexOf(TODAY_DAY) !== -1 || state.activeDaysThisWeek >= GOALS.trainingDaysPerWeek) {
+                    rx.primary = {
+                        type: 'rest',
+                        cardType: 'rx-card--active-recovery',
+                        label: 'Active Recovery',
+                        title: 'Rest & Recover',
+                        desc: 'You\'ve hit your training targets for the week. Take an active recovery day \u2014 walk, stretch, foam roll.',
+                        details: [
+                            { label: 'Activity', value: 'Walk / Stretch' },
+                            { label: 'Duration', value: '20-30 min' },
+                            { label: 'Week Total', value: state.activeDaysThisWeek + ' days' },
+                        ],
+                    };
+                    rx.reasoning.push('You\'ve trained ' + state.activeDaysThisWeek + ' days this week (target: ' + GOALS.trainingDaysPerWeek + ').');
+                    rx.reasoning.push('Today (' + TODAY_DAY + ') is a preferred rest day.');
+                    return rx;
+                }
+                // Default: suggest the more overdue type
+                if (state.daysSinceRun >= state.daysSincePush && state.daysSinceRun >= state.daysSincePull) {
+                    shouldRun = true;
+                } else {
+                    shouldLift = true;
+                    liftType = state.daysSincePush >= state.daysSincePull ? 'push' : 'pull';
+                }
+            }
+
+            // -- Run type decision --
+            if (shouldRun) {
+                if (TODAY_DAY === GOALS.longRunDay) {
+                    runType = 'long';
+                } else if (state.readiness >= 80 && state.daysSinceRun >= 3 && state.weeklyMileage < 8) {
+                    runType = 'tempo';
+                } else {
+                    runType = 'easy';
+                }
+            }
+
+            // ---- Build prescription cards ----
+
+            if (shouldRun) {
+                var runDetails = getRunDetails(runType, state);
+                rx.primary = {
+                    type: 'run',
+                    cardType: 'rx-card--run',
+                    label: 'Cardio',
+                    title: runDetails.title,
+                    desc: runDetails.desc,
+                    details: runDetails.details,
+                };
+                rx.reasoning.push('You\'ve run ' + (state.runsThisWeek || 0) + ' time(s) this week (target: ' + GOALS.runDaysPerWeek + ').');
+                if (state.daysSinceRun >= 3) rx.reasoning.push('It\'s been ' + state.daysSinceRun + ' days since your last run.');
+                if (runType === 'easy') rx.reasoning.push('Easy effort today to build aerobic base without adding too much stress.');
+                if (runType === 'tempo') rx.reasoning.push('Good readiness + low weekly mileage = a chance to push the pace.');
+                if (runType === 'long') rx.reasoning.push(TODAY_DAY + ' is your designated long run day.');
+            }
+
+            if (shouldLift) {
+                var liftDetails = getLiftDetails(liftType, state);
+                var card = {
+                    type: 'lift',
+                    cardType: 'rx-card--lift',
+                    label: 'Strength',
+                    title: liftDetails.title,
+                    desc: liftDetails.desc,
+                    details: liftDetails.details,
+                };
+
+                if (rx.primary && rx.primary.type === 'run') {
+                    rx.secondary = card;
+                } else {
+                    rx.primary = card;
+                }
+
+                rx.reasoning.push('You\'ve lifted ' + (state.liftsThisWeek || 0) + ' time(s) this week (target: ' + GOALS.liftDaysPerWeek + ').');
+                rx.reasoning.push(liftType === 'push'
+                    ? 'Last push was ' + state.daysSincePush + ' day(s) ago vs pull ' + state.daysSincePull + ' day(s) ago.'
+                    : 'Last pull was ' + state.daysSincePull + ' day(s) ago vs push ' + state.daysSincePush + ' day(s) ago.');
+            }
+
+            return rx;
+        }
+
+        function getRunDetails(runType, state) {
+            var basePace = state.lastRunPace || GOALS.easyRunPace;
+
+            if (runType === 'easy') {
+                return {
+                    title: 'Easy Run',
+                    desc: 'Conversational pace \u2014 you should be able to hold a full sentence. Focus on time on feet, not speed. This builds your aerobic engine.',
+                    details: [
+                        { label: 'Distance', value: '2-3 mi' },
+                        { label: 'Pace', value: GOALS.easyRunPace + ' /mi' },
+                        { label: 'Heart Rate', value: '< 145 bpm' },
+                        { label: 'Effort', value: '4/10' },
+                    ],
+                };
+            }
+            if (runType === 'tempo') {
+                return {
+                    title: 'Tempo Run',
+                    desc: 'Comfortably hard \u2014 you can speak in short phrases but not full sentences. Hold a steady effort for the middle portion after warming up.',
+                    details: [
+                        { label: 'Distance', value: '3-4 mi' },
+                        { label: 'Warm Up', value: '0.5 mi easy' },
+                        { label: 'Tempo Pace', value: '8:00-8:30 /mi' },
+                        { label: 'Effort', value: '7/10' },
+                    ],
+                };
+            }
+            if (runType === 'long') {
+                var longDist = Math.max(4, Math.round((state.weeklyMileage || 5) * 0.3 + 3));
+                return {
+                    title: 'Long Run',
+                    desc: 'Slow and steady \u2014 the goal is time on feet, not pace. Stay in zone 2. Walk the hills if needed. Fuel with water.',
+                    details: [
+                        { label: 'Distance', value: longDist + '-' + (longDist + 1) + ' mi' },
+                        { label: 'Pace', value: '9:30-10:30 /mi' },
+                        { label: 'Heart Rate', value: '< 150 bpm' },
+                        { label: 'Effort', value: '5/10' },
+                    ],
+                };
+            }
+            return { title: 'Run', desc: 'Go for a run.', details: [] };
+        }
+
+        function getLiftDetails(liftType, state) {
+            // Find stale muscle groups
+            var staleGroups = [];
+            if (state.muscleLastHit) {
+                var targetGroups = liftType === 'push'
+                    ? ['chest', 'shoulders', 'triceps']
+                    : ['upper_back', 'lats', 'biceps'];
+                targetGroups.forEach(function(mg) {
+                    var d = daysAgo(state.muscleLastHit[mg]);
+                    if (d >= 4) staleGroups.push(mg.replace(/_/g, ' '));
+                });
+            }
+
+            var staleNote = staleGroups.length > 0
+                ? ' Prioritize ' + staleGroups.join(', ') + ' \u2014 it\'s been 4+ days.'
+                : '';
+
+            if (liftType === 'push') {
+                return {
+                    title: 'Push Day',
+                    desc: 'Chest, shoulders, and triceps. Start with your compound movement (bench or overhead press), then isolations.' + staleNote,
+                    details: [
+                        { label: 'Focus', value: 'Chest / Shoulders / Tri' },
+                        { label: 'Duration', value: '35-45 min' },
+                        { label: 'Working Sets', value: '15-22' },
+                        { label: 'Intensity', value: state.readiness >= 70 ? 'Push it' : 'Moderate' },
+                    ],
+                };
+            } else {
+                return {
+                    title: 'Pull Day',
+                    desc: 'Back, biceps, and rear delts. Start with your compound (rows or pull-ups), then isolations.' + staleNote,
+                    details: [
+                        { label: 'Focus', value: 'Back / Biceps / Rear Delt' },
+                        { label: 'Duration', value: '35-45 min' },
+                        { label: 'Working Sets', value: '15-22' },
+                        { label: 'Intensity', value: state.readiness >= 70 ? 'Push it' : 'Moderate' },
+                    ],
+                };
+            }
+        }
+
+        // ============================================================
+        // RENDER
+        // ============================================================
+
+        function render(state, rx) {
+            var root = document.getElementById('rx-root');
+            var html = '';
+
+            // Date header
+            var dateDisplay = TODAY.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+            html += '<p class="rx-date">' + dateDisplay + '</p>';
+
+            // Headline
+            var headline = 'Rest Up';
+            if (rx.primary) {
+                if (rx.primary.type === 'run' && rx.secondary) headline = rx.primary.title + ' + ' + rx.secondary.title;
+                else headline = rx.primary.title;
+            }
+            html += '<h1 class="rx-headline">' + headline + '</h1>';
+
+            // Week at a glance
+            html += '<h3 style="font-family: var(--font-heading); font-size: 0.85rem; margin-bottom: 0.25rem; color: var(--color-text-secondary);">YOUR WEEK</h3>';
+            html += '<div class="week-grid">';
+            state.weekHistory.forEach(function(day) {
+                var cls = 'week-day week-day--' + day.type;
+                if (day.isToday) cls += ' week-day--today';
+
+                var icon = '<i class="fas fa-minus"></i>';
+                var typeLabel = 'Rest';
+                if (day.type === 'run') { icon = '<i class="fas fa-person-running"></i>'; typeLabel = 'Run'; }
+                else if (day.type === 'lift') { icon = '<i class="fas fa-dumbbell"></i>'; typeLabel = day.liftName || 'Lift'; }
+                else if (day.type === 'both') { icon = '<i class="fas fa-bolt"></i>'; typeLabel = 'Run + Lift'; }
+
+                html += '<div class="' + cls + '">' +
+                    '<div class="week-day__label">' + day.day + '</div>' +
+                    '<div class="week-day__icon">' + icon + '</div>' +
+                    '<div class="week-day__type">' + typeLabel + '</div>' +
+                '</div>';
+            });
+            html += '</div>';
+
+            // Readiness card
+            var ringColor = state.readiness >= 70 ? '#22C55E' : state.readiness >= 50 ? '#FBBF24' : '#EF4444';
+            var circumference = 2 * Math.PI * 36;
+            var offset = circumference * (1 - state.readiness / 100);
+
+            html += '<div class="readiness-card">';
+            html += '<div class="readiness-ring">' +
+                '<svg viewBox="0 0 90 90">' +
+                '<circle class="readiness-ring__bg" cx="45" cy="45" r="36"></circle>' +
+                '<circle class="readiness-ring__fill" cx="45" cy="45" r="36" stroke="' + ringColor + '" stroke-dasharray="' + circumference.toFixed(1) + '" stroke-dashoffset="' + offset.toFixed(1) + '"></circle>' +
+                '<text class="readiness-ring__text" x="45" y="45" transform="rotate(90, 45, 45)">' + state.readiness + '</text>' +
+                '</svg></div>';
+            html += '<div class="readiness-details">' +
+                '<h3>Readiness: ' + state.readinessLabel + '</h3>' +
+                '<p>Based on training load, resting HR, fatigue, and recent activity.</p>';
+
+            // Signal pills
+            if (state.signals.length > 0) {
+                html += '<div class="signals">';
+                state.signals.forEach(function(s) {
+                    html += '<span class="signal signal--' + s.type + '"><i class="fas ' + s.icon + '"></i> ' + s.text + '</span>';
+                });
+                html += '</div>';
+            }
+            html += '</div></div>';
+
+            // Primary card
+            if (rx.primary) {
+                html += renderCard(rx.primary);
+            }
+
+            // Secondary card
+            if (rx.secondary) {
+                html += renderCard(rx.secondary);
+            }
+
+            // Reasoning
+            if (rx.reasoning.length > 0) {
+                html += '<div class="rx-reasoning">';
+                html += '<h3><i class="fas fa-brain" style="color: #4F46E5;"></i> Why This Workout?</h3>';
+                html += '<ul>';
+                rx.reasoning.forEach(function(r) {
+                    html += '<li>' + r + '</li>';
+                });
+                html += '</ul>';
+                html += '</div>';
+            }
+
+            root.innerHTML = html;
+        }
+
+        function renderCard(card) {
+            var html = '<div class="rx-card ' + card.cardType + '">';
+            html += '<div class="rx-card__type">' + card.label + '</div>';
+            html += '<div class="rx-card__title">' + card.title + '</div>';
+            html += '<div class="rx-card__desc">' + card.desc + '</div>';
+
+            if (card.details && card.details.length > 0) {
+                html += '<div class="rx-detail-grid">';
+                card.details.forEach(function(d) {
+                    html += '<div class="rx-detail">' +
+                        '<div class="rx-detail__label">' + d.label + '</div>' +
+                        '<div class="rx-detail__value">' + d.value + '</div>' +
+                    '</div>';
+                });
+                html += '</div>';
+            }
+
+            html += '</div>';
+            return html;
+        }
+
+    })();
+    </script>
+</body>
+</html>
