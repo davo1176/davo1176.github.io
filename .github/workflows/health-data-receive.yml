@@ -1,0 +1,27 @@
+name: Receive Apple Health Data
+
+on:
+  repository_dispatch:
+    types: [apple-health-update]
+
+permissions:
+  contents: write
+
+jobs:
+  receive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Process health data payload
+        run: |
+          python scripts/receive_health_data.py '${{ toJSON(github.event.client_payload) }}'
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/apple_health.json
+          git diff --cached --quiet || git commit -m "chore: update Apple Health data"
+          git push
