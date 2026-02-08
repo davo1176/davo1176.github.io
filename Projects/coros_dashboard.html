@@ -105,6 +105,112 @@
             Apple Health. Both feed into GitHub Actions workflows that commit updated JSON to this
             repository, keeping the dashboard fresh with zero manual effort.
         </p>
+        <p>
+            What started as a straightforward "connect to an API and chart the data" project turned into
+            a deep dive in reverse engineering, hitting dead ends with SSL certificate pinning, and
+            discovering the limitations of wearable data ecosystems. Here's how it all went down.
+        </p>
+
+        <!-- The Journey -->
+        <div class="dashboard-section">
+            <h2><i class="fas fa-route" style="color: #4F46E5;"></i> The Journey</h2>
+
+            <h3>Step 1: Is There an API?</h3>
+            <p>
+                Unlike Strava, COROS doesn't offer a public API. There's no developer portal, no OAuth flow,
+                no documentation. My COROS PACE 3 watch tracks everything &mdash; runs, heart rate, sleep,
+                HRV, SpO2, training load &mdash; but COROS keeps that data locked behind their mobile app
+                and web platform at <strong>t.coros.com</strong> (Training Hub).
+            </p>
+            <p>
+                So the first step was clear: open Chrome DevTools and see what the COROS Training Hub web
+                app is actually doing under the hood.
+            </p>
+
+            <h3>Step 2: Reverse-Engineering the Web API</h3>
+            <p>
+                Using the Network tab in Chrome DevTools, I captured the HTTP requests the Training Hub
+                makes as you browse your activities and analytics. Three endpoints stood out:
+            </p>
+            <ul>
+                <li><code>teamapi.coros.com/activity/query</code> &mdash; paginated list of all activities with distance, pace, heart rate, elevation, and more</li>
+                <li><code>teamapi.coros.com/analyse/query</code> &mdash; daily training analytics including resting HR, training load, fatigue rate, and acute/chronic load</li>
+                <li><code>teamapi.coros.com/account/login</code> &mdash; authentication endpoint accepting email + MD5-hashed password, returning an access token</li>
+            </ul>
+            <p>
+                I exported the cURL commands from DevTools, tested them in the terminal, and confirmed I could
+                pull all 232 activities and 84 days of training analytics. The auth pattern uses a custom
+                <code>accesstoken</code> header and a <code>yfheader</code> JSON object containing the user ID.
+                From there I built <strong>fetch_coros.py</strong> &mdash; a zero-dependency Python script that
+                logs in, paginates through all activities, fetches training analytics, and writes processed JSON.
+            </p>
+
+            <h3>Step 3: The Missing Health Data</h3>
+            <p>
+                The web API gave me training activities and fitness analytics, but the really interesting health
+                metrics &mdash; sleep stages, HRV, SpO2, stress &mdash; were nowhere to be found. These are
+                prominently displayed in the COROS mobile app but apparently served from a different API domain.
+            </p>
+            <p>
+                I probed dozens of endpoint patterns on <code>teamapi.coros.com</code> trying to find sleep and
+                health data. Every attempt returned a 500 error (not 404, meaning the routes exist but expect
+                a different request format or come from a different API surface). The mobile app likely uses
+                <code>p.coros.com</code> instead of <code>teamapi.coros.com</code>.
+            </p>
+
+            <h3>Step 4: Proxyman &amp; SSL Pinning</h3>
+            <p>
+                To figure out what the mobile app was doing, I set up
+                <a href="https://proxyman.io/" target="_blank">Proxyman</a> as an HTTPS proxy to intercept
+                traffic from my iPhone. The idea was simple: watch the COROS app make requests, capture the
+                endpoints and payloads, and replicate them in Python.
+            </p>
+            <p>
+                It almost worked. I could see the COROS app connecting to <code>p.coros.com</code> in
+                Proxyman's connection log. But the moment I enabled SSL proxying for that domain to decrypt
+                the traffic, the app immediately stopped making requests. COROS implements
+                <strong>SSL certificate pinning</strong> &mdash; the app only trusts COROS's own certificates
+                and rejects Proxyman's generated certificate, effectively blocking any man-in-the-middle inspection.
+            </p>
+            <p>
+                This is actually good security practice on COROS's part, but it meant the mobile-only health
+                endpoints were off limits without jailbreaking or more invasive reverse engineering.
+            </p>
+
+            <h3>Step 5: Apple Health as a Bridge</h3>
+            <p>
+                Since COROS syncs data to Apple Health, the next idea was to use Apple Health as an intermediary.
+                The plan: COROS syncs to Apple Health &rarr; an iOS Shortcut queries Apple Health for sleep, HRV,
+                SpO2, and resting HR &rarr; the Shortcut POSTs the data to GitHub via a
+                <code>repository_dispatch</code> event &rarr; a GitHub Actions workflow processes and commits
+                the data.
+            </p>
+            <p>
+                I evaluated <strong>Health Auto Export</strong> (an iOS app with REST API integration) but it
+                requires a paid subscription for automation. Instead, I built a free <strong>iOS Shortcut</strong>
+                that queries Apple Health, formats the data as JSON, and POSTs it directly to the GitHub API
+                using a personal access token. I also set up an automation on my phone to trigger it
+                automatically each day.
+            </p>
+            <p>
+                The backend is fully operational &mdash; <strong>receive_health_data.py</strong> processes incoming
+                payloads, deduplicates by date, and merges with existing records. The GitHub Actions workflow was
+                tested and confirmed working with sample data.
+            </p>
+
+            <h3>Step 6: The Final Plot Twist</h3>
+            <p>
+                After building the entire pipeline, I discovered that <strong>COROS doesn't actually sync health
+                metrics to Apple Health</strong>. It only syncs workout activities and workout heart rate &mdash;
+                not sleep, HRV, SpO2, or resting heart rate. The COROS app shows a "sync successful" confirmation,
+                but only workout data actually flows through.
+            </p>
+            <p>
+                This means the Apple Health sections of this dashboard are ready and waiting, but won't show
+                data until either COROS updates their Apple Health integration, or I find another source for
+                those metrics. The infrastructure is built, tested, and deployed &mdash; it just needs data.
+            </p>
+        </div>
 
         <!-- ======================== -->
         <!-- TRAINING: COROS DATA     -->
@@ -230,15 +336,15 @@
             </div>
         </div>
 
-        <!-- Methodology -->
+        <!-- Architecture -->
         <div class="dashboard-section">
-            <h2>Methodology</h2>
+            <h2><i class="fas fa-diagram-project" style="color: #14B8A6;"></i> Architecture</h2>
             <ul>
-                <li><strong>COROS Data:</strong> A Python script authenticates with the COROS Training Hub API, fetches all activities and daily training analytics (resting HR, training load, fatigue, fitness), and writes pre-processed JSON.</li>
-                <li><strong>Apple Health Data:</strong> An iOS Shortcut queries Apple Health for sleep, HRV, resting HR, and SpO2, then POSTs the data to GitHub via repository_dispatch.</li>
-                <li><strong>Automation:</strong> Two GitHub Actions workflows handle updates &mdash; a daily cron for COROS data and a webhook receiver for Apple Health pushes.</li>
-                <li><strong>Deduplication:</strong> Incoming health records are merged by date, ensuring no duplicate data accumulates over time.</li>
-                <li><strong>Visualization:</strong> Chart.js renders interactive charts from the pre-processed JSON with no build tools or frameworks.</li>
+                <li><strong>COROS Pipeline:</strong> <code>fetch_coros.py</code> authenticates with the COROS Training Hub API (MD5 password + access token), paginates through all activities, fetches daily training analytics, and writes pre-processed JSON. Runs daily at 6:30 AM UTC via GitHub Actions cron.</li>
+                <li><strong>Apple Health Pipeline:</strong> An iOS Shortcut queries Apple Health for sleep, HRV, resting HR, and SpO2, formats it as JSON, and POSTs to the GitHub API as a <code>repository_dispatch</code> event. <code>receive_health_data.py</code> processes the payload and merges records by date.</li>
+                <li><strong>Zero Dependencies:</strong> Both Python scripts use only the standard library &mdash; no pip install, no requirements.txt, no venv. Just <code>urllib</code>, <code>json</code>, and <code>ssl</code>.</li>
+                <li><strong>Deduplication:</strong> Incoming health records are merged by date key, so re-running the sync or re-sending the same data never creates duplicates.</li>
+                <li><strong>Visualization:</strong> Chart.js renders 12 interactive charts from pre-processed JSON files. No build tools, no frameworks &mdash; just a single HTML file with inline JavaScript.</li>
             </ul>
         </div>
 

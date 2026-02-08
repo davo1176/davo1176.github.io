@@ -521,6 +521,10 @@ small, .text-small {
   border-top-color: var(--color-strava);
 }
 
+.project-card--coros {
+  border-top-color: var(--color-teal);
+}
+
 .project-card__body {
   padding: var(--space-lg);
   display: flex;
