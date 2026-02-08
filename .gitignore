@@ -3,3 +3,6 @@ __pycache__/
 *.pyo
 venv/
 .env
+.ipynb_checkpoints/
+.virtual_documents/
+.DS_Store

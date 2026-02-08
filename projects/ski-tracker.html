@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
@@ -34,7 +34,7 @@
             <div class="navbar__links">
                 <a href="../index.html#about">About</a>
                 <a href="../index.html#projects">Projects</a>
-                <a href="../today.html">Today's Training</a>
+                <a href="../pages/today.html">Today's Training</a>
                 <a href="../index.html#contact">Contact</a>
             </div>
             <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
@@ -195,7 +195,7 @@
   "https://api.vailresorts.com/digital/stats/statsapi/v3/Stats/ResortDayStat/YOUR_USER_ID?Limit=1000&MinDate=2010-01-01T00:00:00Z" \
   -o ski_day_data.json</code></pre>
             </li>
-            <li>Replace <code>Projects/Ski_Tracker/ski_day_data.json</code> with the new response.</li>
+            <li>Replace <code>data/ski_day_data.json</code> with the new response.</li>
             <li>Re-run <code>python process_ski_data.py</code> to regenerate the CSV.</li>
         </ol>
 
@@ -223,7 +223,7 @@
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../assets/js/main.js"></script>
 
     <!-- Ski Tracker Charts -->
     <script>
@@ -281,7 +281,7 @@
         }
 
         // Fetch data and render
-        fetch('Ski_Tracker/ski_day_data.json')
+        fetch('../data/ski_day_data.json')
             .then(function(r) { return r.json(); })
             .then(function(data) {
                 // Enrich records
