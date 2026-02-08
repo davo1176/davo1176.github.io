@@ -274,6 +274,94 @@
             color: var(--color-text-secondary);
         }
 
+        /* Activity log */
+        .activity-log { margin-top: 2rem; }
+        .activity-log h3 {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .activity-log__empty {
+            text-align: center;
+            color: var(--color-text-secondary);
+            font-style: italic;
+            padding: 1.5rem;
+            background: #F8FAFC;
+            border-radius: var(--radius-lg);
+        }
+        .activity-entry {
+            background: #fff;
+            border: 1px solid #E2E8F0;
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .activity-entry__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        .activity-entry__title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .activity-entry__title i { font-size: 0.85rem; }
+        .activity-entry__meta {
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+        }
+        .activity-entry__stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .activity-entry__stat {
+            font-size: 0.8rem;
+        }
+        .activity-entry__stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+        .activity-entry__stat-value {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .exercise-list {
+            border-top: 1px solid #F1F5F9;
+            padding-top: 0.75rem;
+        }
+        .exercise-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            font-size: 0.8rem;
+        }
+        .exercise-row__name {
+            font-weight: 500;
+            flex: 1;
+        }
+        .exercise-row__detail {
+            color: var(--color-text-secondary);
+            text-align: right;
+            margin-left: 1rem;
+            white-space: nowrap;
+        }
+
         .loading-state {
             text-align: center;
             padding: 4rem 2rem;
@@ -1029,6 +1117,9 @@
                 html += '</div>';
             }
 
+            // Activity log — what actually happened this day
+            html += renderActivityLog();
+
             root.innerHTML = html;
         }
 
@@ -1047,6 +1138,127 @@
                     '</div>';
                 });
                 html += '</div>';
+            }
+
+            html += '</div>';
+            return html;
+        }
+
+        // ============================================================
+        // ACTIVITY LOG — what actually happened on this day
+        // ============================================================
+
+        function renderActivityLog() {
+            var html = '<div class="activity-log">';
+            html += '<h3><i class="fas fa-clipboard-check" style="color: #F97316;"></i> Activity Log</h3>';
+
+            var hasActivities = false;
+
+            // COROS activities for this day
+            if (corosData && corosData.activities) {
+                var dayActivities = corosData.activities.filter(function(a) { return a.date === TODAY_STR; });
+                dayActivities.forEach(function(a) {
+                    hasActivities = true;
+                    var iconClass = 'fa-person-running';
+                    var iconColor = '#14B8A6';
+                    if (a.type === 'Hike') { iconClass = 'fa-mountain'; iconColor = '#22C55E'; }
+                    else if (a.type === 'Bike' || a.type === 'Indoor Bike') { iconClass = 'fa-bicycle'; iconColor = '#4F46E5'; }
+                    else if (a.type === 'Strength' || a.type === 'Gym Cardio') { iconClass = 'fa-dumbbell'; iconColor = '#F97316'; }
+                    else if (a.type === 'Ski' || a.type === 'Snowboard') { iconClass = 'fa-person-skiing'; iconColor = '#0EA5E9'; }
+                    else if (a.type === 'Walk') { iconClass = 'fa-person-walking'; iconColor = '#84CC16'; }
+                    else if (a.type.indexOf('Swim') !== -1) { iconClass = 'fa-person-swimming'; iconColor = '#0EA5E9'; }
+
+                    html += '<div class="activity-entry">';
+                    html += '<div class="activity-entry__header">';
+                    html += '<div class="activity-entry__title"><i class="fas ' + iconClass + '" style="color: ' + iconColor + ';"></i> ' + (a.name || a.type) + '</div>';
+                    html += '<div class="activity-entry__meta">via COROS</div>';
+                    html += '</div>';
+
+                    html += '<div class="activity-entry__stats">';
+                    if (a.distance_miles > 0) {
+                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Distance</div><div class="activity-entry__stat-value">' + a.distance_miles + ' mi</div></div>';
+                    }
+                    html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Duration</div><div class="activity-entry__stat-value">' + a.moving_time_display + '</div></div>';
+                    if (a.average_pace_min_mile) {
+                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Avg Pace</div><div class="activity-entry__stat-value">' + a.average_pace_min_mile + ' /mi</div></div>';
+                    }
+                    if (a.average_heartrate) {
+                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Avg HR</div><div class="activity-entry__stat-value">' + a.average_heartrate + ' bpm</div></div>';
+                    }
+                    if (a.elevation_feet > 0) {
+                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Elevation</div><div class="activity-entry__stat-value">' + a.elevation_feet + ' ft</div></div>';
+                    }
+                    if (a.calories > 0) {
+                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Calories</div><div class="activity-entry__stat-value">' + a.calories + '</div></div>';
+                    }
+                    html += '</div>';
+                    html += '</div>';
+                });
+            }
+
+            // Hevy workouts for this day
+            if (hevyData && hevyData.workouts) {
+                var dayWorkouts = hevyData.workouts.filter(function(w) { return w.date === TODAY_STR; });
+                dayWorkouts.forEach(function(w) {
+                    hasActivities = true;
+                    html += '<div class="activity-entry">';
+                    html += '<div class="activity-entry__header">';
+                    html += '<div class="activity-entry__title"><i class="fas fa-dumbbell" style="color: #F97316;"></i> ' + w.name + '</div>';
+                    html += '<div class="activity-entry__meta">via Hevy</div>';
+                    html += '</div>';
+
+                    html += '<div class="activity-entry__stats">';
+                    html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Duration</div><div class="activity-entry__stat-value">' + w.duration_display + '</div></div>';
+                    html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Volume</div><div class="activity-entry__stat-value">' + Math.round(w.total_volume_lbs).toLocaleString() + ' lbs</div></div>';
+                    html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Sets</div><div class="activity-entry__stat-value">' + w.total_sets + '</div></div>';
+                    html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Reps</div><div class="activity-entry__stat-value">' + w.total_reps + '</div></div>';
+                    if (w.pr_count > 0) {
+                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">PRs</div><div class="activity-entry__stat-value" style="color: #B45309;">' + w.pr_count + ' <i class="fas fa-trophy" style="font-size: 0.7rem;"></i></div></div>';
+                    }
+                    html += '</div>';
+
+                    // Exercise breakdown
+                    if (w.exercises && w.exercises.length > 0) {
+                        html += '<div class="exercise-list">';
+                        w.exercises.forEach(function(ex) {
+                            if (ex.exercise_type === 'duration' && ex.title === 'Warm Up') {
+                                html += '<div class="exercise-row">';
+                                html += '<span class="exercise-row__name">' + ex.title + '</span>';
+                                var dur = ex.sets[0] && ex.sets[0].duration_seconds ? Math.round(ex.sets[0].duration_seconds / 60) + ' min' : '';
+                                html += '<span class="exercise-row__detail">' + dur + '</span>';
+                                html += '</div>';
+                                return;
+                            }
+
+                            var setsSummary = '';
+                            if (ex.working_set_count > 0 && ex.max_weight_lbs > 0) {
+                                setsSummary = ex.working_set_count + ' sets \u00d7 ' + Math.round(ex.max_weight_lbs) + ' lbs';
+                            } else if (ex.working_set_count > 0) {
+                                setsSummary = ex.working_set_count + ' sets';
+                            }
+                            if (ex.total_reps > 0) {
+                                setsSummary += ' \u00b7 ' + ex.total_reps + ' reps';
+                            }
+
+                            // Check for PRs in this exercise
+                            var exPrs = 0;
+                            ex.sets.forEach(function(s) { exPrs += (s.prs ? s.prs.length : 0); });
+                            var prTag = exPrs > 0 ? ' <span style="color: #B45309; font-size: 0.7rem;"><i class="fas fa-trophy"></i></span>' : '';
+
+                            html += '<div class="exercise-row">';
+                            html += '<span class="exercise-row__name">' + ex.title + prTag + '</span>';
+                            html += '<span class="exercise-row__detail">' + setsSummary + '</span>';
+                            html += '</div>';
+                        });
+                        html += '</div>';
+                    }
+
+                    html += '</div>';
+                });
+            }
+
+            if (!hasActivities) {
+                html += '<div class="activity-log__empty">No activities recorded on this day.</div>';
             }
 
             html += '</div>';
