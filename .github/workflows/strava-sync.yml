@@ -1,0 +1,33 @@
+name: Sync Strava Activities
+
+on:
+  schedule:
+    - cron: '0 6 * * *'     # Daily at 6 AM UTC
+  workflow_dispatch:          # Manual trigger for testing
+
+permissions:
+  contents: write             # Needed to commit and push
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Strava activities
+        env:
+          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GH_REPO: ${{ github.repository }}
+        run: python scripts/fetch_strava.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/strava_activities.json data/strava_activities.csv
+          git diff --cached --quiet || git commit -m "chore: update Strava activity data"
+          git push

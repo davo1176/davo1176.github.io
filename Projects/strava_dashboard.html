@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Strava Activity Dashboard - Automated daily sync with interactive visualizations">
+    <title>Strava Activity Dashboard | Daniel Volin</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="../index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero hero--project" style="background: linear-gradient(135deg, #FC4C02 0%, #E34402 100%);">
+        <div class="hero__content">
+            <h1 class="hero__title">Strava Activity Dashboard</h1>
+            <p class="hero__subtitle">Automated daily sync of running, cycling, hiking &amp; more via GitHub Actions</p>
+            <div class="hero__buttons" style="margin-top: 1.5rem;">
+                <span class="tag tag--white">Python</span>
+                <span class="tag tag--white">Chart.js</span>
+                <span class="tag tag--white">JavaScript</span>
+                <span class="tag tag--white">Strava API</span>
+                <span class="tag tag--white">GitHub Actions</span>
+                <span class="tag tag--white">Data Viz</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <h2>Project Overview</h2>
+        <p>
+            This project builds a fully automated data pipeline that connects to the Strava API using OAuth 2.0,
+            fetches all of my activity data (runs, rides, hikes, and more), processes it with Python, and
+            visualizes the results with interactive Chart.js charts. A GitHub Actions cron job runs daily to
+            keep the data fresh, committing updated JSON directly to the repository so GitHub Pages serves
+            the latest stats automatically &mdash; no backend server required.
+        </p>
+
+        <h2>Objectives</h2>
+        <ul>
+            <li>Demonstrate API integration skills with OAuth 2.0 authentication and paginated data retrieval.</li>
+            <li>Build a Python data pipeline that transforms raw API responses into analysis-ready JSON.</li>
+            <li>Automate the entire workflow with GitHub Actions for hands-free daily updates.</li>
+            <li>Create interactive browser-based visualizations revealing activity patterns and trends.</li>
+        </ul>
+
+        <h2>Key Results</h2>
+        <ul>
+            <li>Automated daily sync via GitHub Actions fetches and processes all Strava activities with zero manual effort.</li>
+            <li>Python script handles OAuth token refresh, pagination, unit conversion, and data enrichment using only the standard library.</li>
+            <li>8 interactive Chart.js visualizations reveal patterns across activity types, distances, elevation, and timing.</li>
+            <li>Data updates automatically &mdash; every new Strava activity appears on the dashboard within 24 hours.</li>
+        </ul>
+
+        <!-- Lifetime Stats -->
+        <h2>Lifetime Stats</h2>
+        <div class="strava-stats" id="strava-stats">
+            <div class="strava-stat-card">
+                <div class="strava-stat-card__icon">Loading...</div>
+            </div>
+        </div>
+
+        <!-- Best Activity -->
+        <h2>Best Activity</h2>
+        <div class="callout" id="best-activity-callout">
+            <p>Loading activity data...</p>
+        </div>
+
+        <!-- Charts: Activity Type Breakdown -->
+        <h2>Activity Type Breakdown</h2>
+        <div class="chart-row">
+            <div class="chart-container">
+                <h3>Activities by Type</h3>
+                <canvas id="chart-type-bar"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Type Distribution</h3>
+                <canvas id="chart-type-doughnut"></canvas>
+            </div>
+        </div>
+
+        <!-- Charts: Distance Over Time -->
+        <h2>Distance Over Time</h2>
+        <div class="chart-container">
+            <h3>Monthly Distance (Miles)</h3>
+            <canvas id="chart-monthly-distance"></canvas>
+        </div>
+
+        <!-- Charts: Elevation & Activity Patterns -->
+        <h2>Elevation &amp; Activity Patterns</h2>
+        <div class="chart-row">
+            <div class="chart-container">
+                <h3>Monthly Elevation Gain (Feet)</h3>
+                <canvas id="chart-monthly-elevation"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Activity Type by Month</h3>
+                <canvas id="chart-type-by-month"></canvas>
+            </div>
+        </div>
+
+        <!-- Charts: Weekly & Pace Patterns -->
+        <h2>Weekly &amp; Pace Patterns</h2>
+        <div class="chart-row">
+            <div class="chart-container">
+                <h3>Day of Week Distribution</h3>
+                <canvas id="chart-day-of-week"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Running Pace Trend</h3>
+                <canvas id="chart-pace-trend"></canvas>
+            </div>
+        </div>
+
+        <!-- Methodology -->
+        <h2>Methodology</h2>
+        <ul>
+            <li><strong>Data Source:</strong> Strava API v3 with OAuth 2.0 authentication. Activities are fetched via paginated GET requests (200 per page) using a refresh token flow.</li>
+            <li><strong>Automation:</strong> A GitHub Actions cron job triggers daily at 6 AM UTC. The workflow refreshes the OAuth token, fetches new data, and commits the updated JSON file.</li>
+            <li><strong>Data Processing:</strong> Python script (standard library only &mdash; no pip dependencies) handles token refresh, pagination, unit conversion (meters to miles/feet, m/s to pace), and JSON output.</li>
+            <li><strong>Token Management:</strong> Strava rotates refresh tokens on each use. The script automatically updates the GitHub Actions secret with the new token using the <code>gh</code> CLI.</li>
+            <li><strong>Visualization:</strong> Chart.js renders 8 interactive charts directly from the pre-processed JSON in the browser with no build tools or frameworks.</li>
+        </ul>
+
+        <!-- Skills Demonstrated -->
+        <h2>Skills Demonstrated</h2>
+        <ul>
+            <li><strong>API Integration:</strong> Working with OAuth 2.0 flows, token refresh, and paginated REST endpoints.</li>
+            <li><strong>Data Pipeline:</strong> Building a Python ETL script that transforms raw API responses into analysis-ready datasets.</li>
+            <li><strong>CI/CD Automation:</strong> Designing a GitHub Actions workflow for scheduled, unattended data synchronization.</li>
+            <li><strong>Data Visualization:</strong> Creating interactive browser-based charts with Chart.js and vanilla JavaScript.</li>
+            <li><strong>Web Development:</strong> Building a responsive, data-driven project page following modern HTML/CSS patterns.</li>
+        </ul>
+
+        <!-- Technologies Used -->
+        <h2>Technologies Used</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+            <span class="tag tag--python">Python</span>
+            <span class="tag tag--javascript">JavaScript</span>
+            <span class="tag tag--chartjs">Chart.js</span>
+            <span class="tag tag--strava">Strava API</span>
+            <span class="tag tag--actions">GitHub Actions</span>
+            <span class="tag tag--dataviz">Data Viz</span>
+        </div>
+
+        <!-- How It Works -->
+        <h2>How It Works</h2>
+        <ol>
+            <li>A GitHub Actions cron job triggers daily at 6 AM UTC (or on manual dispatch).</li>
+            <li>The Python script refreshes the Strava OAuth access token using the stored refresh token.</li>
+            <li>The script paginates through all activities from the Strava API, processing each record.</li>
+            <li>Raw data is enriched with unit conversions, derived fields (pace, display times), and aggregate statistics.</li>
+            <li>The processed JSON is written to <code>data/strava_activities.json</code> and committed to the repository.</li>
+            <li>GitHub Pages automatically serves the updated file, and the dashboard reflects the latest data.</li>
+        </ol>
+
+        <!-- GitHub -->
+        <h2>GitHub Repository</h2>
+        <p>
+            <a href="https://github.com/davo1176/davo1176.github.io" target="_blank" class="btn btn--github">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+
+    <!-- Strava Dashboard Charts -->
+    <script>
+    (function() {
+        // Chart.js defaults
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748B';
+        Chart.defaults.responsive = true;
+        Chart.defaults.maintainAspectRatio = true;
+
+        var STRAVA_ORANGE = '#FC4C02';
+
+        // Activity type colors
+        var ACTIVITY_COLORS = {
+            'Run':           '#FC4C02',
+            'Ride':          '#4F46E5',
+            'Hike':          '#22C55E',
+            'Walk':          '#14B8A6',
+            'Swim':          '#0EA5E9',
+            'NordicSki':     '#7DD3FC',
+            'AlpineSki':     '#0284C7',
+            'BackcountrySki':'#38BDF8',
+            'Workout':       '#F97316',
+            'WeightTraining':'#8B5CF6',
+            'Yoga':          '#EC4899',
+        };
+
+        var DEFAULT_COLOR = '#64748B';
+        var DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        var DAYS_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+        function getColor(type) {
+            return ACTIVITY_COLORS[type] || DEFAULT_COLOR;
+        }
+
+        function formatNumber(n) {
+            return n.toLocaleString('en-US');
+        }
+
+        // Fetch data and render
+        fetch('../data/strava_activities.json')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                renderStats(data);
+                renderBestActivity(data);
+                renderTypeBarChart(data.activities);
+                renderTypeDoughnutChart(data.activities);
+                renderMonthlyDistanceChart(data.activities);
+                renderMonthlyElevationChart(data.activities);
+                renderTypeByMonthChart(data.activities);
+                renderDayOfWeekChart(data.activities);
+                renderPaceTrendChart(data.activities);
+            })
+            .catch(function(err) {
+                console.error('Failed to load Strava data:', err);
+                document.getElementById('strava-stats').innerHTML =
+                    '<p style="color: red;">Failed to load activity data. Please serve this page from a web server.</p>';
+            });
+
+        // === RENDER FUNCTIONS ===
+
+        function renderStats(data) {
+            var s = data.athlete_stats;
+            var distDisplay = s.total_distance_miles >= 1000
+                ? (s.total_distance_miles / 1000).toFixed(1) + 'K'
+                : Math.round(s.total_distance_miles);
+            var elevDisplay = s.total_elevation_feet >= 100000
+                ? (s.total_elevation_feet / 1000).toFixed(0) + 'K'
+                : formatNumber(Math.round(s.total_elevation_feet));
+
+            document.getElementById('strava-stats').innerHTML =
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-person-running" style="color: ' + STRAVA_ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + s.total_activities + '</div>' +
+                    '<div class="strava-stat-card__label">Total Activities</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-route" style="color: ' + STRAVA_ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + distDisplay + '</div>' +
+                    '<div class="strava-stat-card__label">Total Miles</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-mountain" style="color: ' + STRAVA_ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + elevDisplay + '</div>' +
+                    '<div class="strava-stat-card__label">Elevation (ft)</div>' +
+                '</div>' +
+                '<div class="strava-stat-card">' +
+                    '<div class="strava-stat-card__icon"><i class="fas fa-clock" style="color: ' + STRAVA_ORANGE + ';"></i></div>' +
+                    '<div class="strava-stat-card__value">' + s.total_moving_time_display + '</div>' +
+                    '<div class="strava-stat-card__label">Moving Time</div>' +
+                '</div>';
+        }
+
+        function renderBestActivity(data) {
+            var best = data.best_activity;
+            var dt = new Date(best.date + 'T00:00:00');
+            var dateStr = dt.toLocaleDateString('en-US', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+            document.getElementById('best-activity-callout').innerHTML =
+                '<p><i class="fas fa-trophy" style="color: #FBBF24; margin-right: 0.5rem;"></i>' +
+                '<strong>' + dateStr + '</strong> &mdash; ' +
+                '<strong>' + best.name + '</strong> (' + best.type + ')' +
+                ' &mdash; ' + best.distance_miles + ' miles, ' +
+                formatNumber(best.elevation_feet) + ' ft elevation, ' +
+                best.moving_time_display + '.</p>';
+        }
+
+        // --- Activity Type Charts ---
+
+        function getTypeCounts(activities) {
+            var counts = {};
+            activities.forEach(function(a) {
+                counts[a.type] = (counts[a.type] || 0) + 1;
+            });
+            var sorted = Object.keys(counts).sort(function(a, b) {
+                return counts[b] - counts[a];
+            });
+            return {
+                labels: sorted,
+                values: sorted.map(function(t) { return counts[t]; }),
+                colors: sorted.map(function(t) { return getColor(t); }),
+            };
+        }
+
+        function renderTypeBarChart(activities) {
+            var data = getTypeCounts(activities);
+            new Chart(document.getElementById('chart-type-bar'), {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.values,
+                        backgroundColor: data.colors,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderTypeDoughnutChart(activities) {
+            var data = getTypeCounts(activities);
+            new Chart(document.getElementById('chart-type-doughnut'), {
+                type: 'doughnut',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.values,
+                        backgroundColor: data.colors,
+                        borderWidth: 2,
+                        borderColor: '#fff',
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: { padding: 16, usePointStyle: true }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Monthly Charts ---
+
+        function getMonthlyData(activities) {
+            // Build sorted month keys from the data
+            var monthMap = {};
+            activities.forEach(function(a) {
+                var key = a.year + '-' + String(a.month).padStart(2, '0');
+                if (!monthMap[key]) {
+                    monthMap[key] = { distance: 0, elevation: 0, byType: {} };
+                }
+                monthMap[key].distance += a.distance_miles;
+                monthMap[key].elevation += a.elevation_feet;
+                monthMap[key].byType[a.type] = (monthMap[key].byType[a.type] || 0) + 1;
+            });
+
+            var months = Object.keys(monthMap).sort();
+            var MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                               'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var labels = months.map(function(m) {
+                var parts = m.split('-');
+                return MONTH_NAMES[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+            });
+
+            return {
+                keys: months,
+                labels: labels,
+                distances: months.map(function(m) { return Math.round(monthMap[m].distance * 10) / 10; }),
+                elevations: months.map(function(m) { return Math.round(monthMap[m].elevation); }),
+                monthMap: monthMap,
+            };
+        }
+
+        function renderMonthlyDistanceChart(activities) {
+            var data = getMonthlyData(activities);
+            new Chart(document.getElementById('chart-monthly-distance'), {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Distance (mi)',
+                        data: data.distances,
+                        backgroundColor: STRAVA_ORANGE,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderMonthlyElevationChart(activities) {
+            var data = getMonthlyData(activities);
+            new Chart(document.getElementById('chart-monthly-elevation'), {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Elevation (ft)',
+                        data: data.elevations,
+                        backgroundColor: '#14B8A6',
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(v) {
+                                    return v >= 1000 ? (v / 1000) + 'k' : v;
+                                }
+                            }
+                        },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderTypeByMonthChart(activities) {
+            var data = getMonthlyData(activities);
+            // Get all unique types
+            var allTypes = {};
+            activities.forEach(function(a) { allTypes[a.type] = true; });
+            var types = Object.keys(allTypes).sort();
+
+            var datasets = types.map(function(type) {
+                return {
+                    label: type,
+                    data: data.keys.map(function(m) {
+                        return (data.monthMap[m].byType[type] || 0);
+                    }),
+                    backgroundColor: getColor(type),
+                    borderRadius: 4,
+                };
+            });
+
+            new Chart(document.getElementById('chart-type-by-month'), {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: datasets,
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: { padding: 12, usePointStyle: true }
+                        }
+                    },
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { stacked: true, beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        // --- Day of Week Chart ---
+
+        function renderDayOfWeekChart(activities) {
+            var counts = {};
+            DAYS_OF_WEEK.forEach(function(d) { counts[d] = 0; });
+            activities.forEach(function(a) { counts[a.day_of_week]++; });
+
+            var values = DAYS_OF_WEEK.map(function(d) { return counts[d]; });
+            var colors = DAYS_OF_WEEK.map(function(d, i) {
+                return (i >= 5) ? '#E34402' : STRAVA_ORANGE;
+            });
+
+            new Chart(document.getElementById('chart-day-of-week'), {
+                type: 'bar',
+                data: {
+                    labels: DAYS_SHORT,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // --- Running Pace Trend ---
+
+        function renderPaceTrendChart(activities) {
+            var runs = activities.filter(function(a) {
+                return a.type === 'Run' && a.average_pace_min_mile;
+            });
+
+            if (runs.length === 0) {
+                document.getElementById('chart-pace-trend').parentElement.innerHTML =
+                    '<h3>Running Pace Trend</h3>' +
+                    '<p style="text-align: center; color: #64748B; padding: 2rem;">No running data available yet.</p>';
+                return;
+            }
+
+            // Sort by date
+            runs.sort(function(a, b) { return a.date.localeCompare(b.date); });
+
+            // Convert pace string "M:SS" to decimal minutes for charting
+            function paceToMinutes(pace) {
+                var parts = pace.split(':');
+                return parseInt(parts[0], 10) + parseInt(parts[1], 10) / 60;
+            }
+
+            var labels = runs.map(function(r) {
+                var dt = new Date(r.date + 'T00:00:00');
+                return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            });
+
+            var paceValues = runs.map(function(r) {
+                return Math.round(paceToMinutes(r.average_pace_min_mile) * 100) / 100;
+            });
+
+            new Chart(document.getElementById('chart-pace-trend'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Pace (min/mi)',
+                        data: paceValues,
+                        borderColor: STRAVA_ORANGE,
+                        backgroundColor: 'rgba(252, 76, 2, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: STRAVA_ORANGE,
+                        pointRadius: 5,
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            reverse: true,
+                            ticks: {
+                                callback: function(v) {
+                                    var mins = Math.floor(v);
+                                    var secs = Math.round((v - mins) * 60);
+                                    return mins + ':' + String(secs).padStart(2, '0');
+                                }
+                            }
+                        },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+    })();
+    </script>
+</body>
+</html>

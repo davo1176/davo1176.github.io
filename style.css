@@ -12,6 +12,7 @@
   --color-green: #22C55E;
   --color-pink: #EC4899;
   --color-ski: #0EA5E9;
+  --color-strava: #FC4C02;
   --color-surface: #F8FAFC;
   --color-card: #FFFFFF;
   --color-text: #0F172A;
@@ -516,6 +517,10 @@ small, .text-small {
   border-top-color: var(--color-ski);
 }
 
+.project-card--strava {
+  border-top-color: var(--color-strava);
+}
+
 .project-card__body {
   padding: var(--space-lg);
   display: flex;
@@ -839,6 +844,8 @@ small, .text-small {
 .tag--chartjs { background: #FF6384; color: white; }
 .tag--api { background: var(--color-ski); color: white; }
 .tag--javascript { background: #F7DF1E; color: var(--color-text); }
+.tag--strava { background: var(--color-strava); color: white; }
+.tag--actions { background: #2088FF; color: white; }
 
 /* White variant for hero sections */
 .tag--white {
@@ -1083,6 +1090,44 @@ small, .text-small {
 }
 
 /* ============================================ */
+/* 16b. STRAVA DASHBOARD                        */
+/* ============================================ */
+.strava-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.strava-stat-card {
+  background: var(--color-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border-top: 3px solid var(--color-strava);
+}
+
+.strava-stat-card__icon {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.strava-stat-card__value {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.strava-stat-card__label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+/* ============================================ */
 /* 17. RESPONSIVE - TABLET (max-width: 1024px)  */
 /* ============================================ */
 @media (max-width: 1024px) {
@@ -1187,6 +1232,10 @@ small, .text-small {
   .ski-stats {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .strava-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ============================================ */
@@ -1222,6 +1271,14 @@ small, .text-small {
   }
 
   .ski-stat-card__value {
+    font-size: 1.5rem;
+  }
+
+  .strava-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .strava-stat-card__value {
     font-size: 1.5rem;
   }
 }
