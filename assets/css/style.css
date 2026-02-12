@@ -533,6 +533,10 @@ small, .text-small {
   border-top-color: #7C3AED;
 }
 
+.project-card--ocean {
+  border-top-color: #0E7490;
+}
+
 .project-card__body {
   padding: var(--space-lg);
   display: flex;
@@ -858,6 +862,10 @@ small, .text-small {
 .tag--javascript { background: #F7DF1E; color: var(--color-text); }
 .tag--strava { background: var(--color-strava); color: white; }
 .tag--actions { background: #2088FF; color: white; }
+.tag--looker { background: #0E7490; color: white; }
+.tag--sheets { background: #0F9D58; color: white; }
+.tag--lean { background: #7C3AED; color: white; }
+.tag--bsc { background: #6366F1; color: white; }
 
 /* White variant for hero sections */
 .tag--white {

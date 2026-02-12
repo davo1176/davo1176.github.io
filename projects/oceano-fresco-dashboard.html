@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master's Thesis: Designing a KPI Dashboard Framework for Oceano Fresco, a sustainable aquaculture scale-up - Daniel Volin">
+    <title>Oceano Fresco Dashboard | Daniel Volin</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5966R6YDXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5966R6YDXX');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar--interior">
+        <div class="container">
+            <a href="../index.html" class="navbar__brand">Danny Does Data</a>
+            <div class="navbar__links">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../pages/today.html">Today's Training</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero hero--project" style="background: linear-gradient(135deg, #0E7490 0%, #14B8A6 100%);">
+        <div class="hero__content">
+            <h1 class="hero__title">Building the North Star Dashboard for a Startup Aquaculture Company</h1>
+            <p class="hero__subtitle">Master's Thesis &mdash; Nova School of Business & Economics</p>
+            <div class="hero__buttons" style="margin-top: 1.5rem;">
+                <span class="tag tag--white">Looker Studio</span>
+                <span class="tag tag--white">Lean Startup</span>
+                <span class="tag tag--white">KPI Design</span>
+                <span class="tag tag--white">Data Strategy</span>
+                <span class="tag tag--white">Stakeholder Research</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <h2>The Problem</h2>
+        <p>Oceano Fresco is a Portuguese aquaculture scale-up that farms premium native European bivalves (clams and oysters) across a fully vertically integrated production cycle &mdash; from spawning in a hatchery, through a nursery stage, to an offshore open-sea farm off the coast of the Algarve. They're one of very few companies in the world attempting to industrialize the farming of these hard-to-grow native species.</p>
+        <p>The challenge: as the company prepared to scale from R&D to commercial operations, their data infrastructure couldn't keep up. Operational records were scattered across site-specific Excel files with inconsistent formats, no unified batch tracking, and zero financial KPI visibility. The CEO described their financial runway estimate as "probably until the middle of next year" &mdash; an informal guess, not a model. Cost per kilogram? They didn't have the data. The company was making multi-million-euro decisions on intuition.</p>
+
+        <div class="callout">
+            <p><strong>My role:</strong> I led the dashboarding theory and application for the team &mdash; designing the six-step methodology that translated stakeholder needs into a functional MVP dashboard, grounded in decision-science theory, Lean Startup principles, and human-centered design. My individual thesis section covered the full theoretical framework for how to design dashboards in startup contexts.</p>
+        </div>
+
+        <h2>The Approach: Six Steps from Decisions to Dashboard</h2>
+        <p>Rather than starting with "what data do we have?", I built a methodology that starts with "what decisions do we need to support?" This decision-driven approach, synthesized from Balanced Scorecard theory, Simon's intelligence-design-choice model, information quality research, and Lean Startup validated-learning loops, produced a six-stage process:</p>
+        <ol style="list-style: decimal; padding-left: 2rem; margin-bottom: 1rem;">
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">Purpose Definition & Stakeholder Discovery</strong> &mdash; Structured interviews with the CEO, CCO, Operations Director, and site managers to surface the decisions that actually matter and articulate precise questions the dashboard must answer.</li>
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">Candidate KPI Identification</strong> &mdash; Using the Balanced Scorecard as a scaffold, mapping potential KPIs across financial, customer, internal process, and learning perspectives, then critically examining each for fit with a capital-intensive, long-cycle biological production system.</li>
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">KPI Screening & Prioritization</strong> &mdash; Applying SMART(ER) criteria and multi-criteria decision making to filter candidates. Information quality dimensions (format, currency, completeness, accuracy) helped assess whether each KPI could actually be reported reliably with available data.</li>
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">Information Architecture & Visual Design</strong> &mdash; Structuring the dashboard into layered views (executive, operational, analytical) with visual hierarchy, drill-down capability, and usability heuristics baked in from the start.</li>
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">MVP Prototyping & Deployment</strong> &mdash; Treating the dashboard itself as a minimum viable product within the build-measure-learn loop. Ship fast, observe usage, collect feedback.</li>
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">Evaluation, Learning & Iteration</strong> &mdash; Identifying vanity metrics, refining KPI sets, and deciding whether to persevere or pivot based on stakeholder feedback.</li>
+        </ol>
+
+        <h2>Understanding the Starting Point</h2>
+        <p>Before designing anything, we mapped Oceano Fresco's reality through on-site visits, semi-structured interviews, and deep analysis of their existing data files. What we found:</p>
+        <ul>
+            <li><strong>Fragmented data infrastructure:</strong> Three production sites (Nazare, Sines, Lagos) each maintained separate Excel files with different column structures, date formats (DD/MM/YYYY vs MM/DD/YYYY), and decimal separators &mdash; a byproduct of a multinational workforce.</li>
+            <li><strong>Broken batch traceability:</strong> Batch IDs changed when clams moved from hatchery to farm, and batches were mixed during stocking, making it impossible to link downstream outcomes to upstream production decisions.</li>
+            <li><strong>No financial KPIs:</strong> No cost-per-kilogram calculation, no systematized financial runway model, no revenue attribution by customer segment. The CFO position was vacant, and the CCO was handling accounting, grants, and commercial strategy solo.</li>
+            <li><strong>Inconsistent cross-site visibility:</strong> Site managers operated in isolation until just four months before our engagement. The CPO had to manually aggregate three separate Excel files to produce any enterprise-level view.</li>
+        </ul>
+
+        <h2>The Gap Analysis: What Could We Actually Dashboard?</h2>
+        <p>We developed a <strong>Data-Dashboard Readiness Quadrant</strong> &mdash; a framework that plots strategic importance against data quality at the metric level &mdash; to separate what we could build now from what required infrastructure investment first:</p>
+
+        <div class="callout">
+            <p><strong>Quadrant 1 (Dashboard Now):</strong> Hatchery spawn success, seed output, larval survival, batch tracking &mdash; roughly 25% of the North Star scope. This data was structured, consistent, and reliable.</p>
+        </div>
+        <div class="callout">
+            <p><strong>Quadrant 2 (Improve Data First):</strong> Financial health (cost-per-kg, runway), sales performance, farm growth curves, nursery survival, end-to-end batch traceability &mdash; the other 75%. Strategically critical, but the data wasn't there yet.</p>
+        </div>
+
+        <p>This was the honest assessment: we could track the input bottleneck (hatchery), but we couldn't yet assess how effectively that production translated into commercial outcomes. The executive layer of the North Star &mdash; profitability dashboards, cash position overviews &mdash; would require foundational data engineering work before it could go live.</p>
+
+        <h2>Building the MVP: Iteration by Iteration</h2>
+        <p>We chose <strong>Google Looker Studio</strong> connected to Google Sheets &mdash; free, shareable under NDA constraints, and compatible with Oceano Fresco's existing Excel workflows. The goal wasn't to build the perfect dashboard; it was to build the minimum viable one that could demonstrate value and start changing how the company thinks about data.</p>
+        <p>This wasn't a single build &mdash; it was a series of iterations, each one teaching us something the last one couldn't.</p>
+
+        <h3>MVP 1: Built on Broken Data</h3>
+        <p>The first version was rough. We took whatever data Oceano Fresco had &mdash; inconsistent Excel files with mixed formats, broken batch IDs, and gaps everywhere &mdash; and forced it into a five-page dashboard mirroring the North Star architecture: executive overview, hatchery, nursery, farm, and financials.</p>
+
+        <img src="../assets/images/mvp1-nursery.png" alt="MVP 1 - Nursery executive overview showing monthly biomass trends, population tracking, and species breakdown built from raw Oceano Fresco data" style="width: 100%;">
+        <p><small><em>MVP 1: The nursery executive overview. It looks like a dashboard, but under the hood the data was skewed, broken, and incomplete. No end-to-end batch traceability, no way to track a cohort across production stages, and zero financial information. A polished shell on top of a fragmented foundation.</em></small></p>
+
+        <p>Honestly, the data was trash. Date formats didn't match across sites, decimal separators switched between periods and commas depending on who entered the data, and batch IDs changed when clams moved between stages &mdash; making end-to-end traceability impossible. You couldn't follow a single batch from spawn to harvest. There was no way to see how a cohort performed over time, no way to link upstream hatchery decisions to downstream farm outcomes. The farm data was so structurally incoherent we couldn't even reorganize it for dashboarding. And on the financial side? Nothing. No cost-per-kilogram, no revenue attribution, no runway model &mdash; just a blank page where the most strategically important views were supposed to live.</p>
+        <p>But that was the point. We presented MVP 1 to the CEO, CCO, and Operations Director via Teams &mdash; not to show a polished product, but to make the data problems impossible to ignore. The charts were skewed, the numbers couldn't be trusted, and the financial tab was empty. They responded positively to the executive structure and drill-down capabilities, calling it a significant improvement over static Excel reports. More importantly, the session confirmed exactly where the data broke: no batch traceability across stages, nursery inconsistencies that made survival and growth metrics unreliable, and a complete absence of financial data.</p>
+        <p>MVP 1 wasn't useful as a decision tool. But it was invaluable as a diagnostic &mdash; it showed everyone in the room exactly why the data infrastructure needed investment before the dashboard could deliver real value. Sometimes the most useful thing a dashboard can do is prove it doesn't work yet.</p>
+
+        <h3>MVP 2: Synthesized End-to-End Dataset</h3>
+        <p>With the data gaps confirmed, we took a different approach. Rather than waiting for Oceano Fresco to fix their data infrastructure (which would take months), we synthesized a biologically plausible, internally consistent dataset grounded in interview insights. The goal was to show what the North Star <em>could</em> look like with clean data &mdash; giving stakeholders something concrete to work toward. Key decisions:</p>
+        <ul>
+            <li><strong>Unified batch identifiers</strong> that persisted from hatchery through nursery to farm &mdash; solving the traceability gap.</li>
+            <li><strong>Two distinct eras</strong> in the farm data: a "struggle era" (pre-mid-2024, stunted growth, culled cohorts) and a "success era" (improved trajectories reflecting operational lessons learned).</li>
+            <li><strong>Financial tables</strong> allocating revenues and costs by species and site, cash position tracking calibrated to interview estimates, and funding structure documentation.</li>
+        </ul>
+        <p>MVP 2 made the North Star tangible. Stakeholders noted it offered a "clearer and more coherent breakdown of information" than anything they'd had before, and expressed interest in adopting the synthesized Google Sheets as a reference format for future data collection. The jump from MVP 1 to MVP 2 wasn't just a better dashboard &mdash; it was proof that the framework worked, and that the gap between where they were and where they needed to be was closeable.</p>
+
+        <h2>The Final Dashboard</h2>
+        <p>The embedded dashboard below is the final MVP we delivered to Oceano Fresco. It demonstrates the three-tier information architecture: executive-level trade-off visibility, operational drill-downs by production stage, and the financial views that connect biological performance to business outcomes.</p>
+
+        <div style="margin: 2rem 0; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-lg);">
+            <iframe
+                src="https://lookerstudio.google.com/embed/reporting/46c7f4e7-fd35-4b4a-9f81-8b0c98e0e7b5/page/iLrfF"
+                width="100%"
+                height="600"
+                style="border: none; display: block;"
+                allowfullscreen
+                sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <h2>The Implementation Roadmap</h2>
+        <p>The dashboard was always meant to be the starting point, not the endpoint. We defined a four-phase roadmap to evolve the MVP into a mature decision intelligence platform:</p>
+        <ol style="list-style: decimal; padding-left: 2rem; margin-bottom: 1rem;">
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">Foundation & MVP Deployment (3-6 months)</strong> &mdash; Centralize all records into a single source of truth. Define every metric with a 3W1H+F data dictionary (What, Who, When, Why, How + Frequency). Deploy the MVP dashboard to secure executive commitment.</li>
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">Operational Standardization (6-12 months)</strong> &mdash; Unified data entry templates across all sites. End-to-end batch traceability. Organization-wide data literacy programs.</li>
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">Integration & Automation (9-15 months)</strong> &mdash; IoT sensor deployment for real-time environmental monitoring. Automated unit economics calculations. Stage-mix simulator for scenario planning.</li>
+            <li style="margin-bottom: 0.75rem; color: var(--color-text-secondary);"><strong style="color: var(--color-text);">Predictive & Advanced Analytics (24+ months)</strong> &mdash; ML-driven mortality prediction, growth forecasting, stocking density optimization, and sales-stage mix optimization.</li>
+        </ol>
+
+        <h2>Key Takeaways</h2>
+        <ul>
+            <li><strong>Start with decisions, not data.</strong> The biggest trap in dashboard design is building from whatever data happens to exist. The methodology starts with stakeholder decisions and works backward to KPIs &mdash; which often reveals that the most important metrics don't exist yet.</li>
+            <li><strong>Be honest about what you can't build.</strong> The Data-Dashboard Readiness Quadrant gave us a structured way to tell stakeholders: "Here's what we can deliver now, here's what needs data investment first." That honesty built more trust than a flashy but unreliable dashboard would have.</li>
+            <li><strong>Treat the dashboard as an MVP.</strong> Lean Startup thinking applied to dashboards means shipping fast, collecting feedback, and iterating. MVP 1 confirmed our gap analysis; MVP 2 demonstrated the vision. Both were necessary steps.</li>
+            <li><strong>Data culture matters more than tools.</strong> Across every case study we analyzed (Airbnb, Glovo, Legalhero), the pattern was the same: technology alone doesn't create data-driven organizations. Without shared language, a single source of truth, and leadership commitment, dashboards get abandoned.</li>
+        </ul>
+
+        <h2>Technologies & Frameworks</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+            <span class="tag tag--looker">Looker Studio</span>
+            <span class="tag tag--sheets">Google Sheets</span>
+            <span class="tag tag--dashboard">Dashboard Design</span>
+            <span class="tag tag--kpi">KPI Frameworks</span>
+            <span class="tag tag--lean">Lean Startup</span>
+            <span class="tag tag--bsc">Balanced Scorecard</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">Danny Does Data</div>
+                <div class="footer__links">
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+            </div>
+            <p class="footer__copy">&copy; 2025 Daniel Volin</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
