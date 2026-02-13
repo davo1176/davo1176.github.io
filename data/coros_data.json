@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-02-12T07:35:23Z",
+  "last_updated": "2026-02-13T07:32:25Z",
   "source": "coros_training_hub",
   "athlete_stats": {
-    "total_activities": 232,
-    "total_distance_miles": 1005.1,
-    "total_elevation_feet": 56311,
-    "total_moving_time_seconds": 663030,
-    "total_moving_time_display": "184h 10m",
-    "total_calories": 139230
+    "total_activities": 233,
+    "total_distance_miles": 1007.9,
+    "total_elevation_feet": 56459,
+    "total_moving_time_seconds": 664581,
+    "total_moving_time_display": "184h 36m",
+    "total_calories": 139580
   },
   "activities": [
     {
@@ -5113,21 +5113,31 @@
       "calories": 344,
       "training_load": 73,
       "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "475379961918685184",
+      "name": "Lisbon Run",
+      "type": "Run",
+      "sport_code": 100,
+      "date": "2026-02-12",
+      "year": 2026,
+      "month": 2,
+      "day_of_week": "Thursday",
+      "distance_miles": 2.81,
+      "distance_km": 4.53,
+      "moving_time_seconds": 1551,
+      "moving_time_display": "25m 51s",
+      "elevation_feet": 148,
+      "elevation_meters": 45,
+      "average_heartrate": 155,
+      "average_pace_min_mile": "9:11",
+      "cadence": 166,
+      "calories": 350,
+      "training_load": 78,
+      "device": "COROS PACE 3"
     }
   ],
   "training_days": [
-    {
-      "date": "2025-11-21",
-      "resting_hr": 54,
-      "test_resting_hr": 48,
-      "training_load": 0,
-      "fatigue_rate": 10.0,
-      "fatigue_rate_new": -35.0,
-      "base_fitness": 35.0,
-      "acute_load": 11.0,
-      "chronic_load": 46.0,
-      "training_load_ratio": 0.23
-    },
     {
       "date": "2025-11-22",
       "resting_hr": 50,
@@ -6114,15 +6124,27 @@
     },
     {
       "date": "2026-02-12",
-      "resting_hr": 62,
+      "resting_hr": 58,
       "test_resting_hr": 53,
+      "training_load": 78,
+      "fatigue_rate": 14.0,
+      "fatigue_rate_new": -31.0,
+      "base_fitness": 31.0,
+      "acute_load": 17.0,
+      "chronic_load": 48.0,
+      "training_load_ratio": 0.35
+    },
+    {
+      "date": "2026-02-13",
+      "resting_hr": null,
+      "test_resting_hr": null,
       "training_load": 0,
-      "fatigue_rate": 4.0,
-      "fatigue_rate_new": -41.0,
-      "base_fitness": 41.0,
-      "acute_load": 5.0,
+      "fatigue_rate": 12.0,
+      "fatigue_rate_new": -32.0,
+      "base_fitness": 32.0,
+      "acute_load": 14.0,
       "chronic_load": 46.0,
-      "training_load_ratio": 0.1
+      "training_load_ratio": 0.3
     }
   ]
 }
