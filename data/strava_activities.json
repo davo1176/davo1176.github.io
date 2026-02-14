@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-02-13T06:53:44Z",
+  "last_updated": "2026-02-14T06:37:40Z",
   "athlete_stats": {
-    "total_activities": 342,
+    "total_activities": 343,
     "total_distance_miles": 1257.8,
     "total_elevation_feet": 72213,
-    "total_moving_time_seconds": 927071,
-    "total_moving_time_display": "257h 31m"
+    "total_moving_time_seconds": 929612,
+    "total_moving_time_display": "258h 13m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -7881,6 +7881,29 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 3
+    },
+    {
+      "id": 17383178731,
+      "name": "Push",
+      "type": "WeightTraining",
+      "sport_type": "WeightTraining",
+      "date": "2026-02-13",
+      "year": 2026,
+      "month": 2,
+      "day_of_week": "Friday",
+      "distance_miles": 0.0,
+      "distance_km": 0.0,
+      "moving_time_seconds": 2541,
+      "moving_time_display": "42m 21s",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_speed_mph": 0.0,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 0.0,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 2
     }
   ]
 }
