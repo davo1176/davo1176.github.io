@@ -1,35 +1,35 @@
 {
-  "last_updated": "2026-02-17T07:51:21Z",
+  "last_updated": "2026-02-18T07:51:06Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 65,
-    "total_volume_kg": 321952.0,
-    "total_volume_lbs": 709781.8,
-    "total_sets": 1466,
-    "total_reps": 15359,
-    "total_duration_seconds": 160640,
-    "total_duration_display": "44h 37m",
-    "total_prs": 128,
+    "total_workouts": 66,
+    "total_volume_kg": 328342.0,
+    "total_volume_lbs": 723869.3,
+    "total_sets": 1490,
+    "total_reps": 15577,
+    "total_duration_seconds": 163853,
+    "total_duration_display": "45h 30m",
+    "total_prs": 135,
     "muscle_group_sets": {
-      "full_body": 60,
+      "full_body": 61,
       "chest": 316,
       "triceps": 411,
-      "shoulders": 516,
+      "shoulders": 519,
       "abdominals": 84,
       "glutes": 20,
       "hamstrings": 20,
       "quadriceps": 20,
       "lower_back": 20,
-      "upper_back": 383,
-      "lats": 331,
+      "upper_back": 397,
+      "lats": 342,
       "traps": 93,
-      "biceps": 574,
-      "forearms": 359,
+      "biceps": 594,
+      "forearms": 376,
       "neck": 73
     },
     "workout_name_counts": {
       "Push": 28,
-      "Pull": 29,
+      "Pull": 30,
       "Delts / Back": 1,
       "Pull - quickly during lunch": 1,
       "Quicky Pull": 1,
@@ -25784,6 +25784,443 @@
           "total_volume_lbs": 1157.4,
           "max_weight_kg": 15,
           "max_weight_lbs": 33.1
+        }
+      ]
+    },
+    {
+      "id": "06882fe4-d5ef-4132-83d0-cd87c849fd8a",
+      "name": "Pull",
+      "date": "2026-02-17",
+      "year": 2026,
+      "month": 2,
+      "day_of_week": "Tuesday",
+      "start_time": "2026-02-17T08:55:03",
+      "end_time": "2026-02-17T09:48:36",
+      "duration_seconds": 3213,
+      "duration_display": "53m 33s",
+      "exercise_count": 8,
+      "total_sets": 24,
+      "total_reps": 218,
+      "total_volume_kg": 6390.0,
+      "total_volume_lbs": 14087.5,
+      "pr_count": 7,
+      "muscle_groups_hit": {
+        "full_body": 1,
+        "upper_back": 14,
+        "lats": 11,
+        "biceps": 20,
+        "forearms": 17,
+        "shoulders": 3
+      },
+      "exercises": [
+        {
+          "title": "Warm Up",
+          "muscle_group": "full_body",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "duration",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": null,
+              "rpe": null,
+              "duration_seconds": 300,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 0,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Bent Over Row (Barbell)",
+          "muscle_group": "upper_back",
+          "other_muscles": [
+            "lats",
+            "biceps",
+            "forearms"
+          ],
+          "equipment_category": "barbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 50,
+              "weight_lbs": 110.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 60,
+              "weight_lbs": 132.3,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 65,
+              "weight_lbs": 143.3,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": [
+                {
+                  "type": "best_weight",
+                  "value": 65
+                },
+                {
+                  "type": "best_1rm",
+                  "value": 80.24691358024691
+                }
+              ]
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 65,
+              "weight_lbs": 143.3,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 60,
+              "weight_lbs": 132.3,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 5,
+          "total_reps": 44,
+          "total_volume_kg": 2620,
+          "total_volume_lbs": 5776.1,
+          "max_weight_kg": 65,
+          "max_weight_lbs": 143.3
+        },
+        {
+          "title": "Preacher Curl (Barbell)",
+          "muscle_group": "biceps",
+          "other_muscles": [],
+          "equipment_category": "barbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 22.5,
+              "weight_lbs": 49.6,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 22.5,
+              "weight_lbs": 49.6,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 22.5,
+              "weight_lbs": 49.6,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 24,
+          "total_volume_kg": 540.0,
+          "total_volume_lbs": 1190.5,
+          "max_weight_kg": 22.5,
+          "max_weight_lbs": 49.6
+        },
+        {
+          "title": "Lat Pulldown (Cable)",
+          "muscle_group": "lats",
+          "other_muscles": [
+            "upper_back",
+            "biceps",
+            "forearms"
+          ],
+          "equipment_category": "machine",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 55,
+              "weight_lbs": 121.3,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": [
+                {
+                  "type": "best_volume",
+                  "value": 550
+                },
+                {
+                  "type": "best_1rm",
+                  "value": 73.33333333333333
+                }
+              ]
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 52.5,
+              "weight_lbs": 115.7,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 52.5,
+              "weight_lbs": 115.7,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 50,
+              "weight_lbs": 110.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 4,
+          "total_reps": 40,
+          "total_volume_kg": 2100.0,
+          "total_volume_lbs": 4629.7,
+          "max_weight_kg": 55,
+          "max_weight_lbs": 121.3
+        },
+        {
+          "title": "Hammer Curl (Dumbbell)",
+          "muscle_group": "biceps",
+          "other_muscles": [
+            "forearms"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 8,
+              "weight_lbs": 17.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 9,
+              "weight_lbs": 19.8,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": [
+                {
+                  "type": "best_weight",
+                  "value": 9
+                },
+                {
+                  "type": "best_volume",
+                  "value": 90
+                },
+                {
+                  "type": "best_1rm",
+                  "value": 12
+                }
+              ]
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 9,
+              "weight_lbs": 19.8,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 260,
+          "total_volume_lbs": 573.2,
+          "max_weight_kg": 9,
+          "max_weight_lbs": 19.8
+        },
+        {
+          "title": "Rear Delt Reverse Fly (Dumbbell)",
+          "muscle_group": "shoulders",
+          "other_muscles": [
+            "upper_back"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 8,
+              "weight_lbs": 17.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 9,
+              "weight_lbs": 19.8,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 9,
+              "weight_lbs": 19.8,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 260,
+          "total_volume_lbs": 573.2,
+          "max_weight_kg": 9,
+          "max_weight_lbs": 19.8
+        },
+        {
+          "title": "Hammer Curl (Dumbbell)",
+          "muscle_group": "biceps",
+          "other_muscles": [
+            "forearms"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 7,
+              "weight_lbs": 15.4,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 7,
+              "weight_lbs": 15.4,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 7,
+              "weight_lbs": 15.4,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 210,
+          "total_volume_lbs": 463.0,
+          "max_weight_kg": 7,
+          "max_weight_lbs": 15.4
+        },
+        {
+          "title": "Dumbbell Row",
+          "muscle_group": "lats",
+          "other_muscles": [
+            "upper_back",
+            "biceps",
+            "forearms"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 2,
+          "total_reps": 20,
+          "total_volume_kg": 400,
+          "total_volume_lbs": 881.8,
+          "max_weight_kg": 20,
+          "max_weight_lbs": 44.1
         }
       ]
     }
