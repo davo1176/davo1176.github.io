@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-02-20T06:48:13Z",
+  "last_updated": "2026-02-21T06:35:12Z",
   "athlete_stats": {
-    "total_activities": 347,
-    "total_distance_miles": 1260.5,
-    "total_elevation_feet": 72357,
-    "total_moving_time_seconds": 939050,
-    "total_moving_time_display": "260h 50m"
+    "total_activities": 349,
+    "total_distance_miles": 1263.3,
+    "total_elevation_feet": 72560,
+    "total_moving_time_seconds": 943972,
+    "total_moving_time_display": "262h 12m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -7996,6 +7996,52 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 4
+    },
+    {
+      "id": 17460776244,
+      "name": "Lunch Run",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-02-20",
+      "year": 2026,
+      "month": 2,
+      "day_of_week": "Friday",
+      "distance_miles": 2.81,
+      "distance_km": 4.52,
+      "moving_time_seconds": 1427,
+      "moving_time_display": "23m 47s",
+      "elevation_feet": 203,
+      "elevation_meters": 62.0,
+      "average_speed_mph": 7.1,
+      "average_pace_min_mile": "8:28",
+      "max_speed_mph": 10.5,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 2
+    },
+    {
+      "id": 17460510887,
+      "name": "Pull",
+      "type": "WeightTraining",
+      "sport_type": "WeightTraining",
+      "date": "2026-02-20",
+      "year": 2026,
+      "month": 2,
+      "day_of_week": "Friday",
+      "distance_miles": 0.0,
+      "distance_km": 0.0,
+      "moving_time_seconds": 3495,
+      "moving_time_display": "58m 15s",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_speed_mph": 0.0,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 0.0,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 2
     }
   ]
 }
