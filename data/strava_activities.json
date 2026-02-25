@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-02-24T06:54:04Z",
+  "last_updated": "2026-02-25T06:56:28Z",
   "athlete_stats": {
-    "total_activities": 350,
-    "total_distance_miles": 1263.3,
-    "total_elevation_feet": 72560,
-    "total_moving_time_seconds": 946468,
-    "total_moving_time_display": "262h 54m"
+    "total_activities": 352,
+    "total_distance_miles": 1266.2,
+    "total_elevation_feet": 72681,
+    "total_moving_time_seconds": 949580,
+    "total_moving_time_display": "263h 46m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -8065,6 +8065,52 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 2
+    },
+    {
+      "id": 17510669889,
+      "name": "Quick pull bc I have no time anymore it seesm",
+      "type": "WeightTraining",
+      "sport_type": "WeightTraining",
+      "date": "2026-02-24",
+      "year": 2026,
+      "month": 2,
+      "day_of_week": "Tuesday",
+      "distance_miles": 0.0,
+      "distance_km": 0.0,
+      "moving_time_seconds": 1743,
+      "moving_time_display": "29m 3s",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_speed_mph": 0.0,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 0.0,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 1
+    },
+    {
+      "id": 17510283806,
+      "name": "Evening Run",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-02-24",
+      "year": 2026,
+      "month": 2,
+      "day_of_week": "Tuesday",
+      "distance_miles": 2.81,
+      "distance_km": 4.53,
+      "moving_time_seconds": 1369,
+      "moving_time_display": "22m 49s",
+      "elevation_feet": 121,
+      "elevation_meters": 37.0,
+      "average_speed_mph": 7.4,
+      "average_pace_min_mile": "8:06",
+      "max_speed_mph": 18.1,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 3
     }
   ]
 }
