@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-02-28T06:30:39Z",
+  "last_updated": "2026-03-01T06:38:53Z",
   "athlete_stats": {
-    "total_activities": 355,
-    "total_distance_miles": 1269.0,
-    "total_elevation_feet": 72809,
-    "total_moving_time_seconds": 954970,
-    "total_moving_time_display": "265h 16m"
+    "total_activities": 356,
+    "total_distance_miles": 1272.7,
+    "total_elevation_feet": 73094,
+    "total_moving_time_seconds": 957384,
+    "total_moving_time_display": "265h 56m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -8180,6 +8180,29 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 2
+    },
+    {
+      "id": 17552832888,
+      "name": "Morning Run",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-02-28",
+      "year": 2026,
+      "month": 2,
+      "day_of_week": "Saturday",
+      "distance_miles": 3.73,
+      "distance_km": 6.01,
+      "moving_time_seconds": 2414,
+      "moving_time_display": "40m 14s",
+      "elevation_feet": 285,
+      "elevation_meters": 87.0,
+      "average_speed_mph": 5.6,
+      "average_pace_min_mile": "10:46",
+      "max_speed_mph": 12.1,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 3
     }
   ]
 }
