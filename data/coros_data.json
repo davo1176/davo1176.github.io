@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-03-12T07:28:57Z",
+  "last_updated": "2026-03-13T07:28:02Z",
   "source": "coros_training_hub",
   "athlete_stats": {
-    "total_activities": 239,
-    "total_distance_miles": 1025.5,
-    "total_elevation_feet": 57534,
-    "total_moving_time_seconds": 674444,
-    "total_moving_time_display": "187h 20m",
-    "total_calories": 141751
+    "total_activities": 241,
+    "total_distance_miles": 1027.6,
+    "total_elevation_feet": 57656,
+    "total_moving_time_seconds": 675459,
+    "total_moving_time_display": "187h 37m",
+    "total_calories": 141989
   },
   "activities": [
     {
@@ -5267,21 +5267,53 @@
       "calories": 343,
       "training_load": 66,
       "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "476017114411466759",
+      "name": "Milhundos Run",
+      "type": "Run",
+      "sport_code": 100,
+      "date": "2026-03-12",
+      "year": 2026,
+      "month": 3,
+      "day_of_week": "Thursday",
+      "distance_miles": 1.01,
+      "distance_km": 1.62,
+      "moving_time_seconds": 482,
+      "moving_time_display": "8m 2s",
+      "elevation_feet": 66,
+      "elevation_meters": 20,
+      "average_heartrate": 154,
+      "average_pace_min_mile": "7:58",
+      "cadence": 169,
+      "calories": 119,
+      "training_load": 31,
+      "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "476016870414123010",
+      "name": "Penafiel Run",
+      "type": "Run",
+      "sport_code": 100,
+      "date": "2026-03-12",
+      "year": 2026,
+      "month": 3,
+      "day_of_week": "Thursday",
+      "distance_miles": 1.04,
+      "distance_km": 1.68,
+      "moving_time_seconds": 533,
+      "moving_time_display": "8m 53s",
+      "elevation_feet": 56,
+      "elevation_meters": 17,
+      "average_heartrate": 149,
+      "average_pace_min_mile": "8:30",
+      "cadence": 168,
+      "calories": 119,
+      "training_load": 22,
+      "device": "COROS PACE 3"
     }
   ],
   "training_days": [
-    {
-      "date": "2025-12-19",
-      "resting_hr": 53,
-      "test_resting_hr": 46,
-      "training_load": 86,
-      "fatigue_rate": 41.0,
-      "fatigue_rate_new": -8.0,
-      "base_fitness": 8.0,
-      "acute_load": 40.0,
-      "chronic_load": 48.0,
-      "training_load_ratio": 0.83
-    },
     {
       "date": "2025-12-20",
       "resting_hr": 52,
@@ -6268,15 +6300,27 @@
     },
     {
       "date": "2026-03-12",
-      "resting_hr": null,
+      "resting_hr": 48,
       "test_resting_hr": 51,
-      "training_load": 0,
-      "fatigue_rate": 8.0,
-      "fatigue_rate_new": -37.0,
-      "base_fitness": 37.0,
-      "acute_load": 9.0,
+      "training_load": 53,
+      "fatigue_rate": 15.0,
+      "fatigue_rate_new": -29.0,
+      "base_fitness": 29.0,
+      "acute_load": 17.0,
       "chronic_load": 46.0,
-      "training_load_ratio": 0.19
+      "training_load_ratio": 0.36
+    },
+    {
+      "date": "2026-03-13",
+      "resting_hr": 64,
+      "test_resting_hr": null,
+      "training_load": 0,
+      "fatigue_rate": 12.0,
+      "fatigue_rate_new": -32.0,
+      "base_fitness": 32.0,
+      "acute_load": 14.0,
+      "chronic_load": 46.0,
+      "training_load_ratio": 0.3
     }
   ]
 }
