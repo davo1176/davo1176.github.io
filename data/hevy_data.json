@@ -1,20 +1,20 @@
 {
-  "last_updated": "2026-03-15T07:46:36Z",
+  "last_updated": "2026-03-16T08:08:02Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 75,
+    "total_workouts": 76,
     "total_volume_kg": 372369.5,
     "total_volume_lbs": 820933.2,
-    "total_sets": 1671,
-    "total_reps": 17211,
-    "total_duration_seconds": 186125,
-    "total_duration_display": "51h 42m",
+    "total_sets": 1678,
+    "total_reps": 17316,
+    "total_duration_seconds": 186181,
+    "total_duration_display": "51h 43m",
     "total_prs": 146,
     "muscle_group_sets": {
       "full_body": 70,
-      "chest": 345,
-      "triceps": 444,
-      "shoulders": 570,
+      "chest": 352,
+      "triceps": 451,
+      "shoulders": 577,
       "abdominals": 84,
       "glutes": 20,
       "hamstrings": 20,
@@ -39,7 +39,8 @@
       "Quick Push": 1,
       "Quick Push post ski trip": 1,
       "Quick pull bc I have no time anymore it seesm": 1,
-      "Quick quick pull": 1
+      "Quick quick pull": 1,
+      "Morning workout \u2600\ufe0f": 1
     }
   },
   "workouts": [
@@ -29470,6 +29471,119 @@
           "total_volume_lbs": 1157.4,
           "max_weight_kg": 17.5,
           "max_weight_lbs": 38.6
+        }
+      ]
+    },
+    {
+      "id": "952b5a75-26a4-4091-be15-4870bc1072a7",
+      "name": "Morning workout \u2600\ufe0f",
+      "date": "2026-03-11",
+      "year": 2026,
+      "month": 3,
+      "day_of_week": "Wednesday",
+      "start_time": "2026-03-11T10:00:36",
+      "end_time": "2026-03-11T10:01:32",
+      "duration_seconds": 56,
+      "duration_display": "56s",
+      "exercise_count": 1,
+      "total_sets": 7,
+      "total_reps": 105,
+      "total_volume_kg": 0,
+      "total_volume_lbs": 0.0,
+      "pr_count": 0,
+      "muscle_groups_hit": {
+        "chest": 7,
+        "triceps": 7,
+        "shoulders": 7
+      },
+      "exercises": [
+        {
+          "title": "Push Up",
+          "muscle_group": "chest",
+          "other_muscles": [
+            "triceps",
+            "shoulders"
+          ],
+          "equipment_category": "none",
+          "exercise_type": "reps_only",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 7,
+          "total_reps": 105,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
         }
       ]
     }
