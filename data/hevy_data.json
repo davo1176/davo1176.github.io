@@ -1,20 +1,20 @@
 {
-  "last_updated": "2026-03-20T07:47:18Z",
+  "last_updated": "2026-03-21T07:33:36Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 78,
-    "total_volume_kg": 381199.5,
-    "total_volume_lbs": 840400.0,
-    "total_sets": 1713,
-    "total_reps": 17630,
-    "total_duration_seconds": 190611,
-    "total_duration_display": "52h 56m",
-    "total_prs": 146,
+    "total_workouts": 79,
+    "total_volume_kg": 383679.5,
+    "total_volume_lbs": 845867.5,
+    "total_sets": 1723,
+    "total_reps": 17730,
+    "total_duration_seconds": 192203,
+    "total_duration_display": "53h 23m",
+    "total_prs": 148,
     "muscle_group_sets": {
       "full_body": 72,
-      "chest": 363,
-      "triceps": 462,
-      "shoulders": 591,
+      "chest": 369,
+      "triceps": 466,
+      "shoulders": 598,
       "abdominals": 84,
       "glutes": 20,
       "hamstrings": 20,
@@ -28,7 +28,7 @@
       "neck": 83
     },
     "workout_name_counts": {
-      "Push": 32,
+      "Push": 33,
       "Pull": 35,
       "Delts / Back": 1,
       "Pull - quickly during lunch": 1,
@@ -30213,6 +30213,215 @@
           "total_volume_lbs": 1322.8,
           "max_weight_kg": 20,
           "max_weight_lbs": 44.1
+        }
+      ]
+    },
+    {
+      "id": "ecab7668-6731-40cc-b0c4-a38b7c14a097",
+      "name": "Push",
+      "date": "2026-03-20",
+      "year": 2026,
+      "month": 3,
+      "day_of_week": "Friday",
+      "start_time": "2026-03-20T12:47:57",
+      "end_time": "2026-03-20T13:14:29",
+      "duration_seconds": 1592,
+      "duration_display": "26m 32s",
+      "exercise_count": 4,
+      "total_sets": 10,
+      "total_reps": 100,
+      "total_volume_kg": 2480.0,
+      "total_volume_lbs": 5467.5,
+      "pr_count": 2,
+      "muscle_groups_hit": {
+        "chest": 6,
+        "triceps": 4,
+        "shoulders": 7
+      },
+      "exercises": [
+        {
+          "title": "Bench Press (Barbell)",
+          "muscle_group": "chest",
+          "other_muscles": [
+            "triceps",
+            "shoulders"
+          ],
+          "equipment_category": "barbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "warmup",
+              "weight_kg": 60,
+              "weight_lbs": 132.3,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 60,
+              "weight_lbs": 132.3,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 60,
+              "weight_lbs": 132.3,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 60,
+              "weight_lbs": 132.3,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 1800,
+          "total_volume_lbs": 3968.3,
+          "max_weight_kg": 60,
+          "max_weight_lbs": 132.3
+        },
+        {
+          "title": "Overhead Press (Dumbbell)",
+          "muscle_group": "shoulders",
+          "other_muscles": [
+            "triceps"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 10,
+          "total_volume_kg": 125.0,
+          "total_volume_lbs": 275.6,
+          "max_weight_kg": 12.5,
+          "max_weight_lbs": 27.6
+        },
+        {
+          "title": "Cable Fly Crossovers",
+          "muscle_group": "chest",
+          "other_muscles": [],
+          "equipment_category": "machine",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 375.0,
+          "total_volume_lbs": 826.7,
+          "max_weight_kg": 12.5,
+          "max_weight_lbs": 27.6
+        },
+        {
+          "title": "Lateral Raise (Dumbbell)",
+          "muscle_group": "shoulders",
+          "other_muscles": [],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 6,
+              "weight_lbs": 13.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": [
+                {
+                  "type": "best_weight",
+                  "value": 6
+                },
+                {
+                  "type": "best_1rm",
+                  "value": 8
+                }
+              ]
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 6,
+              "weight_lbs": 13.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 6,
+              "weight_lbs": 13.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 180,
+          "total_volume_lbs": 396.8,
+          "max_weight_kg": 6,
+          "max_weight_lbs": 13.2
         }
       ]
     }
