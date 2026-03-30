@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-03-29T06:56:44Z",
+  "last_updated": "2026-03-30T07:19:46Z",
   "athlete_stats": {
-    "total_activities": 373,
-    "total_distance_miles": 1301.9,
-    "total_elevation_feet": 75333,
-    "total_moving_time_seconds": 1001061,
-    "total_moving_time_display": "278h 4m"
+    "total_activities": 374,
+    "total_distance_miles": 1313.7,
+    "total_elevation_feet": 77820,
+    "total_moving_time_seconds": 1017616,
+    "total_moving_time_display": "282h 40m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -8594,6 +8594,29 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 1
+    },
+    {
+      "id": 17904545329,
+      "name": "Lunch Hike",
+      "type": "Hike",
+      "sport_type": "Hike",
+      "date": "2026-03-29",
+      "year": 2026,
+      "month": 3,
+      "day_of_week": "Sunday",
+      "distance_miles": 11.82,
+      "distance_km": 19.02,
+      "moving_time_seconds": 16555,
+      "moving_time_display": "4h 35m",
+      "elevation_feet": 2487,
+      "elevation_meters": 758.0,
+      "average_speed_mph": 2.6,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 7.6,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 4
     }
   ]
 }
