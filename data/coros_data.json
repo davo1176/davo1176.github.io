@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-03-29T07:34:15Z",
+  "last_updated": "2026-03-30T08:08:59Z",
   "source": "coros_training_hub",
   "athlete_stats": {
-    "total_activities": 245,
-    "total_distance_miles": 1046.5,
-    "total_elevation_feet": 59579,
-    "total_moving_time_seconds": 687049,
-    "total_moving_time_display": "190h 50m",
-    "total_calories": 144533
+    "total_activities": 246,
+    "total_distance_miles": 1058.3,
+    "total_elevation_feet": 62066,
+    "total_moving_time_seconds": 706622,
+    "total_moving_time_display": "196h 17m",
+    "total_calories": 146964
   },
   "activities": [
     {
@@ -5399,21 +5399,31 @@
       "calories": 422,
       "training_load": 75,
       "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "476420895034867717",
+      "name": "Sines Hike",
+      "type": "Track Run",
+      "sport_code": 104,
+      "date": "2026-03-29",
+      "year": 2026,
+      "month": 3,
+      "day_of_week": "Sunday",
+      "distance_miles": 11.82,
+      "distance_km": 19.02,
+      "moving_time_seconds": 19573,
+      "moving_time_display": "5h 26m",
+      "elevation_feet": 2487,
+      "elevation_meters": 758,
+      "average_heartrate": 122,
+      "average_pace_min_mile": "9:23",
+      "cadence": 97,
+      "calories": 2431,
+      "training_load": 273,
+      "device": "COROS PACE 3"
     }
   ],
   "training_days": [
-    {
-      "date": "2026-01-05",
-      "resting_hr": 52,
-      "test_resting_hr": 48,
-      "training_load": 0,
-      "fatigue_rate": 15.0,
-      "fatigue_rate_new": -29.0,
-      "base_fitness": 29.0,
-      "acute_load": 17.0,
-      "chronic_load": 46.0,
-      "training_load_ratio": 0.36
-    },
     {
       "date": "2026-01-06",
       "resting_hr": 49,
@@ -6400,15 +6410,27 @@
     },
     {
       "date": "2026-03-29",
-      "resting_hr": 57,
+      "resting_hr": 54,
       "test_resting_hr": 51,
+      "training_load": 273,
+      "fatigue_rate": 48.0,
+      "fatigue_rate_new": 15.0,
+      "base_fitness": -15.0,
+      "acute_load": 67.0,
+      "chronic_load": 52.0,
+      "training_load_ratio": 1.28
+    },
+    {
+      "date": "2026-03-30",
+      "resting_hr": null,
+      "test_resting_hr": 48,
       "training_load": 0,
-      "fatigue_rate": 27.0,
-      "fatigue_rate_new": -18.0,
-      "base_fitness": 18.0,
-      "acute_load": 28.0,
-      "chronic_load": 46.0,
-      "training_load_ratio": 0.6
+      "fatigue_rate": 46.0,
+      "fatigue_rate_new": 7.0,
+      "base_fitness": -7.0,
+      "acute_load": 58.0,
+      "chronic_load": 51.0,
+      "training_load_ratio": 1.13
     }
   ]
 }
