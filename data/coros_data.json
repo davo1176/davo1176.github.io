@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-04-01T08:01:32Z",
+  "last_updated": "2026-04-02T07:47:49Z",
   "source": "coros_training_hub",
   "athlete_stats": {
-    "total_activities": 251,
-    "total_distance_miles": 1089.6,
-    "total_elevation_feet": 67490,
-    "total_moving_time_seconds": 758578,
-    "total_moving_time_display": "210h 42m",
-    "total_calories": 152860
+    "total_activities": 254,
+    "total_distance_miles": 1105.3,
+    "total_elevation_feet": 69850,
+    "total_moving_time_seconds": 782909,
+    "total_moving_time_display": "217h 28m",
+    "total_calories": 155956
   },
   "activities": [
     {
@@ -5531,21 +5531,75 @@
       "calories": 1655,
       "training_load": 178,
       "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "476489548197560328",
+      "name": "Aljezur Hike",
+      "type": "Track Run",
+      "sport_code": 104,
+      "date": "2026-04-01",
+      "year": 2026,
+      "month": 4,
+      "day_of_week": "Wednesday",
+      "distance_miles": 3.06,
+      "distance_km": 4.92,
+      "moving_time_seconds": 4271,
+      "moving_time_display": "1h 11m",
+      "elevation_feet": 276,
+      "elevation_meters": 84,
+      "average_heartrate": 131,
+      "average_pace_min_mile": "11:06",
+      "cadence": 111,
+      "calories": 594,
+      "training_load": 83,
+      "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "476487000755568647",
+      "name": "Odeceixe Hike",
+      "type": "Track Run",
+      "sport_code": 104,
+      "date": "2026-04-01",
+      "year": 2026,
+      "month": 4,
+      "day_of_week": "Wednesday",
+      "distance_miles": 9.32,
+      "distance_km": 15.01,
+      "moving_time_seconds": 15325,
+      "moving_time_display": "4h 15m",
+      "elevation_feet": 1831,
+      "elevation_meters": 558,
+      "average_heartrate": 123,
+      "average_pace_min_mile": "9:28",
+      "cadence": 100,
+      "calories": 1935,
+      "training_load": 243,
+      "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "476481601163788290",
+      "name": "Odemira Hike",
+      "type": "Track Run",
+      "sport_code": 104,
+      "date": "2026-04-01",
+      "year": 2026,
+      "month": 4,
+      "day_of_week": "Wednesday",
+      "distance_miles": 3.29,
+      "distance_km": 5.29,
+      "moving_time_seconds": 4735,
+      "moving_time_display": "1h 18m",
+      "elevation_feet": 253,
+      "elevation_meters": 77,
+      "average_heartrate": 119,
+      "average_pace_min_mile": "10:46",
+      "cadence": 107,
+      "calories": 567,
+      "training_load": 83,
+      "device": "COROS PACE 3"
     }
   ],
   "training_days": [
-    {
-      "date": "2026-01-08",
-      "resting_hr": 57,
-      "test_resting_hr": 49,
-      "training_load": 0,
-      "fatigue_rate": 17.0,
-      "fatigue_rate_new": -27.0,
-      "base_fitness": 27.0,
-      "acute_load": 19.0,
-      "chronic_load": 46.0,
-      "training_load_ratio": 0.41
-    },
     {
       "date": "2026-01-09",
       "resting_hr": 53,
@@ -6532,15 +6586,27 @@
     },
     {
       "date": "2026-04-01",
-      "resting_hr": null,
+      "resting_hr": 64,
       "test_resting_hr": 48,
+      "training_load": 409,
+      "fatigue_rate": 100.0,
+      "fatigue_rate_new": 96.0,
+      "base_fitness": -96.0,
+      "acute_load": 168.0,
+      "chronic_load": 72.0,
+      "training_load_ratio": 2.33
+    },
+    {
+      "date": "2026-04-02",
+      "resting_hr": null,
+      "test_resting_hr": null,
       "training_load": 0,
-      "fatigue_rate": 77.0,
-      "fatigue_rate_new": 47.0,
-      "base_fitness": -47.0,
-      "acute_load": 109.0,
-      "chronic_load": 62.0,
-      "training_load_ratio": 1.75
+      "fatigue_rate": 100.0,
+      "fatigue_rate_new": 74.0,
+      "base_fitness": -74.0,
+      "acute_load": 144.0,
+      "chronic_load": 70.0,
+      "training_load_ratio": 2.05
     }
   ]
 }
