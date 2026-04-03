@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-04-02T07:05:13Z",
+  "last_updated": "2026-04-03T07:01:26Z",
   "athlete_stats": {
-    "total_activities": 382,
-    "total_distance_miles": 1360.7,
-    "total_elevation_feet": 85604,
-    "total_moving_time_seconds": 1084258,
-    "total_moving_time_display": "301h 10m"
+    "total_activities": 383,
+    "total_distance_miles": 1362.4,
+    "total_elevation_feet": 85739,
+    "total_moving_time_seconds": 1086583,
+    "total_moving_time_display": "301h 49m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -8797,6 +8797,29 @@
       "average_speed_mph": 2.7,
       "average_pace_min_mile": null,
       "max_speed_mph": 4.5,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 1
+    },
+    {
+      "id": 17946979056,
+      "name": "Morning Hike",
+      "type": "Hike",
+      "sport_type": "Hike",
+      "date": "2026-04-02",
+      "year": 2026,
+      "month": 4,
+      "day_of_week": "Thursday",
+      "distance_miles": 1.66,
+      "distance_km": 2.68,
+      "moving_time_seconds": 2325,
+      "moving_time_display": "38m 45s",
+      "elevation_feet": 135,
+      "elevation_meters": 41.0,
+      "average_speed_mph": 2.6,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 4.7,
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
