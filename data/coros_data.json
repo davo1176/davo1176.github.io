@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-04-02T07:47:49Z",
+  "last_updated": "2026-04-03T07:44:11Z",
   "source": "coros_training_hub",
   "athlete_stats": {
-    "total_activities": 254,
-    "total_distance_miles": 1105.3,
-    "total_elevation_feet": 69850,
-    "total_moving_time_seconds": 782909,
-    "total_moving_time_display": "217h 28m",
-    "total_calories": 155956
+    "total_activities": 255,
+    "total_distance_miles": 1106.9,
+    "total_elevation_feet": 69985,
+    "total_moving_time_seconds": 785346,
+    "total_moving_time_display": "218h 9m",
+    "total_calories": 156268
   },
   "activities": [
     {
@@ -5597,21 +5597,31 @@
       "calories": 567,
       "training_load": 83,
       "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "476505046853386540",
+      "name": "Aljezur Hike",
+      "type": "Track Run",
+      "sport_code": 104,
+      "date": "2026-04-02",
+      "year": 2026,
+      "month": 4,
+      "day_of_week": "Thursday",
+      "distance_miles": 1.66,
+      "distance_km": 2.68,
+      "moving_time_seconds": 2437,
+      "moving_time_display": "40m 37s",
+      "elevation_feet": 135,
+      "elevation_meters": 41,
+      "average_heartrate": 124,
+      "average_pace_min_mile": "10:35",
+      "cadence": 110,
+      "calories": 312,
+      "training_load": 36,
+      "device": "COROS PACE 3"
     }
   ],
   "training_days": [
-    {
-      "date": "2026-01-09",
-      "resting_hr": 53,
-      "test_resting_hr": 57,
-      "training_load": 0,
-      "fatigue_rate": 14.0,
-      "fatigue_rate_new": -30.0,
-      "base_fitness": 30.0,
-      "acute_load": 16.0,
-      "chronic_load": 46.0,
-      "training_load_ratio": 0.34
-    },
     {
       "date": "2026-01-10",
       "resting_hr": 65,
@@ -6586,7 +6596,7 @@
     },
     {
       "date": "2026-04-01",
-      "resting_hr": 64,
+      "resting_hr": 55,
       "test_resting_hr": 48,
       "training_load": 409,
       "fatigue_rate": 100.0,
@@ -6598,15 +6608,27 @@
     },
     {
       "date": "2026-04-02",
-      "resting_hr": null,
-      "test_resting_hr": null,
+      "resting_hr": 56,
+      "test_resting_hr": 52,
+      "training_load": 36,
+      "fatigue_rate": 100.0,
+      "fatigue_rate_new": 78.0,
+      "base_fitness": -78.0,
+      "acute_load": 149.0,
+      "chronic_load": 71.0,
+      "training_load_ratio": 2.09
+    },
+    {
+      "date": "2026-04-03",
+      "resting_hr": 66,
+      "test_resting_hr": 52,
       "training_load": 0,
       "fatigue_rate": 100.0,
-      "fatigue_rate_new": 74.0,
-      "base_fitness": -74.0,
-      "acute_load": 144.0,
-      "chronic_load": 70.0,
-      "training_load_ratio": 2.05
+      "fatigue_rate_new": 59.0,
+      "base_fitness": -59.0,
+      "acute_load": 128.0,
+      "chronic_load": 69.0,
+      "training_load_ratio": 1.85
     }
   ]
 }
