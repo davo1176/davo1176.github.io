@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-04-03T07:01:26Z",
+  "last_updated": "2026-04-04T06:53:31Z",
   "athlete_stats": {
-    "total_activities": 383,
+    "total_activities": 384,
     "total_distance_miles": 1362.4,
     "total_elevation_feet": 85739,
-    "total_moving_time_seconds": 1086583,
-    "total_moving_time_display": "301h 49m"
+    "total_moving_time_seconds": 1089073,
+    "total_moving_time_display": "302h 31m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -8820,6 +8820,29 @@
       "average_speed_mph": 2.6,
       "average_pace_min_mile": null,
       "max_speed_mph": 4.7,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 1
+    },
+    {
+      "id": 17959328449,
+      "name": "Fuck that hurt. Push",
+      "type": "WeightTraining",
+      "sport_type": "WeightTraining",
+      "date": "2026-04-03",
+      "year": 2026,
+      "month": 4,
+      "day_of_week": "Friday",
+      "distance_miles": 0.0,
+      "distance_km": 0.0,
+      "moving_time_seconds": 2490,
+      "moving_time_display": "41m 30s",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_speed_mph": 0.0,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 0.0,
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
