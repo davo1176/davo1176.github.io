@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-04-29T08:06:47Z",
+  "last_updated": "2026-04-30T08:10:40Z",
   "athlete_stats": {
-    "total_activities": 418,
-    "total_distance_miles": 1412.4,
-    "total_elevation_feet": 87959,
-    "total_moving_time_seconds": 1176236,
-    "total_moving_time_display": "326h 43m"
+    "total_activities": 419,
+    "total_distance_miles": 1413.5,
+    "total_elevation_feet": 88054,
+    "total_moving_time_seconds": 1176795,
+    "total_moving_time_display": "326h 53m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -9536,7 +9536,7 @@
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
-      "kudos_count": 1
+      "kudos_count": 2
     },
     {
       "id": 18274721902,
@@ -9582,7 +9582,7 @@
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
-      "kudos_count": 2
+      "kudos_count": 3
     },
     {
       "id": 18295199846,
@@ -9606,6 +9606,29 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 1
+    },
+    {
+      "id": 18308842726,
+      "name": "Really a baby ass run but sometimes that\u2019s what you gotta do",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-04-29",
+      "year": 2026,
+      "month": 4,
+      "day_of_week": "Wednesday",
+      "distance_miles": 1.11,
+      "distance_km": 1.78,
+      "moving_time_seconds": 559,
+      "moving_time_display": "9m 19s",
+      "elevation_feet": 95,
+      "elevation_meters": 29.0,
+      "average_speed_mph": 7.1,
+      "average_pace_min_mile": "8:25",
+      "max_speed_mph": 13.4,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 3
     },
     {
       "id": 18302183467,
