@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-02T07:24:26Z",
+  "last_updated": "2026-05-03T07:53:33Z",
   "athlete_stats": {
     "total_activities": 424,
     "total_distance_miles": 1420.1,
@@ -9766,7 +9766,7 @@
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
-      "kudos_count": 0
+      "kudos_count": 1
     }
   ]
 }
