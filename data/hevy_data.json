@@ -1,20 +1,20 @@
 {
-  "last_updated": "2026-05-03T08:46:51Z",
+  "last_updated": "2026-05-04T09:21:07Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 101,
-    "total_volume_kg": 512579.0,
-    "total_volume_lbs": 1130041.9,
-    "total_sets": 2216,
-    "total_reps": 22408,
-    "total_duration_seconds": 256588,
-    "total_duration_display": "71h 16m",
+    "total_workouts": 102,
+    "total_volume_kg": 513764.0,
+    "total_volume_lbs": 1132654.4,
+    "total_sets": 2221,
+    "total_reps": 22435,
+    "total_duration_seconds": 257298,
+    "total_duration_display": "71h 28m",
     "total_prs": 174,
     "muscle_group_sets": {
-      "full_body": 89,
-      "chest": 453,
-      "triceps": 565,
-      "shoulders": 731,
+      "full_body": 90,
+      "chest": 456,
+      "triceps": 569,
+      "shoulders": 735,
       "abdominals": 102,
       "glutes": 57,
       "hamstrings": 69,
@@ -47,7 +47,8 @@
       "Fuck that hurt. Push": 1,
       "Legs": 3,
       "Quick Pull": 2,
-      "Legs?": 1
+      "Legs?": 1,
+      "Push - DNF": 1
     }
   },
   "workouts": [
@@ -39000,6 +39001,142 @@
           "total_volume_lbs": 881.8,
           "max_weight_kg": 20,
           "max_weight_lbs": 44.1
+        }
+      ]
+    },
+    {
+      "id": "c38ff157-ba1c-4a51-bace-53cc82026132",
+      "name": "Push - DNF",
+      "date": "2026-05-04",
+      "year": 2026,
+      "month": 5,
+      "day_of_week": "Monday",
+      "start_time": "2026-05-04T05:54:54",
+      "end_time": "2026-05-04T06:06:44",
+      "duration_seconds": 710,
+      "duration_display": "11m 50s",
+      "exercise_count": 3,
+      "total_sets": 5,
+      "total_reps": 27,
+      "total_volume_kg": 1185,
+      "total_volume_lbs": 2612.5,
+      "pr_count": 0,
+      "muscle_groups_hit": {
+        "full_body": 1,
+        "chest": 3,
+        "triceps": 4,
+        "shoulders": 4
+      },
+      "exercises": [
+        {
+          "title": "Warm Up",
+          "muscle_group": "full_body",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "duration",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": null,
+              "rpe": null,
+              "duration_seconds": 300,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 0,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Bench Press (Barbell)",
+          "muscle_group": "chest",
+          "other_muscles": [
+            "triceps",
+            "shoulders"
+          ],
+          "equipment_category": "barbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "warmup",
+              "weight_kg": 60,
+              "weight_lbs": 132.3,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 75,
+              "weight_lbs": 165.3,
+              "reps": 5,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 55,
+              "weight_lbs": 121.3,
+              "reps": 6,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 55,
+              "weight_lbs": 121.3,
+              "reps": 6,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 17,
+          "total_volume_kg": 1035,
+          "total_volume_lbs": 2281.8,
+          "max_weight_kg": 75,
+          "max_weight_lbs": 165.3
+        },
+        {
+          "title": "Overhead Press (Dumbbell)",
+          "muscle_group": "shoulders",
+          "other_muscles": [
+            "triceps"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 10,
+          "total_volume_kg": 150,
+          "total_volume_lbs": 330.7,
+          "max_weight_kg": 15,
+          "max_weight_lbs": 33.1
         }
       ]
     }
