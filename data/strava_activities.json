@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-05-14T08:31:26Z",
+  "last_updated": "2026-05-15T08:42:47Z",
   "athlete_stats": {
-    "total_activities": 438,
-    "total_distance_miles": 1444.3,
-    "total_elevation_feet": 88854,
-    "total_moving_time_seconds": 1223956,
-    "total_moving_time_display": "339h 59m"
+    "total_activities": 440,
+    "total_distance_miles": 1446.4,
+    "total_elevation_feet": 88910,
+    "total_moving_time_seconds": 1228857,
+    "total_moving_time_display": "341h 20m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -10089,6 +10089,52 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 1
+    },
+    {
+      "id": 18506249739,
+      "name": "Recovery run cuz my legs feel like ass",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-05-14",
+      "year": 2026,
+      "month": 5,
+      "day_of_week": "Thursday",
+      "distance_miles": 2.01,
+      "distance_km": 3.23,
+      "moving_time_seconds": 1112,
+      "moving_time_display": "18m 32s",
+      "elevation_feet": 56,
+      "elevation_meters": 17.0,
+      "average_speed_mph": 6.5,
+      "average_pace_min_mile": "9:13",
+      "max_speed_mph": 14.1,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 1
+    },
+    {
+      "id": 18513102434,
+      "name": "Push",
+      "type": "WeightTraining",
+      "sport_type": "WeightTraining",
+      "date": "2026-05-15",
+      "year": 2026,
+      "month": 5,
+      "day_of_week": "Friday",
+      "distance_miles": 0.0,
+      "distance_km": 0.0,
+      "moving_time_seconds": 3789,
+      "moving_time_display": "1h 3m",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_speed_mph": 0.0,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 0.0,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 0
     }
   ]
 }
