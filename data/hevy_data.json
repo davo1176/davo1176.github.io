@@ -1,21 +1,21 @@
 {
-  "last_updated": "2026-05-17T09:05:47Z",
+  "last_updated": "2026-05-18T11:06:56Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 109,
-    "total_volume_kg": 557584.0,
-    "total_volume_lbs": 1229260.8,
-    "total_sets": 2415,
-    "total_reps": 24386,
-    "total_duration_seconds": 280175,
-    "total_duration_display": "77h 49m",
-    "total_prs": 184,
+    "total_workouts": 110,
+    "total_volume_kg": 562006.5,
+    "total_volume_lbs": 1239010.8,
+    "total_sets": 2443,
+    "total_reps": 24659,
+    "total_duration_seconds": 283636,
+    "total_duration_display": "78h 47m",
+    "total_prs": 186,
     "muscle_group_sets": {
-      "full_body": 93,
-      "chest": 478,
-      "triceps": 598,
-      "shoulders": 776,
-      "abdominals": 146,
+      "full_body": 94,
+      "chest": 489,
+      "triceps": 612,
+      "shoulders": 791,
+      "abdominals": 151,
       "glutes": 72,
       "hamstrings": 91,
       "quadriceps": 90,
@@ -31,7 +31,7 @@
       "adductors": 2
     },
     "workout_name_counts": {
-      "Push": 42,
+      "Push": 43,
       "Pull": 45,
       "Delts / Back": 1,
       "Pull - quickly during lunch": 1,
@@ -42424,6 +42424,520 @@
           "total_volume_lbs": 352.7,
           "max_weight_kg": 20,
           "max_weight_lbs": 44.1
+        }
+      ]
+    },
+    {
+      "id": "77f83390-b44d-4374-8605-f08bbf9a70f0",
+      "name": "Push",
+      "date": "2026-05-18",
+      "year": 2026,
+      "month": 5,
+      "day_of_week": "Monday",
+      "start_time": "2026-05-18T05:59:05",
+      "end_time": "2026-05-18T06:56:46",
+      "duration_seconds": 3461,
+      "duration_display": "57m 41s",
+      "exercise_count": 12,
+      "total_sets": 28,
+      "total_reps": 273,
+      "total_volume_kg": 4422.5,
+      "total_volume_lbs": 9749.9,
+      "pr_count": 2,
+      "muscle_groups_hit": {
+        "full_body": 1,
+        "chest": 11,
+        "triceps": 14,
+        "shoulders": 15,
+        "abdominals": 5
+      },
+      "exercises": [
+        {
+          "title": "Warm Up",
+          "muscle_group": "full_body",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "duration",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": null,
+              "rpe": null,
+              "duration_seconds": 300,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 0,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Bench Press (Barbell)",
+          "muscle_group": "chest",
+          "other_muscles": [
+            "triceps",
+            "shoulders"
+          ],
+          "equipment_category": "barbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "warmup",
+              "weight_kg": 50,
+              "weight_lbs": 110.2,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 60,
+              "weight_lbs": 132.3,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 70,
+              "weight_lbs": 154.3,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 70,
+              "weight_lbs": 154.3,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 5,
+              "weight_lbs": 11.0,
+              "reps": 7,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 4,
+          "total_reps": 35,
+          "total_volume_kg": 1895,
+          "total_volume_lbs": 4177.8,
+          "max_weight_kg": 70,
+          "max_weight_lbs": 154.3
+        },
+        {
+          "title": "Incline Bench Press (Dumbbell)",
+          "muscle_group": "chest",
+          "other_muscles": [
+            "triceps",
+            "shoulders"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 600,
+          "total_volume_lbs": 1322.8,
+          "max_weight_kg": 20,
+          "max_weight_lbs": 44.1
+        },
+        {
+          "title": "Overhead Press (Dumbbell)",
+          "muscle_group": "shoulders",
+          "other_muscles": [
+            "triceps"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 10,
+              "weight_lbs": 22.0,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": [
+                {
+                  "type": "best_volume",
+                  "value": 180
+                },
+                {
+                  "type": "best_1rm",
+                  "value": 21.12676056338028
+                }
+              ]
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 4,
+          "total_reps": 44,
+          "total_volume_kg": 600,
+          "total_volume_lbs": 1322.8,
+          "max_weight_kg": 15,
+          "max_weight_lbs": 33.1
+        },
+        {
+          "title": "Cable Fly Crossovers",
+          "muscle_group": "chest",
+          "other_muscles": [],
+          "equipment_category": "machine",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 10,
+              "weight_lbs": 22.0,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 10,
+              "weight_lbs": 22.0,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 4,
+          "total_reps": 40,
+          "total_volume_kg": 450.0,
+          "total_volume_lbs": 992.1,
+          "max_weight_kg": 12.5,
+          "max_weight_lbs": 27.6
+        },
+        {
+          "title": "Lateral Raise (Dumbbell)",
+          "muscle_group": "shoulders",
+          "other_muscles": [],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 6,
+              "weight_lbs": 13.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 6,
+              "weight_lbs": 13.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 6,
+              "weight_lbs": 13.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 6,
+              "weight_lbs": 13.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 4,
+          "total_reps": 40,
+          "total_volume_kg": 240,
+          "total_volume_lbs": 529.1,
+          "max_weight_kg": 6,
+          "max_weight_lbs": 13.2
+        },
+        {
+          "title": "Triceps Rope Pushdown",
+          "muscle_group": "triceps",
+          "other_muscles": [],
+          "equipment_category": "machine",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 45,
+          "total_volume_kg": 637.5,
+          "total_volume_lbs": 1405.4,
+          "max_weight_kg": 15,
+          "max_weight_lbs": 33.1
+        },
+        {
+          "title": "Flutter Kicks",
+          "muscle_group": "abdominals",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "reps_only",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 10,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Ab Scissors",
+          "muscle_group": "abdominals",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "reps_only",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 5,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 5,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Heel Taps",
+          "muscle_group": "abdominals",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "reps_only",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 20,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 20,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Plank",
+          "muscle_group": "abdominals",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "duration",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": null,
+              "rpe": null,
+              "duration_seconds": 62,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 0,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "V Up",
+          "muscle_group": "abdominals",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "reps_only",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 4,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 4,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
         }
       ]
     }
