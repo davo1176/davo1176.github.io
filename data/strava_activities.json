@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-05-19T09:32:55Z",
+  "last_updated": "2026-05-20T08:57:34Z",
   "athlete_stats": {
-    "total_activities": 446,
-    "total_distance_miles": 1455.6,
-    "total_elevation_feet": 89140,
-    "total_moving_time_seconds": 1243481,
-    "total_moving_time_display": "345h 24m"
+    "total_activities": 449,
+    "total_distance_miles": 1459.9,
+    "total_elevation_feet": 89225,
+    "total_moving_time_seconds": 1249366,
+    "total_moving_time_display": "347h 2m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -10252,6 +10252,52 @@
       "kudos_count": 1
     },
     {
+      "id": 18573527406,
+      "name": "Padel | Padel Campo Grande",
+      "type": "Workout",
+      "sport_type": "Padel",
+      "date": "2026-05-19",
+      "year": 2026,
+      "month": 5,
+      "day_of_week": "Tuesday",
+      "distance_miles": 0.21,
+      "distance_km": 0.34,
+      "moving_time_seconds": 415,
+      "moving_time_display": "6m 55s",
+      "elevation_feet": 0,
+      "elevation_meters": 0.0,
+      "average_speed_mph": 1.8,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 5.4,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 0
+    },
+    {
+      "id": 18570894192,
+      "name": "Afternoon Run",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-05-19",
+      "year": 2026,
+      "month": 5,
+      "day_of_week": "Tuesday",
+      "distance_miles": 4.09,
+      "distance_km": 6.58,
+      "moving_time_seconds": 2147,
+      "moving_time_display": "35m 47s",
+      "elevation_feet": 85,
+      "elevation_meters": 26.0,
+      "average_speed_mph": 6.9,
+      "average_pace_min_mile": "8:45",
+      "max_speed_mph": 9.4,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 0
+    },
+    {
       "id": 18564160205,
       "name": "Pull",
       "type": "WeightTraining",
@@ -10273,6 +10319,29 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 1
+    },
+    {
+      "id": 18577960559,
+      "name": "Legs",
+      "type": "WeightTraining",
+      "sport_type": "WeightTraining",
+      "date": "2026-05-20",
+      "year": 2026,
+      "month": 5,
+      "day_of_week": "Wednesday",
+      "distance_miles": 0.0,
+      "distance_km": 0.0,
+      "moving_time_seconds": 3323,
+      "moving_time_display": "55m 23s",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_speed_mph": 0.0,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 0.0,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 0
     }
   ]
 }
