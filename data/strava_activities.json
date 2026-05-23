@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-05-22T08:53:11Z",
+  "last_updated": "2026-05-23T08:10:42Z",
   "athlete_stats": {
-    "total_activities": 451,
-    "total_distance_miles": 1465.6,
-    "total_elevation_feet": 89372,
-    "total_moving_time_seconds": 1252557,
-    "total_moving_time_display": "347h 55m"
+    "total_activities": 453,
+    "total_distance_miles": 1469.5,
+    "total_elevation_feet": 89517,
+    "total_moving_time_seconds": 1254451,
+    "total_moving_time_display": "348h 27m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -10226,7 +10226,7 @@
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
-      "kudos_count": 2
+      "kudos_count": 3
     },
     {
       "id": 18551243402,
@@ -10272,7 +10272,7 @@
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
-      "kudos_count": 1
+      "kudos_count": 2
     },
     {
       "id": 18570894192,
@@ -10295,7 +10295,7 @@
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
-      "kudos_count": 0
+      "kudos_count": 1
     },
     {
       "id": 18564160205,
@@ -10388,6 +10388,52 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 1
+    },
+    {
+      "id": 18609152017,
+      "name": "Afternoon Run",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-05-22",
+      "year": 2026,
+      "month": 5,
+      "day_of_week": "Friday",
+      "distance_miles": 1.35,
+      "distance_km": 2.17,
+      "moving_time_seconds": 684,
+      "moving_time_display": "11m 24s",
+      "elevation_feet": 138,
+      "elevation_meters": 42.0,
+      "average_speed_mph": 7.1,
+      "average_pace_min_mile": "8:26",
+      "max_speed_mph": 9.8,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 2
+    },
+    {
+      "id": 18607618887,
+      "name": "Lunch Run",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-05-22",
+      "year": 2026,
+      "month": 5,
+      "day_of_week": "Friday",
+      "distance_miles": 2.5,
+      "distance_km": 4.02,
+      "moving_time_seconds": 1210,
+      "moving_time_display": "20m 10s",
+      "elevation_feet": 7,
+      "elevation_meters": 2.0,
+      "average_speed_mph": 7.4,
+      "average_pace_min_mile": "8:04",
+      "max_speed_mph": 9.8,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 2
     }
   ]
 }
