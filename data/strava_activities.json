@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-06-05T09:36:40Z",
+  "last_updated": "2026-06-06T08:27:20Z",
   "athlete_stats": {
-    "total_activities": 467,
-    "total_distance_miles": 1480.2,
-    "total_elevation_feet": 89953,
-    "total_moving_time_seconds": 1285294,
-    "total_moving_time_display": "357h 1m"
+    "total_activities": 468,
+    "total_distance_miles": 1482.8,
+    "total_elevation_feet": 89960,
+    "total_moving_time_seconds": 1286561,
+    "total_moving_time_display": "357h 22m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -10733,6 +10733,29 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 1
+    },
+    {
+      "id": 18795578978,
+      "name": "Corrida da hora do almo\u00e7o",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-06-05",
+      "year": 2026,
+      "month": 6,
+      "day_of_week": "Friday",
+      "distance_miles": 2.51,
+      "distance_km": 4.04,
+      "moving_time_seconds": 1267,
+      "moving_time_display": "21m 7s",
+      "elevation_feet": 7,
+      "elevation_meters": 2.0,
+      "average_speed_mph": 7.1,
+      "average_pace_min_mile": "8:25",
+      "max_speed_mph": 9.2,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 2
     },
     {
       "id": 18793590189,
