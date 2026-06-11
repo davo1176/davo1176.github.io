@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-06-10T09:46:32Z",
+  "last_updated": "2026-06-11T10:13:37Z",
   "athlete_stats": {
-    "total_activities": 473,
-    "total_distance_miles": 1485.4,
-    "total_elevation_feet": 89967,
-    "total_moving_time_seconds": 1297158,
-    "total_moving_time_display": "360h 19m"
+    "total_activities": 474,
+    "total_distance_miles": 1488.2,
+    "total_elevation_feet": 90069,
+    "total_moving_time_seconds": 1298700,
+    "total_moving_time_display": "360h 45m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -10867,6 +10867,29 @@
       "average_speed_mph": 0.0,
       "average_pace_min_mile": null,
       "max_speed_mph": 0.0,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 2
+    },
+    {
+      "id": 18863684472,
+      "name": "Afternoon Run",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-06-09",
+      "year": 2026,
+      "month": 6,
+      "day_of_week": "Tuesday",
+      "distance_miles": 2.8,
+      "distance_km": 4.51,
+      "moving_time_seconds": 1542,
+      "moving_time_display": "25m 42s",
+      "elevation_feet": 102,
+      "elevation_meters": 31.0,
+      "average_speed_mph": 6.5,
+      "average_pace_min_mile": "9:10",
+      "max_speed_mph": 12.8,
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
