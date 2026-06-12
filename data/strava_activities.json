@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-06-11T10:13:37Z",
+  "last_updated": "2026-06-12T10:01:08Z",
   "athlete_stats": {
-    "total_activities": 474,
+    "total_activities": 475,
     "total_distance_miles": 1488.2,
     "total_elevation_feet": 90069,
-    "total_moving_time_seconds": 1298700,
-    "total_moving_time_display": "360h 45m"
+    "total_moving_time_seconds": 1302300,
+    "total_moving_time_display": "361h 45m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -10908,6 +10908,29 @@
       "distance_km": 0.0,
       "moving_time_seconds": 2014,
       "moving_time_display": "33m 34s",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_speed_mph": 0.0,
+      "average_pace_min_mile": null,
+      "max_speed_mph": 0.0,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 1
+    },
+    {
+      "id": 18876732680,
+      "name": "Pirates at Kynd Space",
+      "type": "Workout",
+      "sport_type": "Pilates",
+      "date": "2026-06-10",
+      "year": 2026,
+      "month": 6,
+      "day_of_week": "Wednesday",
+      "distance_miles": 0.0,
+      "distance_km": 0.0,
+      "moving_time_seconds": 3600,
+      "moving_time_display": "1h 0m",
       "elevation_feet": 0,
       "elevation_meters": 0,
       "average_speed_mph": 0.0,
