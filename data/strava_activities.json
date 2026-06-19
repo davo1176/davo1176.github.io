@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-06-18T10:12:12Z",
+  "last_updated": "2026-06-19T10:17:37Z",
   "athlete_stats": {
-    "total_activities": 480,
-    "total_distance_miles": 1490.3,
-    "total_elevation_feet": 90079,
-    "total_moving_time_seconds": 1314419,
-    "total_moving_time_display": "365h 6m"
+    "total_activities": 481,
+    "total_distance_miles": 1494.8,
+    "total_elevation_feet": 90253,
+    "total_moving_time_seconds": 1316833,
+    "total_moving_time_display": "365h 47m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -11055,6 +11055,29 @@
       "average_heartrate": null,
       "max_heartrate": null,
       "kudos_count": 2
+    },
+    {
+      "id": 18974743563,
+      "name": "Corrida ao entardecer",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-06-18",
+      "year": 2026,
+      "month": 6,
+      "day_of_week": "Thursday",
+      "distance_miles": 4.45,
+      "distance_km": 7.16,
+      "moving_time_seconds": 2414,
+      "moving_time_display": "40m 14s",
+      "elevation_feet": 174,
+      "elevation_meters": 53.0,
+      "average_speed_mph": 6.6,
+      "average_pace_min_mile": "9:02",
+      "max_speed_mph": 12.5,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 1
     }
   ]
 }
