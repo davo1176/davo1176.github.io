@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-06-25T08:51:55Z",
+  "last_updated": "2026-06-26T08:55:16Z",
   "athlete_stats": {
-    "total_activities": 486,
-    "total_distance_miles": 1498.1,
+    "total_activities": 487,
+    "total_distance_miles": 1500.6,
     "total_elevation_feet": 90381,
-    "total_moving_time_seconds": 1323141,
-    "total_moving_time_display": "367h 32m"
+    "total_moving_time_seconds": 1324371,
+    "total_moving_time_display": "367h 52m"
   },
   "best_activity": {
     "name": "Morning Run",
@@ -11169,7 +11169,7 @@
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
-      "kudos_count": 2
+      "kudos_count": 3
     },
     {
       "id": 19045633523,
@@ -11192,7 +11192,30 @@
       "has_heartrate": false,
       "average_heartrate": null,
       "max_heartrate": null,
-      "kudos_count": 1
+      "kudos_count": 2
+    },
+    {
+      "id": 19062147341,
+      "name": "Lunch Run",
+      "type": "Run",
+      "sport_type": "Run",
+      "date": "2026-06-25",
+      "year": 2026,
+      "month": 6,
+      "day_of_week": "Thursday",
+      "distance_miles": 2.49,
+      "distance_km": 4.0,
+      "moving_time_seconds": 1230,
+      "moving_time_display": "20m 30s",
+      "elevation_feet": 0,
+      "elevation_meters": 0.0,
+      "average_speed_mph": 7.3,
+      "average_pace_min_mile": "8:14",
+      "max_speed_mph": 11.9,
+      "has_heartrate": false,
+      "average_heartrate": null,
+      "max_heartrate": null,
+      "kudos_count": 3
     }
   ]
 }
