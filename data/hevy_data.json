@@ -1,17 +1,17 @@
 {
-  "last_updated": "2026-07-03T10:04:45Z",
+  "last_updated": "2026-07-04T09:23:47Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 131,
-    "total_volume_kg": 644216.0,
-    "total_volume_lbs": 1420251.5,
-    "total_sets": 2818,
-    "total_reps": 28069,
-    "total_duration_seconds": 338601,
-    "total_duration_display": "94h 3m",
+    "total_workouts": 132,
+    "total_volume_kg": 644415.0,
+    "total_volume_lbs": 1420690.2,
+    "total_sets": 2826,
+    "total_reps": 28112,
+    "total_duration_seconds": 340050,
+    "total_duration_display": "94h 27m",
     "total_prs": 216,
     "muscle_group_sets": {
-      "full_body": 107,
+      "full_body": 108,
       "chest": 540,
       "triceps": 693,
       "shoulders": 879,
@@ -20,15 +20,16 @@
       "hamstrings": 137,
       "quadriceps": 133,
       "lower_back": 20,
-      "upper_back": 714,
-      "lats": 605,
+      "upper_back": 717,
+      "lats": 608,
       "traps": 145,
-      "biceps": 1093,
-      "forearms": 704,
+      "biceps": 1099,
+      "forearms": 707,
       "neck": 125,
       "calves": 44,
       "abductors": 3,
-      "adductors": 2
+      "adductors": 2,
+      "cardio": 1
     },
     "workout_name_counts": {
       "Push": 50,
@@ -50,7 +51,8 @@
       "Legs?": 1,
       "Push - DNF": 1,
       "Quickie pull": 1,
-      "Quick Legs": 1
+      "Quick Legs": 1,
+      "Hotel Pull": 1
     }
   },
   "workouts": [
@@ -49775,6 +49777,178 @@
           "total_volume_lbs": 992.1,
           "max_weight_kg": 15,
           "max_weight_lbs": 33.1
+        }
+      ]
+    },
+    {
+      "id": "d364061d-9a33-448d-b6ba-b0a3c1f55401",
+      "name": "Hotel Pull",
+      "date": "2026-07-04",
+      "year": 2026,
+      "month": 7,
+      "day_of_week": "Saturday",
+      "start_time": "2026-07-04T07:51:17",
+      "end_time": "2026-07-04T08:15:26",
+      "duration_seconds": 1449,
+      "duration_display": "24m 9s",
+      "exercise_count": 4,
+      "total_sets": 8,
+      "total_reps": 43,
+      "total_volume_kg": 199.0,
+      "total_volume_lbs": 438.7,
+      "pr_count": 0,
+      "muscle_groups_hit": {
+        "full_body": 1,
+        "lats": 3,
+        "upper_back": 3,
+        "biceps": 6,
+        "forearms": 3,
+        "cardio": 1
+      },
+      "exercises": [
+        {
+          "title": "Warm Up",
+          "muscle_group": "full_body",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "duration",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": null,
+              "rpe": null,
+              "duration_seconds": 300,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 0,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Pull Up",
+          "muscle_group": "lats",
+          "other_muscles": [
+            "upper_back",
+            "biceps",
+            "forearms"
+          ],
+          "equipment_category": "machine",
+          "exercise_type": "reps_only",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 7,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 6,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 4,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 17,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Seated Incline Curl (Dumbbell)",
+          "muscle_group": "biceps",
+          "other_muscles": [],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 7.5,
+              "weight_lbs": 16.5,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 7.5,
+              "weight_lbs": 16.5,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 8,
+              "weight_lbs": 17.6,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 26,
+          "total_volume_kg": 199.0,
+          "total_volume_lbs": 438.7,
+          "max_weight_kg": 8,
+          "max_weight_lbs": 17.6
+        },
+        {
+          "title": "Treadmill",
+          "muscle_group": "cardio",
+          "other_muscles": [],
+          "equipment_category": "machine",
+          "exercise_type": "distance_duration",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": null,
+              "rpe": null,
+              "duration_seconds": 10,
+              "distance_meters": 2000,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 0,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
         }
       ]
     }
