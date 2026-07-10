@@ -1,20 +1,20 @@
 {
-  "last_updated": "2026-07-09T10:25:24Z",
+  "last_updated": "2026-07-10T10:24:00Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 132,
-    "total_volume_kg": 644415.0,
-    "total_volume_lbs": 1420690.2,
-    "total_sets": 2826,
-    "total_reps": 28112,
-    "total_duration_seconds": 340050,
-    "total_duration_display": "94h 27m",
-    "total_prs": 216,
+    "total_workouts": 133,
+    "total_volume_kg": 646245.0,
+    "total_volume_lbs": 1424724.7,
+    "total_sets": 2838,
+    "total_reps": 28227,
+    "total_duration_seconds": 341984,
+    "total_duration_display": "94h 59m",
+    "total_prs": 218,
     "muscle_group_sets": {
-      "full_body": 108,
-      "chest": 540,
-      "triceps": 693,
-      "shoulders": 879,
+      "full_body": 109,
+      "chest": 548,
+      "triceps": 702,
+      "shoulders": 888,
       "abdominals": 172,
       "glutes": 103,
       "hamstrings": 137,
@@ -32,7 +32,7 @@
       "cardio": 1
     },
     "workout_name_counts": {
-      "Push": 50,
+      "Push": 51,
       "Pull": 54,
       "Delts / Back": 1,
       "Pull - quickly during lunch": 1,
@@ -49945,6 +49945,272 @@
           ],
           "working_set_count": 1,
           "total_reps": 0,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        }
+      ]
+    },
+    {
+      "id": "511cd612-b554-4f81-84d0-ebf4cbb9f48a",
+      "name": "Push",
+      "date": "2026-07-10",
+      "year": 2026,
+      "month": 7,
+      "day_of_week": "Friday",
+      "start_time": "2026-07-10T09:02:49",
+      "end_time": "2026-07-10T09:35:03",
+      "duration_seconds": 1934,
+      "duration_display": "32m 14s",
+      "exercise_count": 6,
+      "total_sets": 12,
+      "total_reps": 115,
+      "total_volume_kg": 1830.0,
+      "total_volume_lbs": 4034.5,
+      "pr_count": 2,
+      "muscle_groups_hit": {
+        "full_body": 1,
+        "chest": 8,
+        "triceps": 9,
+        "shoulders": 9
+      },
+      "exercises": [
+        {
+          "title": "Warm Up",
+          "muscle_group": "full_body",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "duration",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": null,
+              "rpe": null,
+              "duration_seconds": 300,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 0,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Bench Press (Dumbbell)",
+          "muscle_group": "chest",
+          "other_muscles": [
+            "triceps",
+            "shoulders"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "warmup",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 27.5,
+              "weight_lbs": 60.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 27.5,
+              "weight_lbs": 60.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 2,
+          "total_reps": 20,
+          "total_volume_kg": 550.0,
+          "total_volume_lbs": 1212.5,
+          "max_weight_kg": 27.5,
+          "max_weight_lbs": 60.6
+        },
+        {
+          "title": "Incline Bench Press (Dumbbell)",
+          "muscle_group": "chest",
+          "other_muscles": [
+            "triceps",
+            "shoulders"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 550,
+          "total_volume_lbs": 1212.5,
+          "max_weight_kg": 20,
+          "max_weight_lbs": 44.1
+        },
+        {
+          "title": "Overhead Press (Dumbbell)",
+          "muscle_group": "shoulders",
+          "other_muscles": [
+            "triceps"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 32,
+          "total_volume_kg": 400.0,
+          "total_volume_lbs": 881.8,
+          "max_weight_kg": 12.5,
+          "max_weight_lbs": 27.6
+        },
+        {
+          "title": "Cable Fly Crossovers",
+          "muscle_group": "chest",
+          "other_muscles": [],
+          "equipment_category": "machine",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": [
+                {
+                  "type": "best_volume",
+                  "value": 180
+                },
+                {
+                  "type": "best_1rm",
+                  "value": 21.12676056338028
+                }
+              ]
+            }
+          ],
+          "working_set_count": 2,
+          "total_reps": 24,
+          "total_volume_kg": 330.0,
+          "total_volume_lbs": 727.5,
+          "max_weight_kg": 15,
+          "max_weight_lbs": 33.1
+        },
+        {
+          "title": "Triceps Dip",
+          "muscle_group": "triceps",
+          "other_muscles": [
+            "chest",
+            "shoulders"
+          ],
+          "equipment_category": "machine",
+          "exercise_type": "reps_only",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 9,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 9,
           "total_volume_kg": 0,
           "total_volume_lbs": 0.0,
           "max_weight_kg": 0,
