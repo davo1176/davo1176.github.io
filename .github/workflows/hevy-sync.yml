@@ -26,5 +26,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/hevy_data.json
-          git diff --cached --quiet || git commit -m "chore: update Hevy workout data"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update Hevy workout data"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase --autostash origin main && git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push failed (attempt $attempt), retrying..."
+            sleep 5
+          done
+          echo "Failed to push after multiple attempts." >&2
+          exit 1
