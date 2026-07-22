@@ -20,9 +20,11 @@ import csv
 import json
 import os
 import subprocess
+import sys
 import time
 import urllib.request
 import urllib.parse
+import urllib.error
 from datetime import datetime
 
 
@@ -47,8 +49,21 @@ def refresh_token():
     }).encode("utf-8")
 
     req = urllib.request.Request(STRAVA_TOKEN_URL, data=data, method="POST")
-    with urllib.request.urlopen(req) as resp:
-        result = json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        print(f"ERROR: Strava token refresh failed (HTTP {e.code}).", file=sys.stderr)
+        print(f"Response body: {body}", file=sys.stderr)
+        if e.code in (400, 401):
+            print(
+                "\nThe STRAVA_REFRESH_TOKEN secret is invalid or expired. "
+                "Re-authorize the Strava app and update the "
+                "STRAVA_REFRESH_TOKEN secret with a fresh refresh token.",
+                file=sys.stderr,
+            )
+        raise
 
     access_token = result["access_token"]
     new_refresh_token = result["refresh_token"]
@@ -92,8 +107,14 @@ def fetch_activities(access_token):
         req = urllib.request.Request(url)
         req.add_header("Authorization", f"Bearer {access_token}")
 
-        with urllib.request.urlopen(req) as resp:
-            batch = json.loads(resp.read().decode("utf-8"))
+        try:
+            with urllib.request.urlopen(req) as resp:
+                batch = json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            body = e.read().decode("utf-8", errors="replace")
+            print(f"ERROR: Strava activities fetch failed (HTTP {e.code}).", file=sys.stderr)
+            print(f"Response body: {body}", file=sys.stderr)
+            raise
 
         if not batch:
             break

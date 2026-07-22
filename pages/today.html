@@ -1176,46 +1176,64 @@
 
             var hasActivities = false;
 
-            // COROS activities for this day
-            if (corosData && corosData.activities) {
-                var dayActivities = corosData.activities.filter(function(a) { return a.date === TODAY_STR; });
-                dayActivities.forEach(function(a) {
-                    hasActivities = true;
-                    var iconClass = 'fa-person-running';
-                    var iconColor = '#14B8A6';
-                    if (a.type === 'Hike') { iconClass = 'fa-mountain'; iconColor = '#22C55E'; }
-                    else if (a.type === 'Bike' || a.type === 'Indoor Bike') { iconClass = 'fa-bicycle'; iconColor = '#4F46E5'; }
-                    else if (a.type === 'Strength' || a.type === 'Gym Cardio') { iconClass = 'fa-dumbbell'; iconColor = '#F97316'; }
-                    else if (a.type === 'Ski' || a.type === 'Snowboard') { iconClass = 'fa-person-skiing'; iconColor = '#0EA5E9'; }
-                    else if (a.type === 'Walk') { iconClass = 'fa-person-walking'; iconColor = '#84CC16'; }
-                    else if (a.type.indexOf('Swim') !== -1) { iconClass = 'fa-person-swimming'; iconColor = '#0EA5E9'; }
+            // Runs prefer Strava, then fall back to COROS. The Strava API sync was
+            // retired in July 2026, so for recent days Strava has no data and COROS
+            // (which is still synced daily) supplies the run. Non-run activities always
+            // come from COROS.
+            function isRunType(t) { return !!t && /run/i.test(t); }
 
-                    html += '<div class="activity-entry">';
-                    html += '<div class="activity-entry__header">';
-                    html += '<div class="activity-entry__title"><i class="fas ' + iconClass + '" style="color: ' + iconColor + ';"></i> ' + (a.name || a.type) + '</div>';
-                    html += '<div class="activity-entry__meta">via COROS</div>';
-                    html += '</div>';
+            function renderActivityEntry(a, sourceLabel) {
+                var iconClass = 'fa-person-running';
+                var iconColor = '#14B8A6';
+                if (a.type === 'Hike') { iconClass = 'fa-mountain'; iconColor = '#22C55E'; }
+                else if (a.type === 'Bike' || a.type === 'Indoor Bike' || a.type === 'Ride' || a.type === 'VirtualRide') { iconClass = 'fa-bicycle'; iconColor = '#4F46E5'; }
+                else if (a.type === 'Strength' || a.type === 'Gym Cardio' || a.type === 'WeightTraining' || a.type === 'Workout') { iconClass = 'fa-dumbbell'; iconColor = '#F97316'; }
+                else if (a.type === 'Ski' || a.type === 'Snowboard' || (a.type && a.type.indexOf('Ski') !== -1)) { iconClass = 'fa-person-skiing'; iconColor = '#0EA5E9'; }
+                else if (a.type === 'Walk') { iconClass = 'fa-person-walking'; iconColor = '#84CC16'; }
+                else if (a.type && a.type.indexOf('Swim') !== -1) { iconClass = 'fa-person-swimming'; iconColor = '#0EA5E9'; }
 
-                    html += '<div class="activity-entry__stats">';
-                    if (a.distance_miles > 0) {
-                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Distance</div><div class="activity-entry__stat-value">' + a.distance_miles + ' mi</div></div>';
-                    }
-                    html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Duration</div><div class="activity-entry__stat-value">' + a.moving_time_display + '</div></div>';
-                    if (a.average_pace_min_mile) {
-                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Avg Pace</div><div class="activity-entry__stat-value">' + a.average_pace_min_mile + ' /mi</div></div>';
-                    }
-                    if (a.average_heartrate) {
-                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Avg HR</div><div class="activity-entry__stat-value">' + a.average_heartrate + ' bpm</div></div>';
-                    }
-                    if (a.elevation_feet > 0) {
-                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Elevation</div><div class="activity-entry__stat-value">' + a.elevation_feet + ' ft</div></div>';
-                    }
-                    if (a.calories > 0) {
-                        html += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Calories</div><div class="activity-entry__stat-value">' + a.calories + '</div></div>';
-                    }
-                    html += '</div>';
-                    html += '</div>';
-                });
+                var h = '<div class="activity-entry">';
+                h += '<div class="activity-entry__header">';
+                h += '<div class="activity-entry__title"><i class="fas ' + iconClass + '" style="color: ' + iconColor + ';"></i> ' + (a.name || a.type) + '</div>';
+                h += '<div class="activity-entry__meta">via ' + sourceLabel + '</div>';
+                h += '</div>';
+
+                h += '<div class="activity-entry__stats">';
+                if (a.distance_miles > 0) {
+                    h += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Distance</div><div class="activity-entry__stat-value">' + a.distance_miles + ' mi</div></div>';
+                }
+                h += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Duration</div><div class="activity-entry__stat-value">' + a.moving_time_display + '</div></div>';
+                if (a.average_pace_min_mile) {
+                    h += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Avg Pace</div><div class="activity-entry__stat-value">' + a.average_pace_min_mile + ' /mi</div></div>';
+                }
+                if (a.average_heartrate) {
+                    h += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Avg HR</div><div class="activity-entry__stat-value">' + Math.round(a.average_heartrate) + ' bpm</div></div>';
+                }
+                if (a.elevation_feet > 0) {
+                    h += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Elevation</div><div class="activity-entry__stat-value">' + a.elevation_feet + ' ft</div></div>';
+                }
+                if (a.calories > 0) {
+                    h += '<div class="activity-entry__stat"><div class="activity-entry__stat-label">Calories</div><div class="activity-entry__stat-value">' + a.calories + '</div></div>';
+                }
+                h += '</div>';
+                h += '</div>';
+                return h;
+            }
+
+            var stravaRuns = (stravaData && stravaData.activities)
+                ? stravaData.activities.filter(function(a) { return a.date === TODAY_STR && isRunType(a.type); })
+                : [];
+            var corosDay = (corosData && corosData.activities)
+                ? corosData.activities.filter(function(a) { return a.date === TODAY_STR; })
+                : [];
+
+            if (stravaRuns.length > 0) {
+                // Strava has the run(s) for this day -> show them, plus any non-run COROS activities.
+                stravaRuns.forEach(function(a) { hasActivities = true; html += renderActivityEntry(a, 'Strava'); });
+                corosDay.filter(function(a) { return !isRunType(a.type); }).forEach(function(a) { hasActivities = true; html += renderActivityEntry(a, 'COROS'); });
+            } else {
+                // No Strava run for this day (e.g. after the July 2026 API retirement) -> fall back to COROS.
+                corosDay.forEach(function(a) { hasActivities = true; html += renderActivityEntry(a, 'COROS'); });
             }
 
             // Hevy workouts for this day
