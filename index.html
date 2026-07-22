@@ -17,7 +17,7 @@
     </script>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
@@ -45,16 +45,50 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero__content">
-            <img src="assets/images/profile.jpg" alt="Daniel Volin" class="hero__photo">
-            <h1 class="hero__title">Hi, I'm Danny</h1>
-            <p class="hero__subtitle">Data & Analytics | Nova SBE</p>
-            <div class="hero__buttons">
-                <a href="#projects" class="btn btn--primary">View My Work <i class="fas fa-arrow-down"></i></a>
-                <a href="#contact" class="btn btn--outline">Get In Touch</a>
+            <div class="hero__lede">
+                <span class="hero__kicker">Daniel Volin &middot; Data Engineer</span>
+                <h1 class="hero__title">I build across the whole <em>data pipeline</em>.</h1>
+                <p class="hero__subtitle">Data engineer working every stage &mdash; scraping, ingestion, cleaning, and analytics. This portfolio is where two of my passions meet: I point those skills at my own training, health, and travel data to show what I can build end to end.</p>
+
+                <div class="readout" id="hero-readout" aria-label="Live personal data readout">
+                    <div class="readout__cell">
+                        <div class="readout__value" id="stat-miles">&mdash;</div>
+                        <span class="readout__label">Miles Logged</span>
+                    </div>
+                    <div class="readout__cell">
+                        <div class="readout__value" id="stat-runs">&mdash;</div>
+                        <span class="readout__label">Activities</span>
+                    </div>
+                    <div class="readout__cell">
+                        <div class="readout__value" id="stat-lifts">&mdash;</div>
+                        <span class="readout__label">Lifts Tracked</span>
+                    </div>
+                    <div class="readout__cell">
+                        <div class="readout__value" id="stat-prs">&mdash;</div>
+                        <span class="readout__label">Gym PRs</span>
+                    </div>
+                    <div class="readout__cell">
+                        <div class="readout__value" id="stat-ski">&mdash;</div>
+                        <span class="readout__label">Ski Days</span>
+                    </div>
+                    <div class="readout__cell">
+                        <div class="readout__value">8</div>
+                        <span class="readout__label">Projects</span>
+                    </div>
+                </div>
+
+                <p class="hero__meta" id="hero-sync"><span class="dot"></span>Assembled live from my own data pipelines</p>
+
+                <div class="hero__buttons">
+                    <a href="#projects" class="btn btn--primary">View the work</a>
+                    <a href="#contact" class="btn btn--outline">Get in touch</a>
+                </div>
             </div>
-        </div>
-        <div class="hero__scroll">
-            <i class="fas fa-chevron-down"></i>
+
+            <figure class="hero__figure">
+                <img src="assets/images/profile.jpg" alt="Daniel Volin" class="hero__photo">
+                <figcaption><span>Daniel Volin</span><span>Lisbon, PT</span></figcaption>
+            </figure>
         </div>
     </section>
 
@@ -62,7 +96,8 @@
     <section id="about" class="section">
         <div class="container">
             <div class="section-header fade-in">
-                <h2>About Me</h2>
+                <span class="kicker">About</span>
+                <h2>Data, on purpose</h2>
             </div>
             <div class="about-card fade-in">
                 <p>I'm Daniel Volin, a data and analytics consultant with a passion for transforming data into actionable insights. With experience in marketing analytics, financial modeling, and consulting, I bring a data-driven approach to business strategy. Currently pursuing my master's degree at Nova SBE, I am always eager to learn and apply new analytical methods to solve real-world business challenges.</p>
@@ -75,15 +110,16 @@
     <section id="projects" class="section">
         <div class="container">
             <div class="section-header fade-in">
+                <span class="kicker">Selected work &middot; 8 builds</span>
                 <h2>Featured Projects</h2>
-                <p>A selection of data analytics and engineering projects I've worked on.</p>
+                <p>Dashboards, pipelines, and analyses &mdash; several built by reverse-engineering the private APIs behind apps I use every day.</p>
             </div>
             <div class="projects-grid">
 
                 <!-- Project: Oceano Fresco Dashboard (Thesis) -->
                 <div class="project-card project-card--ocean fade-in">
                     <div class="project-card__body">
-                        <div class="project-card__icon"><i class="fas fa-water" style="color: #0E7490;"></i></div>
+                        <div class="project-card__icon"><i class="fas fa-water"></i></div>
                         <h3 class="project-card__title">
                             <a href="projects/oceano-fresco-dashboard.html">Oceano Fresco: North Star Dashboard</a>
                         </h3>
@@ -101,7 +137,7 @@
                 <!-- Project 1: HR Attrition -->
                 <div class="project-card project-card--teal fade-in">
                     <div class="project-card__body">
-                        <div class="project-card__icon">📊</div>
+                        <div class="project-card__icon"><i class="fas fa-chart-line"></i></div>
                         <h3 class="project-card__title">
                             <a href="projects/hr-attrition.html">Human Resources Attrition Project</a>
                         </h3>
@@ -119,7 +155,7 @@
                 <!-- Project 2: Terrorism Dashboard -->
                 <div class="project-card project-card--coral fade-in">
                     <div class="project-card__body">
-                        <div class="project-card__icon">🌍</div>
+                        <div class="project-card__icon"><i class="fas fa-globe"></i></div>
                         <h3 class="project-card__title">
                             <a href="projects/global-terrorism.html">Global Terrorism Dashboard</a>
                         </h3>
@@ -137,7 +173,7 @@
                 <!-- Project 3: Web Scraper -->
                 <div class="project-card project-card--green fade-in">
                     <div class="project-card__body">
-                        <div class="project-card__icon">🕷️</div>
+                        <div class="project-card__icon"><i class="fas fa-spider"></i></div>
                         <h3 class="project-card__title">
                             <a href="projects/web-scraper.html">Web Scraper Application</a>
                         </h3>
@@ -155,7 +191,7 @@
                 <!-- Project 4: Ski Tracker -->
                 <div class="project-card project-card--ski fade-in">
                     <div class="project-card__body">
-                        <div class="project-card__icon"><i class="fas fa-skiing" style="color: #0EA5E9;"></i></div>
+                        <div class="project-card__icon"><i class="fas fa-person-skiing"></i></div>
                         <h3 class="project-card__title">
                             <a href="projects/ski-tracker.html">Epic Pass Ski Tracker</a>
                         </h3>
@@ -173,11 +209,11 @@
                 <!-- Project 5: Strava Dashboard -->
                 <div class="project-card project-card--strava fade-in">
                     <div class="project-card__body">
-                        <div class="project-card__icon"><i class="fab fa-strava" style="color: #FC4C02;"></i></div>
+                        <div class="project-card__icon"><i class="fab fa-strava"></i></div>
                         <h3 class="project-card__title">
                             <a href="projects/strava-dashboard.html">Strava Activity Dashboard</a>
                         </h3>
-                        <p class="project-card__desc">Automated daily pipeline syncs Strava activities via GitHub Actions, visualizing running, cycling, and hiking patterns with interactive Chart.js charts.</p>
+                        <p class="project-card__desc">A daily pipeline synced Strava activities via GitHub Actions, visualizing running, cycling, and hiking with interactive Chart.js charts &mdash; now archived after Strava's 2026 API changes.</p>
                         <div class="project-card__tags">
                             <span class="tag tag--python">Python</span>
                             <span class="tag tag--javascript">JavaScript</span>
@@ -191,7 +227,7 @@
                 <!-- Project 6: COROS Health & Training Dashboard -->
                 <div class="project-card project-card--coros fade-in">
                     <div class="project-card__body">
-                        <div class="project-card__icon"><i class="fas fa-heart-pulse" style="color: #14B8A6;"></i></div>
+                        <div class="project-card__icon"><i class="fas fa-heart-pulse"></i></div>
                         <h3 class="project-card__title">
                             <a href="projects/coros-dashboard.html">Health & Training Dashboard</a>
                         </h3>
@@ -209,7 +245,7 @@
                 <!-- Project 7: Hevy Gym Dashboard -->
                 <div class="project-card project-card--hevy fade-in">
                     <div class="project-card__body">
-                        <div class="project-card__icon"><i class="fas fa-dumbbell" style="color: #F97316;"></i></div>
+                        <div class="project-card__icon"><i class="fas fa-dumbbell"></i></div>
                         <h3 class="project-card__title">
                             <a href="projects/hevy-dashboard.html">Gym Dashboard</a>
                         </h3>
@@ -227,7 +263,7 @@
                 <!-- Project 8: Today's Training Prescription -->
                 <div class="project-card project-card--rx fade-in">
                     <div class="project-card__body">
-                        <div class="project-card__icon"><i class="fas fa-brain" style="color: #7C3AED;"></i></div>
+                        <div class="project-card__icon"><i class="fas fa-brain"></i></div>
                         <h3 class="project-card__title">
                             <a href="pages/today.html">Today's Training</a>
                         </h3>
@@ -249,6 +285,7 @@
     <section id="contact" class="section">
         <div class="container">
             <div class="section-header fade-in">
+                <span class="kicker">Contact</span>
                 <h2>Let's Connect</h2>
                 <p>Feel free to reach out for collaboration or just a friendly chat.</p>
             </div>
