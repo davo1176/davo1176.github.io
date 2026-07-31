@@ -530,8 +530,93 @@
 
         function runEngine() {
             var analysis = analyzeTrainingState();
+
+            // When looking at a future day (e.g. tomorrow), the logged data
+            // doesn't yet include the work that's been prescribed for today.
+            // Fold today's prescription into the analysis so tomorrow's
+            // recommendation doesn't repeat what today already covers
+            // (e.g. don't recommend a push day the day after a prescribed push).
+            var projectedLabels = null;
+            if (TODAY_STR > REAL_TODAY_STR) {
+                var todayRx = computePrescriptionFor(REAL_TODAY_STR);
+                projectedLabels = applyProjectedToday(analysis, todayRx);
+            }
+
             var prescription = generatePrescription(analysis);
+
+            if (projectedLabels) {
+                prescription.reasoning.unshift('Accounting for today\'s prescribed ' + projectedLabels + ' \u2014 tomorrow shifts to what\'s next.');
+            }
+
             render(analysis, prescription);
+        }
+
+        // Compute the prescription for an arbitrary date without rendering,
+        // then restore the currently selected date.
+        function computePrescriptionFor(dateStr) {
+            var saved = new Date(selectedDate);
+            setSelectedDate(new Date(dateStr + 'T12:00:00'));
+            var a = analyzeTrainingState();
+            var p = generatePrescription(a);
+            setSelectedDate(saved);
+            return p;
+        }
+
+        // Fold a prior day's prescribed work into a future day's analysis state
+        // so the future recommendation reflects work that hasn't been logged yet.
+        // Returns a human label of what was projected (or null if nothing).
+        function applyProjectedToday(state, todayRx) {
+            if (!todayRx) return null;
+            var cards = [todayRx.primary, todayRx.secondary].filter(Boolean);
+            var labels = [];
+            var addedActiveDay = false;
+
+            cards.forEach(function(card) {
+                var t = (card.title || '').toLowerCase();
+                if (card.type === 'lift') {
+                    if (t.indexOf('push') !== -1) {
+                        state.lastPushDate = REAL_TODAY_STR;
+                        state.daysSincePush = daysAgo(REAL_TODAY_STR);
+                        state.pushCountWeek = (state.pushCountWeek || 0) + 1;
+                        if (state.muscleLastHit) {
+                            ['chest', 'shoulders', 'triceps'].forEach(function(mg) { state.muscleLastHit[mg] = REAL_TODAY_STR; });
+                        }
+                    } else if (t.indexOf('pull') !== -1) {
+                        state.lastPullDate = REAL_TODAY_STR;
+                        state.daysSincePull = daysAgo(REAL_TODAY_STR);
+                        state.pullCountWeek = (state.pullCountWeek || 0) + 1;
+                        if (state.muscleLastHit) {
+                            ['upper_back', 'lats', 'biceps'].forEach(function(mg) { state.muscleLastHit[mg] = REAL_TODAY_STR; });
+                        }
+                    }
+                    state.liftsThisWeek = (state.liftsThisWeek || 0) + 1;
+                    addedActiveDay = true;
+                    labels.push(card.title);
+                } else if (card.type === 'run') {
+                    state.lastRunDate = REAL_TODAY_STR;
+                    state.daysSinceRun = daysAgo(REAL_TODAY_STR);
+                    state.runsThisWeek = (state.runsThisWeek || 0) + 1;
+                    addedActiveDay = true;
+                    labels.push(card.title);
+                }
+            });
+
+            // Count today as an active day if it wasn't already logged.
+            if (addedActiveDay) {
+                var todayLogged = false;
+                if (corosData && corosData.activities) {
+                    todayLogged = corosData.activities.some(function(a) { return a.date === REAL_TODAY_STR; });
+                }
+                if (!todayLogged && hevyData && hevyData.workouts) {
+                    todayLogged = hevyData.workouts.some(function(w) { return w.date === REAL_TODAY_STR; });
+                }
+                if (!todayLogged) {
+                    state.activeDaysThisWeek = (state.activeDaysThisWeek || 0) + 1;
+                    state.restDaysThisWeek = Math.max(0, (state.restDaysThisWeek || 0) - 1);
+                }
+            }
+
+            return labels.length ? labels.join(' + ') : null;
         }
 
         // ============================================================
