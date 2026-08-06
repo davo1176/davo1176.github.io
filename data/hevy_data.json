@@ -1,14 +1,14 @@
 {
-  "last_updated": "2026-08-05T09:37:00Z",
+  "last_updated": "2026-08-06T09:39:25Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 148,
-    "total_volume_kg": 694084.5,
-    "total_volume_lbs": 1530192.6,
-    "total_sets": 3103,
-    "total_reps": 30594,
-    "total_duration_seconds": 379980,
-    "total_duration_display": "105h 33m",
+    "total_workouts": 149,
+    "total_volume_kg": 701214.5,
+    "total_volume_lbs": 1545911.5,
+    "total_sets": 3118,
+    "total_reps": 30747,
+    "total_duration_seconds": 382959,
+    "total_duration_display": "106h 22m",
     "total_prs": 229,
     "muscle_group_sets": {
       "full_body": 122,
@@ -16,9 +16,9 @@
       "triceps": 796,
       "shoulders": 979,
       "abdominals": 172,
-      "glutes": 103,
-      "hamstrings": 137,
-      "quadriceps": 133,
+      "glutes": 111,
+      "hamstrings": 149,
+      "quadriceps": 144,
       "lower_back": 20,
       "upper_back": 782,
       "lats": 677,
@@ -26,7 +26,7 @@
       "biceps": 1221,
       "forearms": 782,
       "neck": 133,
-      "calves": 44,
+      "calves": 48,
       "abductors": 3,
       "adductors": 2,
       "cardio": 1
@@ -46,7 +46,7 @@
       "Quick quick pull": 1,
       "Morning workout \u2600\ufe0f": 1,
       "Fuck that hurt. Push": 1,
-      "Legs": 8,
+      "Legs": 9,
       "Quick Pull": 3,
       "Legs?": 1,
       "Push - DNF": 1,
@@ -55147,6 +55147,250 @@
           "total_volume_lbs": 1598.3,
           "max_weight_kg": 25,
           "max_weight_lbs": 55.1
+        }
+      ]
+    },
+    {
+      "id": "5b8fc17f-ca06-4e22-86cd-1e2f0a339414",
+      "name": "Legs",
+      "date": "2026-08-05",
+      "year": 2026,
+      "month": 8,
+      "day_of_week": "Wednesday",
+      "start_time": "2026-08-05T11:25:51",
+      "end_time": "2026-08-05T12:15:30",
+      "duration_seconds": 2979,
+      "duration_display": "49m 39s",
+      "exercise_count": 4,
+      "total_sets": 15,
+      "total_reps": 153,
+      "total_volume_kg": 7130,
+      "total_volume_lbs": 15718.9,
+      "pr_count": 0,
+      "muscle_groups_hit": {
+        "quadriceps": 11,
+        "hamstrings": 12,
+        "glutes": 8,
+        "calves": 4
+      },
+      "exercises": [
+        {
+          "title": "Squat (Barbell)",
+          "muscle_group": "quadriceps",
+          "other_muscles": [
+            "hamstrings",
+            "glutes"
+          ],
+          "equipment_category": "barbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 40,
+              "weight_lbs": 88.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 70,
+              "weight_lbs": 154.3,
+              "reps": 9,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 70,
+              "weight_lbs": 154.3,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 4,
+          "total_reps": 37,
+          "total_volume_kg": 1790,
+          "total_volume_lbs": 3946.3,
+          "max_weight_kg": 70,
+          "max_weight_lbs": 154.3
+        },
+        {
+          "title": "Leg Press (Machine)",
+          "muscle_group": "quadriceps",
+          "other_muscles": [
+            "glutes",
+            "hamstrings"
+          ],
+          "equipment_category": "machine",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 40,
+              "weight_lbs": 88.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 80,
+              "weight_lbs": 176.4,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 80,
+              "weight_lbs": 176.4,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 80,
+              "weight_lbs": 176.4,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 4,
+          "total_reps": 40,
+          "total_volume_kg": 2800,
+          "total_volume_lbs": 6172.9,
+          "max_weight_kg": 80,
+          "max_weight_lbs": 176.4
+        },
+        {
+          "title": "Seated Leg Curl (Machine)",
+          "muscle_group": "hamstrings",
+          "other_muscles": [
+            "calves"
+          ],
+          "equipment_category": "machine",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 30,
+              "weight_lbs": 66.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 35,
+              "weight_lbs": 77.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 35,
+              "weight_lbs": 77.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 35,
+              "weight_lbs": 77.2,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 4,
+          "total_reps": 42,
+          "total_volume_kg": 1420,
+          "total_volume_lbs": 3130.6,
+          "max_weight_kg": 35,
+          "max_weight_lbs": 77.2
+        },
+        {
+          "title": "Leg Extension (Machine)",
+          "muscle_group": "quadriceps",
+          "other_muscles": [],
+          "equipment_category": "machine",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 40,
+              "weight_lbs": 88.2,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 40,
+              "weight_lbs": 88.2,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 34,
+          "total_volume_kg": 1120,
+          "total_volume_lbs": 2469.2,
+          "max_weight_kg": 40,
+          "max_weight_lbs": 88.2
         }
       ]
     }
