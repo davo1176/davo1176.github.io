@@ -1,19 +1,19 @@
 {
-  "last_updated": "2026-08-10T08:26:28Z",
+  "last_updated": "2026-08-11T08:09:37Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 151,
-    "total_volume_kg": 707206.5,
-    "total_volume_lbs": 1559121.6,
-    "total_sets": 3150,
-    "total_reps": 31055,
-    "total_duration_seconds": 389169,
-    "total_duration_display": "108h 6m",
-    "total_prs": 232,
+    "total_workouts": 152,
+    "total_volume_kg": 708864.5,
+    "total_volume_lbs": 1562776.9,
+    "total_sets": 3162,
+    "total_reps": 31177,
+    "total_duration_seconds": 391280,
+    "total_duration_display": "108h 41m",
+    "total_prs": 233,
     "muscle_group_sets": {
-      "full_body": 124,
+      "full_body": 125,
       "chest": 612,
-      "triceps": 811,
+      "triceps": 817,
       "shoulders": 991,
       "abdominals": 172,
       "glutes": 111,
@@ -23,7 +23,7 @@
       "upper_back": 788,
       "lats": 686,
       "traps": 153,
-      "biceps": 1230,
+      "biceps": 1235,
       "forearms": 788,
       "neck": 133,
       "calves": 48,
@@ -57,7 +57,8 @@
       "Lunch Pull": 1,
       "Pull + abs at lunch": 1,
       "Push at lunch": 1,
-      "Pull and core at lunch": 1
+      "Pull and core at lunch": 1,
+      "Armz": 1
     }
   },
   "workouts": [
@@ -55986,6 +55987,246 @@
           "total_volume_lbs": 1157.4,
           "max_weight_kg": 17.5,
           "max_weight_lbs": 38.6
+        }
+      ]
+    },
+    {
+      "id": "adea1784-0ba1-48b1-a4b4-5a52294e6f4b",
+      "name": "Armz",
+      "date": "2026-08-10",
+      "year": 2026,
+      "month": 8,
+      "day_of_week": "Monday",
+      "start_time": "2026-08-10T11:15:02",
+      "end_time": "2026-08-10T11:50:13",
+      "duration_seconds": 2111,
+      "duration_display": "35m 11s",
+      "exercise_count": 6,
+      "total_sets": 12,
+      "total_reps": 122,
+      "total_volume_kg": 1658,
+      "total_volume_lbs": 3655.3,
+      "pr_count": 1,
+      "muscle_groups_hit": {
+        "full_body": 1,
+        "biceps": 5,
+        "triceps": 6
+      },
+      "exercises": [
+        {
+          "title": "Warm Up",
+          "muscle_group": "full_body",
+          "other_muscles": [],
+          "equipment_category": "none",
+          "exercise_type": "duration",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": null,
+              "rpe": null,
+              "duration_seconds": 300,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 1,
+          "total_reps": 0,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "EZ Bar Biceps Curl",
+          "muscle_group": "biceps",
+          "other_muscles": [],
+          "equipment_category": "barbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 25,
+              "weight_lbs": 55.1,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 25,
+              "weight_lbs": 55.1,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 28,
+          "total_volume_kg": 640,
+          "total_volume_lbs": 1411.0,
+          "max_weight_kg": 25,
+          "max_weight_lbs": 55.1
+        },
+        {
+          "title": "Skullcrusher (Barbell)",
+          "muscle_group": "triceps",
+          "other_muscles": [],
+          "equipment_category": "barbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 25,
+              "weight_lbs": 55.1,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 25,
+              "weight_lbs": 55.1,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 2,
+          "total_reps": 16,
+          "total_volume_kg": 400,
+          "total_volume_lbs": 881.8,
+          "max_weight_kg": 25,
+          "max_weight_lbs": 55.1
+        },
+        {
+          "title": "Bicep Curl (Dumbbell)",
+          "muscle_group": "biceps",
+          "other_muscles": [],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 7,
+              "weight_lbs": 15.4,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": [
+                {
+                  "type": "best_volume",
+                  "value": 84
+                }
+              ]
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 7,
+              "weight_lbs": 15.4,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 2,
+          "total_reps": 24,
+          "total_volume_kg": 168,
+          "total_volume_lbs": 370.4,
+          "max_weight_kg": 7,
+          "max_weight_lbs": 15.4
+        },
+        {
+          "title": "Triceps Extension (Dumbbell)",
+          "muscle_group": "triceps",
+          "other_muscles": [],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 0,
+              "weight_lbs": 0.0,
+              "reps": 12,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 2,
+          "total_reps": 24,
+          "total_volume_kg": 0,
+          "total_volume_lbs": 0.0,
+          "max_weight_kg": 0,
+          "max_weight_lbs": 0.0
+        },
+        {
+          "title": "Triceps Rope Pushdown",
+          "muscle_group": "triceps",
+          "other_muscles": [],
+          "equipment_category": "machine",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 15,
+              "weight_lbs": 33.1,
+              "reps": 15,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 2,
+          "total_reps": 30,
+          "total_volume_kg": 450,
+          "total_volume_lbs": 992.1,
+          "max_weight_kg": 15,
+          "max_weight_lbs": 33.1
         }
       ]
     }
