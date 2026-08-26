@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-08-25T07:25:31Z",
+  "last_updated": "2026-08-26T07:25:51Z",
   "source": "coros_training_hub",
   "athlete_stats": {
-    "total_activities": 330,
-    "total_distance_miles": 1319.4,
-    "total_elevation_feet": 75590,
-    "total_moving_time_seconds": 928855,
-    "total_moving_time_display": "258h 0m",
-    "total_calories": 184350
+    "total_activities": 332,
+    "total_distance_miles": 1323.1,
+    "total_elevation_feet": 75616,
+    "total_moving_time_seconds": 930825,
+    "total_moving_time_display": "258h 33m",
+    "total_calories": 184799
   },
   "activities": [
     {
@@ -7269,21 +7269,53 @@
       "calories": 302,
       "training_load": 55,
       "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "479877435045740550",
+      "name": "Lisboa Corrida",
+      "type": "Run",
+      "sport_code": 100,
+      "date": "2026-08-25",
+      "year": 2026,
+      "month": 8,
+      "day_of_week": "Tuesday",
+      "distance_miles": 3.59,
+      "distance_km": 5.78,
+      "moving_time_seconds": 1908,
+      "moving_time_display": "31m 48s",
+      "elevation_feet": 26,
+      "elevation_meters": 8,
+      "average_heartrate": 153,
+      "average_pace_min_mile": "8:50",
+      "cadence": 172,
+      "calories": 438,
+      "training_load": 89,
+      "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "479876476194291812",
+      "name": "Lisboa Corrida",
+      "type": "Run",
+      "sport_code": 100,
+      "date": "2026-08-25",
+      "year": 2026,
+      "month": 8,
+      "day_of_week": "Tuesday",
+      "distance_miles": 0.11,
+      "distance_km": 0.17,
+      "moving_time_seconds": 62,
+      "moving_time_display": "1m 2s",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_heartrate": 128,
+      "average_pace_min_mile": "9:35",
+      "cadence": 158,
+      "calories": 11,
+      "training_load": 2,
+      "device": "COROS PACE 3"
     }
   ],
   "training_days": [
-    {
-      "date": "2026-06-03",
-      "resting_hr": 55,
-      "test_resting_hr": 47,
-      "training_load": 64,
-      "fatigue_rate": 24.0,
-      "fatigue_rate_new": -23.0,
-      "base_fitness": 23.0,
-      "acute_load": 29.0,
-      "chronic_load": 52.0,
-      "training_load_ratio": 0.55
-    },
     {
       "date": "2026-06-04",
       "resting_hr": 43,
@@ -8270,15 +8302,27 @@
     },
     {
       "date": "2026-08-25",
-      "resting_hr": 43,
+      "resting_hr": 50,
       "test_resting_hr": 46,
+      "training_load": 91,
+      "fatigue_rate": 27.0,
+      "fatigue_rate_new": -18.0,
+      "base_fitness": 18.0,
+      "acute_load": 27.0,
+      "chronic_load": 45.0,
+      "training_load_ratio": 0.6
+    },
+    {
+      "date": "2026-08-26",
+      "resting_hr": 43,
+      "test_resting_hr": 47,
       "training_load": 0,
-      "fatigue_rate": 13.0,
-      "fatigue_rate_new": -30.0,
-      "base_fitness": 30.0,
-      "acute_load": 14.0,
+      "fatigue_rate": 22.0,
+      "fatigue_rate_new": -21.0,
+      "base_fitness": 21.0,
+      "acute_load": 23.0,
       "chronic_load": 44.0,
-      "training_load_ratio": 0.31
+      "training_load_ratio": 0.52
     }
   ]
 }
