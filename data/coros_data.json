@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-26T11:41:36Z",
+  "last_updated": "2026-09-27T12:20:19Z",
   "source": "coros_training_hub",
   "athlete_stats": {
     "total_activities": 346,
@@ -7625,18 +7625,6 @@
   ],
   "training_days": [
     {
-      "date": "2026-07-05",
-      "resting_hr": 51,
-      "test_resting_hr": 51,
-      "training_load": 0,
-      "fatigue_rate": 5.0,
-      "fatigue_rate_new": -38.0,
-      "base_fitness": 38.0,
-      "acute_load": 6.0,
-      "chronic_load": 44.0,
-      "training_load_ratio": 0.13
-    },
-    {
       "date": "2026-07-06",
       "resting_hr": 51,
       "test_resting_hr": 50,
@@ -8622,8 +8610,8 @@
     },
     {
       "date": "2026-09-26",
-      "resting_hr": null,
-      "test_resting_hr": null,
+      "resting_hr": 60,
+      "test_resting_hr": 60,
       "training_load": 0,
       "fatigue_rate": 24.0,
       "fatigue_rate_new": -19.0,
@@ -8631,6 +8619,18 @@
       "acute_load": 24.0,
       "chronic_load": 43.0,
       "training_load_ratio": 0.55
+    },
+    {
+      "date": "2026-09-27",
+      "resting_hr": 47,
+      "test_resting_hr": 51,
+      "training_load": 0,
+      "fatigue_rate": 19.0,
+      "fatigue_rate_new": -23.0,
+      "base_fitness": 23.0,
+      "acute_load": 20.0,
+      "chronic_load": 43.0,
+      "training_load_ratio": 0.46
     }
   ]
 }
