@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-10-20T11:57:33Z",
+  "last_updated": "2026-10-21T12:12:30Z",
   "source": "coros_training_hub",
   "athlete_stats": {
-    "total_activities": 353,
-    "total_distance_miles": 1376.2,
+    "total_activities": 354,
+    "total_distance_miles": 1376.4,
     "total_elevation_feet": 76263,
-    "total_moving_time_seconds": 962088,
-    "total_moving_time_display": "267h 14m",
-    "total_calories": 191131
+    "total_moving_time_seconds": 962176,
+    "total_moving_time_display": "267h 16m",
+    "total_calories": 191140
   },
   "activities": [
     {
@@ -7775,21 +7775,31 @@
       "calories": 273,
       "training_load": 54,
       "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "481175420870361095",
+      "name": "Esteira",
+      "type": "Indoor Run",
+      "sport_code": 101,
+      "date": "2026-10-20",
+      "year": 2026,
+      "month": 10,
+      "day_of_week": "Tuesday",
+      "distance_miles": 0.11,
+      "distance_km": 0.17,
+      "moving_time_seconds": 88,
+      "moving_time_display": "1m 28s",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_heartrate": 111,
+      "average_pace_min_mile": "13:31",
+      "cadence": 131,
+      "calories": 9,
+      "training_load": 1,
+      "device": "COROS PACE 3"
     }
   ],
   "training_days": [
-    {
-      "date": "2026-07-29",
-      "resting_hr": 45,
-      "test_resting_hr": 50,
-      "training_load": 0,
-      "fatigue_rate": 44.0,
-      "fatigue_rate_new": 1.0,
-      "base_fitness": -1.0,
-      "acute_load": 50.0,
-      "chronic_load": 49.0,
-      "training_load_ratio": 1.02
-    },
     {
       "date": "2026-07-30",
       "resting_hr": 53,
@@ -8776,15 +8786,27 @@
     },
     {
       "date": "2026-10-20",
-      "resting_hr": null,
-      "test_resting_hr": null,
-      "training_load": 0,
+      "resting_hr": 52,
+      "test_resting_hr": 48,
+      "training_load": 1,
       "fatigue_rate": 18.0,
       "fatigue_rate_new": -24.0,
       "base_fitness": 24.0,
       "acute_load": 19.0,
       "chronic_load": 43.0,
       "training_load_ratio": 0.44
+    },
+    {
+      "date": "2026-10-21",
+      "resting_hr": null,
+      "test_resting_hr": null,
+      "training_load": 0,
+      "fatigue_rate": 15.0,
+      "fatigue_rate_new": -27.0,
+      "base_fitness": 27.0,
+      "acute_load": 16.0,
+      "chronic_load": 43.0,
+      "training_load_ratio": 0.37
     }
   ]
 }
