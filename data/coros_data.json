@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-10-26T13:27:10Z",
+  "last_updated": "2026-10-27T12:34:35Z",
   "source": "coros_training_hub",
   "athlete_stats": {
-    "total_activities": 358,
-    "total_distance_miles": 1382.3,
+    "total_activities": 359,
+    "total_distance_miles": 1382.6,
     "total_elevation_feet": 76263,
-    "total_moving_time_seconds": 967355,
-    "total_moving_time_display": "268h 42m",
-    "total_calories": 192089
+    "total_moving_time_seconds": 968092,
+    "total_moving_time_display": "268h 54m",
+    "total_calories": 192193
   },
   "activities": [
     {
@@ -7885,21 +7885,31 @@
       "calories": 227,
       "training_load": 11,
       "device": "COROS PACE 3"
+    },
+    {
+      "label_id": "481314838469967973",
+      "name": "Piscina",
+      "type": "Pool Swim",
+      "sport_code": 300,
+      "date": "2026-10-26",
+      "year": 2026,
+      "month": 10,
+      "day_of_week": "Monday",
+      "distance_miles": 0.23,
+      "distance_km": 0.38,
+      "moving_time_seconds": 737,
+      "moving_time_display": "12m 17s",
+      "elevation_feet": 0,
+      "elevation_meters": 0,
+      "average_heartrate": 116,
+      "average_pace_min_mile": null,
+      "cadence": 0,
+      "calories": 104,
+      "training_load": 9,
+      "device": "COROS PACE 3"
     }
   ],
   "training_days": [
-    {
-      "date": "2026-08-04",
-      "resting_hr": 52,
-      "test_resting_hr": 50,
-      "training_load": 61,
-      "fatigue_rate": 43.0,
-      "fatigue_rate_new": -1.0,
-      "base_fitness": 1.0,
-      "acute_load": 48.0,
-      "chronic_load": 49.0,
-      "training_load_ratio": 0.97
-    },
     {
       "date": "2026-08-05",
       "resting_hr": 50,
@@ -8886,15 +8896,27 @@
     },
     {
       "date": "2026-10-26",
-      "resting_hr": null,
+      "resting_hr": 45,
       "test_resting_hr": 56,
-      "training_load": 0,
-      "fatigue_rate": 18.0,
-      "fatigue_rate_new": -24.0,
-      "base_fitness": 24.0,
-      "acute_load": 19.0,
+      "training_load": 9,
+      "fatigue_rate": 19.0,
+      "fatigue_rate_new": -23.0,
+      "base_fitness": 23.0,
+      "acute_load": 20.0,
       "chronic_load": 43.0,
-      "training_load_ratio": 0.44
+      "training_load_ratio": 0.46
+    },
+    {
+      "date": "2026-10-27",
+      "resting_hr": 54,
+      "test_resting_hr": 46,
+      "training_load": 0,
+      "fatigue_rate": 16.0,
+      "fatigue_rate_new": -26.0,
+      "base_fitness": 26.0,
+      "acute_load": 17.0,
+      "chronic_load": 43.0,
+      "training_load_ratio": 0.39
     }
   ]
 }
