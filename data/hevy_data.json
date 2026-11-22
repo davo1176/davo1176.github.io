@@ -1,20 +1,20 @@
 {
-  "last_updated": "2026-11-21T15:07:39Z",
+  "last_updated": "2026-11-22T15:04:52Z",
   "source": "hevy",
   "athlete_stats": {
-    "total_workouts": 192,
-    "total_volume_kg": 883575.0,
-    "total_volume_lbs": 1947947.1,
-    "total_sets": 3894,
-    "total_reps": 37909,
-    "total_duration_seconds": 504260,
-    "total_duration_display": "140h 4m",
+    "total_workouts": 193,
+    "total_volume_kg": 884870.0,
+    "total_volume_lbs": 1950802.1,
+    "total_sets": 3902,
+    "total_reps": 37985,
+    "total_duration_seconds": 505342,
+    "total_duration_display": "140h 22m",
     "total_prs": 268,
     "muscle_group_sets": {
       "full_body": 148,
-      "chest": 767,
-      "triceps": 1076,
-      "shoulders": 1202,
+      "chest": 772,
+      "triceps": 1084,
+      "shoulders": 1210,
       "abdominals": 172,
       "glutes": 128,
       "hamstrings": 174,
@@ -32,7 +32,7 @@
       "cardio": 1
     },
     "workout_name_counts": {
-      "Push": 73,
+      "Push": 74,
       "Pull": 66,
       "Delts / Back": 1,
       "Pull - quickly during lunch": 1,
@@ -69376,6 +69376,174 @@
           "total_volume_lbs": 529.1,
           "max_weight_kg": 10,
           "max_weight_lbs": 22.0
+        }
+      ]
+    },
+    {
+      "id": "bbaa13b5-0bdf-4521-9f9e-b68f8f2e97e4",
+      "name": "Push",
+      "date": "2026-11-21",
+      "year": 2026,
+      "month": 11,
+      "day_of_week": "Saturday",
+      "start_time": "2026-11-21T15:06:01",
+      "end_time": "2026-11-21T15:24:03",
+      "duration_seconds": 1082,
+      "duration_display": "18m 2s",
+      "exercise_count": 3,
+      "total_sets": 8,
+      "total_reps": 76,
+      "total_volume_kg": 1295.0,
+      "total_volume_lbs": 2855.0,
+      "pr_count": 0,
+      "muscle_groups_hit": {
+        "chest": 5,
+        "triceps": 8,
+        "shoulders": 8
+      },
+      "exercises": [
+        {
+          "title": "Bench Press (Dumbbell)",
+          "muscle_group": "chest",
+          "other_muscles": [
+            "triceps",
+            "shoulders"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "warmup",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 8,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 2,
+          "total_reps": 16,
+          "total_volume_kg": 320,
+          "total_volume_lbs": 705.5,
+          "max_weight_kg": 20,
+          "max_weight_lbs": 44.1
+        },
+        {
+          "title": "Incline Bench Press (Dumbbell)",
+          "muscle_group": "chest",
+          "other_muscles": [
+            "triceps",
+            "shoulders"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 20,
+              "weight_lbs": 44.1,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 600,
+          "total_volume_lbs": 1322.8,
+          "max_weight_kg": 20,
+          "max_weight_lbs": 44.1
+        },
+        {
+          "title": "Overhead Press (Dumbbell)",
+          "muscle_group": "shoulders",
+          "other_muscles": [
+            "triceps"
+          ],
+          "equipment_category": "dumbbell",
+          "exercise_type": "weight_reps",
+          "sets": [
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            },
+            {
+              "indicator": "normal",
+              "weight_kg": 12.5,
+              "weight_lbs": 27.6,
+              "reps": 10,
+              "rpe": null,
+              "duration_seconds": null,
+              "distance_meters": null,
+              "prs": []
+            }
+          ],
+          "working_set_count": 3,
+          "total_reps": 30,
+          "total_volume_kg": 375.0,
+          "total_volume_lbs": 826.7,
+          "max_weight_kg": 12.5,
+          "max_weight_lbs": 27.6
         }
       ]
     }
